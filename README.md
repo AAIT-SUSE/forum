@@ -94,7 +94,7 @@ You can get familiar with the application you have just created, do some modific
 
 ## 2 Server Side Enviroment
 
-> 这一部分文档将会指引你搭建服务端的本地开发环境，并初步了解如何使用 Django 框架进行前端开发.
+> 这一部分文档将会指引你搭建服务端的本地开发环境，并初步了解如何使用 Django 框架进行后端开发.
 
 AAIT Forum 项目，*以下简称AF*，在服务端使用基于Django，且遵循MVC 标准的 **django** 框架,但在本项目中后端开发人员只需要考虑视图层中api设计，不需要考虑界面设计。 
 
