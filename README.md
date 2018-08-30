@@ -217,6 +217,6 @@ urlpatterns=[
 
 ### 2.5 About database
 
-此项目开发中需要你对数据有较为熟练的认识，如果没有学习过数据库的话，你可以通过学习快速入门教程学习 [http://www.runoob.com/mysql/mysql-tutorial.html].
+此项目开发中需要你对数据库有较为熟练的认识，如果没有学习过数据库的话，你可以通过学习快速入门教程学习 [http://www.runoob.com/mysql/mysql-tutorial.html].
 
 
