@@ -136,7 +136,7 @@ If you haven't installed `pip` yet, following the link below to download and ins
 ```
 >cd D:
 
->cd django-1.11.8
+>cd django
 
 >python setup.py install #安装django
 ```
