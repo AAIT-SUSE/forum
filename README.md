@@ -114,48 +114,48 @@ In order to run this project in development environment, you'll need **mysql,pyt
 
 If you haven't installed `pip` yet, following the link below to download and install `ez_setup.py` : [https://bootstrap.pypa.io/ez_setup.py),
 
-'''
+```
 >python ez_setup.py #安装ez_setup.py
 
 >easy_install pip #安装 pip
-'''
+```
 
 在Python项目中使用pip可以极高效率的获取需要的包。关于pip的快速入门教程[ https://www.jianshu.com/p/134daa4b254a]
 
 ### 2.2 Install django
 
-'''
+```
 >pip install Django #安装django
-'''
+```
 你也可以直接使用源码安装，就是稍微麻烦一点,获取源码[https://www.djangoproject.com/download/].
 
 直接用解压软件解压，然后到命令行（win10点击开始旁边的那个输入框中输入 cmd, Win8在开始那里点右键，选择命令行).
 
 比如在 D:\django-1.11.8\  这个文件夹下.
 
-'''
+```
 >cd D:
 
 >cd django-1.11.8
 
 >python setup.py install #安装django
-'''
+```
 
 ### 2.3 Creating new application
 
-'''
+```
 > cd xxx					#切换到你的项目路径
 
 > django-admin startproject xxxx	 #xxxx为项目名称
-'''
+```
 
 Then, `cd` to your project folder, and excute
 
-'''
+```
 >cd xxxx #进入项目目录
 
 >django-admin startapp sus #创建项目中的应用
-'''
+```
 
 创建成功后会看到项目目录结构,然后我们可以找到应用目录中的 views.py，写我们的第一次代码.
 
@@ -190,8 +190,9 @@ urlpatterns=[
 
 配置完url之后你的第一个应用就完成了！运行下列命令试试吧！
 
+```
 >python manage.py runserver
-
+```
 可以用浏览器打开控制台提示中的地址看到效果.
 
 ### 2.4 Install mysql
@@ -206,11 +207,11 @@ urlpatterns=[
 
 输入下列命令测试数据库是否安装成功
 
-'''
+```
 >mysql –h localhost –u root -p #登录数据库
 >enter password:你设置的mysql的root账户的密码
 >show databases
-'''
+```
 
 如果以上命令正常输入，并且返回正常结果没有报错就说明你已经安装成功了！
 
