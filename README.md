@@ -100,7 +100,7 @@ AAIT Forum 项目，*以下简称AF*，在服务端使用基于Django，且遵�
 
 后端使用的数据库是mysql，此数据库拥有简单，易用，高性能特点等特点。
 
-In order to run this project in development environment, you'll need ** mysql,python 3.x, and django framework installed on your machine. But in this part, I will only guide you through server side enviroment building.
+In order to run this project in development environment, you'll need ** mysql,python 3.x, and django framework installed on your machine. But in this part, I will only guide you through server side enviroment building.**
 
 一个最快捷的部署后端开发环境的方式就是通过`pip`安装所需的包。
 
