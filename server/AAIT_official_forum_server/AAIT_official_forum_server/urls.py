@@ -14,26 +14,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # 配置路由之后即为RESTful API
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from AAIT_official_forum import views
+from AAIT_official_forum_server import urls
 from rest_framework.routers import DefaultRouter,url
 from django.views.generic import TemplateView
 
 
-administrator_list=views.AdministratorViewSet.as_view({'get':'list','post':'create'})
-administrator_detail=views.AdministratorViewSet.as_view({'get':'retrieve'})
 
-article_detail=views.ArticleViewSet.as_view({'get':'retrieve'})
-article_list=views.ArticleViewSet.as_view({'get':'list','post':'create'})
+router=DefaultRouter()
+router.register(r'AdministratorViewSet',views.AdministratorViewSet)
+router.register(r'ArticleViewSet',views.ArticleViewSet)
 
+router.register(r'PostViewSet',views.PostViewSet)
+router.register(r'PostBoardViewSet',views.PostBoardViewSet)
+
+router.register(r'PostCommentViewSet',views.PostCommentViewSet)
+router.register(r'PostCommentReplyViewSet',views.PostCommentReplyViewSet)
+
+router.register(r'PostThemeViewSet',views.PostThemeViewSet)
+router.register(r'GroupViewSet',views.GroupViewSet)
+
+router.register(r'GroupTaskJoinViewSet',views.GroupTaskJoinViewSet)
+router.register(r'GroupTaskViewSet',views.GroupTaskViewSet)
+
+router.register(r'GroupMembersViewSet',views.GroupMembersViewSet)
+router.register(r'GroupBulletinViewSet',views.GroupBulletinViewSet)
+
+router.register(r'GroupActivityViewSet',views.GroupActivityViewSet)
+router.register(r'JoinGroupActivityViewSet',views.JoinGroupActivityViewSet)
 
 
 urlpatterns = [
+    url('^api/',include(router.urls)),
     path('admin/', admin.site.urls),
     path('index/',views.index),
-  path('administrator/',administrator_list),
-    url(r'administrator_edit/id/(?P<pk>[0-9]+)$',administrator_detail),
-    url(r'article_detail/id/(?P<pk>[0-9]+)$', article_detail),
-    path('article/', article_list)
+
 ]
