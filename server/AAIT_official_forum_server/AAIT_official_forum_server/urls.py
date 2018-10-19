@@ -46,10 +46,12 @@ router.register(r'GroupBulletinViewSet',views.GroupBulletinViewSet)
 router.register(r'GroupActivityViewSet',views.GroupActivityViewSet)
 router.register(r'JoinGroupActivityViewSet',views.JoinGroupActivityViewSet)
 
-
 urlpatterns = [
     url('^api/',include(router.urls)),
     path('admin/', admin.site.urls),
     path('index/',views.index),
-
+    path('register/',views.UserRegisterAPIView.as_view()),
+    path('login/',views.UserLoginAPIView.as_view()),
+    url(r'^user_profile/(?P<pk>[0-9]+)/$',views.UserProfileAPIView.as_view()),
+    url(r'changepassword/',views.ChangePasswordAPIView.as_view()),
 ]

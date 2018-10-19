@@ -901,7 +901,6 @@ CREATE TABLE `user` (
   `salt` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT '盐值，用于验证用户名和密码',
   `e_mail` varchar(45) COLLATE utf8_bin NOT NULL COMMENT '用户邮箱',
   `user_logo` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT '用户头像url地址',
-  `user_rank` int(11) DEFAULT NULL COMMENT '用户等级',
   `user_description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '个人简介',
   `last_post_id` int(11) DEFAULT NULL COMMENT '最新贴子ID',
   `last_article_id` int(11) DEFAULT NULL COMMENT '最新文章ID',
@@ -926,11 +925,14 @@ DROP TABLE IF EXISTS `user_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_account` (
+  `owner_id` int(11) NOT NULL COMMENT '账户所有者id',
   `user_account_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键,账户id',
-  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  `user_rank` int(11) DEFAULT NULL COMMENT '用户等级',
   `user_score` int(11) DEFAULT NULL COMMENT '用户积分',
   PRIMARY KEY (`user_account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='论坛用户积分账户';
+) 
+ALTER `user_account` ADD CONSTRAINT owner_FK1 FOREIGN KEY `owner_id` REFERENCES user(`user_id`)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='论坛用户积分账户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -938,6 +940,31 @@ CREATE TABLE `user_account` (
 --
 
 LOCK TABLES `user_account` WRITE;
+/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+--Table structure for table `user_token`
+--
+
+DROP TABLE IF EXISTS `user_token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_token`(
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键,用户ID',
+  `owner_id` int(11) NOT NULL COMMENT 'token所有者id',
+  `user_token` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT 'token',
+  PRIMARY KEY (`user_id`)
+)ALTER `user_token` ADD CONSTRAINT owner_FK1 FOREIGN KEY `owner_id` REFERENCES user(`user_id`)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户token类';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_token`
+--
+
+LOCK TABLES `user_token` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;

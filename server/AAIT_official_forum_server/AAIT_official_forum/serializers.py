@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from AAIT_official_forum.models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity
-
+from django.contrib.auth.password_validation import validate_password
+from AAIT_official_forum.models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity,User,UserAccount,UserToken
 
 class AdministratorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -96,3 +96,31 @@ class JoinGroupActivitySerializer(serializers.ModelSerializer):
         model=JoinGroupActivity
         fields = ("join_group_activity_id", "group_id", "user_id", "group_activity_id", "join_time", "is_join_finish","is_expire")
 
+class UserSerializer(serializers.ModelSerializer):
+    account = serializers.StringRelatedField(many=True) #该字段只读
+    class Meta:
+        model = User
+        fields = ('user_id','username','e_mail','user_logo','user_description','last_post_id','last_article_id','account')
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username','password','e_mail')
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username','password')
+
+
+class ChangePasswordSerializer(serializers.Serializer): 
+    """ 
+    Serializer for password change endpoint. 
+    """ 
+    old_password = serializers.CharField(required=True) 
+    new_password = serializers.CharField(required=True) 
+
+    def validate_new_password(self, value):
+        validate_password(value) 
+        return value 

@@ -1,12 +1,17 @@
 from django.shortcuts import render
-from rest_framework import permissions,viewsets,renderers,generics
+from django.http import JsonResponse
+from rest_framework import permissions,viewsets,renderers,generics,status,exceptions
 #from rest_framework.filters import DjangoObjectPermissionsFilter
 from rest_framework.decorators import api_view
 from django.views.generic import View
+from rest_framework.views import APIView
+from .permissions import IsOwnerOrReadOnly
+from rest_framework.response import Response
+from django.contrib.auth.hashers import hashlib
+from rest_framework.authentication import BasicAuthentication
+from AAIT_official_forum.models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
+from AAIT_official_forum.serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer
 
-
-from AAIT_official_forum.models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity
-from AAIT_official_forum.serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer
 
 # Create your views here.
 
@@ -84,8 +89,108 @@ class JoinGroupActivityViewSet(viewsets.ModelViewSet):
     queryset = JoinGroupActivity.objects.all()
     serializer_class = JoinGroupActivitySerializer
 
+class UserRegisterAPIView(APIView):
+    queryset = User.objects.all()
+    serializer_class = UserRegisterSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self,request,format=None):
+        data = request.data
+        username = data.get('username')
+        password = data.get('password')
+        email = data.get('e_mail')
+        if User.objects.filter(username__exact=username):
+            return Response('用户名已存在',status=status.HTTP_400_BAD_REQUEST)
+        elif User.objects.filter(e_mail=email):
+            return Response('该邮箱已被注册',status=status.HTTP_400_BAD_REQUEST)  
+        serializer = UserRegisterSerializer(data=data)
+        if serializer.is_valid():
+
+            serializer.save()
+            return Response(serializer.data.get('username'),status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class UserLoginAPIView(APIView):
+    '''
+    用户登录验证，如果通过，则设置、保存并返回token
+    '''
+    queryset = User.objects.all()
+    serializer_class = UserLoginSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self,request,format=None):
+        ret = {'msg':None,'token':None}
+        data = request.data
+        username = data.get('username')
+        password = data.get('password')
+        try:
+            user = User.objects.get(username__exact=username)
+        except:
+            return Response('用户名或密码错误',status=status.HTTP_400_BAD_REQUEST)
+        password_1 = hashlib.md5(password.encode('utf-8')).hexdigest()
+        password = hashlib.md5(password_1.encode('utf-8')+user.salt.encode('utf-8')).hexdigest()
+        if username == user.username and password == user.password:
+            token = hashlib.md5(username.encode('utf-8')).hexdigest()
+            ret['msg'] = 'Successed'
+            ret['token'] = token
+            return JsonResponse(ret)
+            UserToken.objects.update_or_create(user=user,defaults={'token':token})
+            #serializer = UserSerializer(user)
+            #return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response('用户名或密码错误',status=status.HTTP_400_BAD_REQUEST)
+
+class ChangePasswordAPIView(APIView): 
+    """ 
+    An endpoint for changing password. 
+    """ 
+    permission_classes = (permissions.IsAuthenticated,) 
+
+    def get_object(self, queryset=None): 
+        return self.request.user 
+
+    def put(self, request, *args, **kwargs): 
+        self.object = self.get_object() 
+        serializer = ChangePasswordSerializer(data=request.data) 
+
+        if serializer.is_valid(): 
+        # Check old password 
+            old_password = serializer.data.get("old_password") 
+            if not self.object.check_password(old_password): 
+                return Response({"old_password": ["Wrong password."]},status=status.HTTP_400_BAD_REQUEST) 
+                # set_password also hashes the password that the user will get 
+            self.object.set_password(serializer.data.get("new_password")) 
+            self.object.save() 
+            return Response(status=status.HTTP_204_NO_CONTENT) 
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class Authentication(APIView):
+    '''
+    用户登录与否认证
+    '''
+    def authenticate(self,request):
+        token = request.data.get('token')
+        token_obj = UserToken.objects.filter(token=token)
+        if not token_obj:
+            raise exceptions.AuthenticationFailed('用户认证失败')
+        return(token_obj,token_obj.user)
+
+    def authenticate_header(self,request):
+        pass
+
+    
+class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    用户登录认证通过后可查看
+    '''
+    queryset = User.objects.all()
+
+    serializer_class = UserSerializer
+
+    permission_classes = (IsOwnerOrReadOnly,)
+
+    authentication_classes = [Authentication,]
 
 
 def index(request):
