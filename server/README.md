@@ -36,6 +36,7 @@ DATABASES = {
 }
 
 >设置好了之后先导入数据库文件 aait_forum.sql 到数据库
+>  test
 
 
 
