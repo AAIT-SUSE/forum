@@ -211,6 +211,7 @@ urlpatterns=[
 >mysql –h localhost –u root -p #登录数据库
 >enter password:你设置的mysql的root账户的密码
 >show databases
+>合并此处
 ```
 
 如果以上命令正常输入，并且返回正常结果没有报错就说明你已经安装成功了！
