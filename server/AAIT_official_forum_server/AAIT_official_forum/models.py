@@ -304,6 +304,7 @@ class User(models.Model):
         super(User,self).save(*args,**kwargs)
 
 
+
 class UserAccount(models.Model):
     owner = models.ForeignKey(User,related_name='account',on_delete=True)
     user_rank = models.IntegerField(blank=True, null=True)
@@ -314,6 +315,8 @@ class UserAccount(models.Model):
         return('user_score:' '%d' '       ' 'user_rank:' '%d'  % (self.user_score,self.user_rank))
 
 
+
 class UserToken(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     token = models.CharField(max_length=64)
+
