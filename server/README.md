@@ -42,7 +42,7 @@ DATABASES = {
 
 ###论坛
 
-####获取文章列表
+#####获取文章列表
 
 >GET /api/ArticleViewSet/
 
