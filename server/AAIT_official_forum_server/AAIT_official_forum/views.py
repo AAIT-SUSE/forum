@@ -5,7 +5,6 @@ from rest_framework import permissions,viewsets,renderers,generics,status,except
 from rest_framework.decorators import api_view
 from django.views.generic import View
 from rest_framework.views import APIView
-from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 from django.contrib.auth.hashers import hashlib
 from rest_framework.authentication import BasicAuthentication
@@ -185,12 +184,9 @@ class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
     用户登录认证通过后可查看
     '''
     queryset = User.objects.all()
-
+    
     serializer_class = UserSerializer
 
-    permission_classes = (IsOwnerOrReadOnly,)
-
-    authentication_classes = [Authentication,]
 
 
 def index(request):
