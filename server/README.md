@@ -38,6 +38,179 @@ DATABASES = {
 >设置好了之后先导入数据库文件 aait_forum.sql 到数据库
 >  test
 
+## 3 API List
+
+###论坛
+
+####获取文章列表
+
+>GET /api/ArticleViewSet/
+
+####增加文章
+
+>POST /api/ArticleViewSet/
+```
+参数（userid必填）
+
+{
+            "user_id": 8,
+            "article_time": "2020-02-02T13:00:00Z",
+            "title": "sfsdfsdf",
+            "is_valid": 1,
+            "content": "sdfsdf",
+            "article_board_id": 1
+}
+```
+####删除文章
+
+>DELETE /api/ArticleViewSet/<id>/
+
+####修改文章
+>PUT /api/ArticleViewSet/<id>/
+```
+{
+            "user_id": 8,
+            "article_time": "2020-02-02T13:00:00Z",
+            "title": "sfsdfsdf",
+            "is_valid": 1,
+            "content": "sdfsdf",
+            "article_board_id": 1
+}
+```
+
+####获取帖子列表
+>GET /api/PostViewSet/
+
+####增加帖子
+>POST /api/PostViewSet/
+
+```
+参数
+{
+	"user_id": 1,
+        "post_time": "2018-01-01T01:00:00Z",
+        "post_content": "hellowolrd",
+        "title": "helloworld",
+        "post_board_id": "1",
+        "is_vaild": 1
+}
+```
+
+####删除帖子
+
+>DELETE /api/PostViewSet/<id>/
+
+####修改帖子
+
+>PUT /api/PostViewSet/<id>/
+
+
+
+
+
+####获取群组列表
+>GET /api/GroupViewSet/
+
+```
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "group_id": 1,
+            "user_id": 1,
+            "create_time": "2018-01-01T01:00:00Z",
+            "is_close": 0,
+            "description": "第一个群组",
+            "group_name": "第一个",
+            "group_type": "开放"
+        },
+        {
+            "group_id": 2,
+            "user_id": 2,
+            "create_time": null,
+            "is_close": 0,
+            "description": "第二个群组",
+            "group_name": "第二个群组",
+            "group_type": "开放"
+        }
+    ]
+}
+```
+
+####添加群组
+>post /api/GroupViewSet/
+```
+参数
+{
+	    "user_id": 1,
+            "create_time": "2018-01-01T01:00:00Z",
+            "is_close": 0,
+            "description": "第一个群组",
+            "group_name": "第一个",
+            "group_type": "开放"
+}
+```
+
+####删除群组
+
+>DELETE /api/GroupViewSet/<id>/
+
+####修改群组
+
+>PUT /api/GroupViewSet/<id>/
+
+####获取论坛板块列表
+
+>GET /api/PostBoardViewSet/
+
+```
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "post_board_id": 1,
+            "board_description": "第一个板块",
+            "post_theme_id": 1,
+            "last_post_id": 2,
+            "board_name": "第一个板块"
+        },
+        {
+            "post_board_id": 2,
+            "board_description": "第二个板块",
+            "post_theme_id": 1,
+            "last_post_id": 3,
+            "board_name": "第二个板块"
+        }
+    ]
+}
+```
+####添加论坛板块
+>post /api/PostBoardViewSet/
+
+```
+参数
+{
+	   "board_description": "第一个板块",
+            "post_theme_id": 1,
+            "last_post_id": 2,
+            "board_name": "第一个板块"
+}
+```
+
+####删除论坛板块
+
+>DELETE /api/PostBoardViewSet/<id>/
+
+####修改论坛板块
+
+>PUT /api/PostBoardViewSet/<id>/
+
+
+
 
 
 
