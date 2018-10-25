@@ -40,13 +40,13 @@ DATABASES = {
 
 ## 3 API List
 
-###论坛
+### 论坛
 
-#####获取文章列表
+##### 获取文章列表
 
 >GET /api/ArticleViewSet/
 
-####增加文章
+#### 增加文章
 
 >POST /api/ArticleViewSet/
 ```
@@ -61,11 +61,11 @@ DATABASES = {
             "article_board_id": 1
 }
 ```
-####删除文章
+#### 删除文章
 
 >DELETE /api/ArticleViewSet/<id>/
 
-####修改文章
+#### 修改文章
 >PUT /api/ArticleViewSet/<id>/
 ```
 {
@@ -78,10 +78,10 @@ DATABASES = {
 }
 ```
 
-####获取帖子列表
+#### 获取帖子列表
 >GET /api/PostViewSet/
 
-####增加帖子
+#### 增加帖子
 >POST /api/PostViewSet/
 
 ```
@@ -96,11 +96,11 @@ DATABASES = {
 }
 ```
 
-####删除帖子
+#### 删除帖子
 
 >DELETE /api/PostViewSet/<id>/
 
-####修改帖子
+#### 修改帖子
 
 >PUT /api/PostViewSet/<id>/
 
@@ -108,7 +108,7 @@ DATABASES = {
 
 
 
-####获取群组列表
+#### 获取群组列表
 >GET /api/GroupViewSet/
 
 ```
@@ -139,7 +139,7 @@ DATABASES = {
 }
 ```
 
-####添加群组
+#### 添加群组
 >post /api/GroupViewSet/
 ```
 参数
@@ -153,15 +153,15 @@ DATABASES = {
 }
 ```
 
-####删除群组
+#### 删除群组
 
 >DELETE /api/GroupViewSet/<id>/
 
-####修改群组
+#### 修改群组
 
 >PUT /api/GroupViewSet/<id>/
 
-####获取论坛板块列表
+#### 获取论坛板块列表
 
 >GET /api/PostBoardViewSet/
 
@@ -188,7 +188,7 @@ DATABASES = {
     ]
 }
 ```
-####添加论坛板块
+#### 添加论坛板块
 >post /api/PostBoardViewSet/
 
 ```
@@ -201,18 +201,18 @@ DATABASES = {
 }
 ```
 
-####删除论坛板块
+#### 删除论坛板块
 
 >DELETE /api/PostBoardViewSet/<id>/
 
-####修改论坛板块
+#### 修改论坛板块
 
 >PUT /api/PostBoardViewSet/<id>/
 
 ----------
 
 
-### 物品restful api
+### 物品REST api
 
 #### 获取物品列表
 
