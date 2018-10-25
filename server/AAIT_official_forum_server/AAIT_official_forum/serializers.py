@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity,User,UserAccount,UserToken
+from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PoromodoClock,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity,User,UserAccount,UserToken
 
 class AdministratorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +28,12 @@ class GoodsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goods
         fields=("goods_id","price","stock","goods_image","goods_info","is_online")
+
+
+class PoromodoClockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PoromodoClock
+        fields=("poromodo_clock_id","user_id","clock_count","invalid_poromodo_clock")
 
 #########################
 class PostSerializer(serializers.ModelSerializer):
@@ -112,6 +118,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username','password')
+
+
 
 
 class ChangePasswordSerializer(serializers.Serializer): 

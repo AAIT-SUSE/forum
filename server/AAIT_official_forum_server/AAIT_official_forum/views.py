@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.hashers import hashlib
 from rest_framework.authentication import BasicAuthentication
-from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
-from .serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer
+from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,PoromodoClock,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
+from .serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PoromodoClockSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer
 
 
 # Create your views here.
@@ -33,10 +33,15 @@ class ArticleCommentViewSet(viewsets.ModelViewSet):
     queryset = ArticleComment.objects.all()
     serializer_class = ArticleCommentSerializer
 
+#################
 class GoodsViewSet(viewsets.ModelViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
 
+class PoromodoClockViewSet(viewsets.ModelViewSet):
+    queryset = PoromodoClock.objects.all()
+    serializer_class = PoromodoClockSerializer
+#################
 
 
 class PostViewSet(viewsets.ModelViewSet):

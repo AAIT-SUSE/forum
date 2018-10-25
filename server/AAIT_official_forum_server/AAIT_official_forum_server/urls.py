@@ -33,6 +33,13 @@ router.register(r'GroupBulletinViewSet',views.GroupBulletinViewSet)
 router.register(r'GroupActivityViewSet',views.GroupActivityViewSet)
 router.register(r'JoinGroupActivityViewSet',views.JoinGroupActivityViewSet)
 
+router.register(r'GoodsViewSet',views.GoodsViewSet)
+router.register(r'PoromodoClockViewSet',views.PoromodoClockViewSet)
+
+
+
+
+
 urlpatterns = [
     url('^api/',include(router.urls)),
     path('admin/', admin.site.urls),
