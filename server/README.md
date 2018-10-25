@@ -285,8 +285,84 @@ DATABASES = {
 
 ----------
 
+### 番茄 API
+
+#### 获取番茄列表
+
+```
+调用地址：http://127.0.0.1:8000/api/PoromodoClockViewSet/
+
+请求方式：GET
+
+返回类型：JSON
+
+```
+成功返回：
+```
+[
+    {
+        "poromodo_clock_id": 1,
+        "user_id": 1,
+        "clock_count": 1,
+        "invalid_poromodo_clock": 1
+    },
+    {
+        "poromodo_clock_id": 2,
+        "user_id": 2,
+        "clock_count": 2,
+        "invalid_poromodo_clock": 2
+    }
+]```
+失败返回：
+```
+{
+    "detail": "Not found."
+}
+```
+#### 增加番茄
+
+```
+调用地址：http://127.0.0.1:8000/api/PoromodoClockViewSet/
+
+请求方式：POST
+
+返回类型：JSON
+```
+
+| 请求参数 | 类型 | 是否必须 | 描述 |
+|:----------:|:----------:|:----------:|:----------:|
+|   poromodo_clock_id         |   str   |      必须      |    --        |
+|      user_id      |      str      |     选填      |      --      |
+|       clock_count     |   str         |      选填      |    --        |
+|       invalid_poromodo_clock     |   str         |      选填      |    --        |
 
 
+#### 删除番茄
+
+```
+调用地址：http://127.0.0.1:8000/api/PoromodoClockViewSet/{id}/
+
+请求方式：DELETE
+
+返回类型：JSON
+```
+
+#### 修改番茄
+
+```
+调用地址：http://127.0.0.1:8000/api/PoromodoClockViewSet/{id}/
+
+请求方式：PUT
+
+返回类型：JSON
+```
+
+| 请求参数 | 类型 | 是否必须 | 描述 |
+|:----------:|:----------:|:----------:|:----------:|
+|   poromodo_clock_id         |   str   |      必须      |    --        |
+|      user_id      |      str      |     选填      |      --      |
+|       clock_count     |   str         |      选填      |    --        |
+|       invalid_poromodo_clock     |   str         |      选填      |    --        |
 
 
 

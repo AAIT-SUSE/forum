@@ -64,11 +64,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AAIT_official_forum/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="52" column="9" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="9" />
+            <state relative-caret-position="-114">
+              <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -91,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AAIT_official_forum_server/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="163">
+              <caret line="36" column="38" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="38" />
               <folding>
                 <element signature="e#23#55#0" expanded="true" />
               </folding>
@@ -402,16 +402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AAIT_official_forum_server/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#23#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AAIT_official_forum/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -421,8 +411,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AAIT_official_forum/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="9" />
+        <state relative-caret-position="-114">
+          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AAIT_official_forum_server/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="38" />
+          <folding>
+            <element signature="e#23#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
