@@ -312,7 +312,9 @@ DATABASES = {
         "clock_count": 2,
         "invalid_poromodo_clock": 2
     }
-]```
+]
+
+```
 失败返回：
 ```
 {
@@ -364,7 +366,7 @@ DATABASES = {
 |       clock_count     |   str         |      选填      |    --        |
 |       invalid_poromodo_clock     |   str         |      选填      |    --        |
 
-
+----------
 
 
 
