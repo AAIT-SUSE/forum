@@ -209,6 +209,90 @@ DATABASES = {
 
 >PUT /api/PostBoardViewSet/<id>/
 
+----------
+
+
+### 物品restful api
+
+#### 获取物品列表
+
+```
+调用地址：http://127.0.0.1:8000/api/GoodsViewSet/
+
+请求方式：GET
+
+返回类型：JSON
+
+```
+成功返回：
+```
+[{"goods_id":1,"price":null,"stock":null,"goods_image":null,"goods_info":null,"is_online":null},{"goods_id":2,"price":1,"stock":2,"goods_image":"test","goods_info":"测试","is_online":0},{"goods_id":21,"price":null,"stock":null,"goods_image":null,"goods_info":null,"is_online":null}]
+```
+失败返回：
+```
+{
+    "detail": "Not found."
+}
+```
+#### 增加物品
+
+```
+调用地址：http://127.0.0.1:8000/api/GoodsViewSet/
+
+请求方式：POST
+
+返回类型：JSON
+```
+
+| 请求参数 | 类型 | 是否必须 | 描述 |
+|:----------:|:----------:|:----------:|:----------:|
+|   goods_id         |   str   |      必须      |    --        |
+|      price      |      str      |     选填      |      --      |
+|       stock     |   str         |      选填      |    --        |
+|       goods_image     |   str         |      选填      |    --        |
+|       goods_info     |   str         |      选填      |    --        |
+|       is_online     |   str         |      选填      |    --        |
+
+
+#### 删除物品
+
+```
+调用地址：http://127.0.0.1:8000/api/GoodsViewSet/{id}/
+
+请求方式：DELETE
+
+返回类型：JSON
+```
+
+#### 修改物品
+
+```
+调用地址：http://127.0.0.1:8000/api/GoodsViewSet/{id}/
+
+请求方式：PUT
+
+返回类型：JSON
+```
+
+| 请求参数 | 类型 | 是否必须 | 描述 |
+|:----------:|:----------:|:----------:|:----------:|
+|   goods_id         |   str   |      必须      |    --        |
+|      price      |      str      |     选填      |      --      |
+|       stock     |   str         |      选填      |    --        |
+|       goods_image     |   str         |      选填      |    --        |
+|       goods_info     |   str         |      选填      |    --        |
+|       is_online     |   str         |      选填      |    --        |
+
+----------
+
+
+
+
+
+
+
+
+
 
 
 
