@@ -67,7 +67,7 @@ Then, `cd` to your project folder, and excute
 npm run serve
 ```
 
-to run the developement server. Open your browser, type:
+to run the developement server. Open your browser, visit:
 
 ```
 localhost:8080
@@ -92,6 +92,6 @@ You can get familiar with the application you have just created, do some modific
 
 当你熟悉了基本的操作流程和**vuetify**之后，你就可以参与开发了。在本地创建一个新项目后，在本Github仓库中下载`.zip`压缩包，解压后得到的文件复制到项目目录中即可。
 
-## 2 Server Side Enviroment
+## 2 Server Side Environment
 
-**- TBC -**
+In order to setup **server side environment** of Envision, please refer to this [link](https://github.com/q513021617/forum/blob/master/README.md#2-server-side-enviroment).
