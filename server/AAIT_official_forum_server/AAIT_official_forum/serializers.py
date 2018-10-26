@@ -111,16 +111,13 @@ class UserSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password','e_mail')
+        fields = ('username','password','confirm_password','e_mail')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username','password')
-
-
-
 
 class ChangePasswordSerializer(serializers.Serializer): 
     """ 
@@ -132,3 +129,14 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate_new_password(self, value):
         validate_password(value) 
         return value 
+
+class ForgetPasswordSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username','e_mail')
+
+class ResetPasswordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username','password','confirm_password')

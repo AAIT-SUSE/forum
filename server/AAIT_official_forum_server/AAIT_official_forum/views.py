@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from django.contrib.auth.hashers import hashlib
 from rest_framework.authentication import BasicAuthentication
 from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,PoromodoClock,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
-from .serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PoromodoClockSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer
-
+from .serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PoromodoClockSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer,ForgetPasswordSerializer,ResetPasswordSerializer
+from .Send_email import SendEmail
 
 # Create your views here.
 
@@ -102,14 +102,16 @@ class UserRegisterAPIView(APIView):
         data = request.data
         username = data.get('username')
         password = data.get('password')
+        confirm_password = data.get('confirm_password')
         email = data.get('e_mail')
         if User.objects.filter(username__exact=username):
             return Response('用户名已存在',status=status.HTTP_400_BAD_REQUEST)
         elif User.objects.filter(e_mail=email):
-            return Response('该邮箱已被注册',status=status.HTTP_400_BAD_REQUEST)  
+            return Response('该邮箱已被注册',status=status.HTTP_400_BAD_REQUEST)
+        elif password != confirm_password:
+            return Response('两次输入密码不一致',status=status.HTTP_400_BAD_REQUEST)  
         serializer = UserRegisterSerializer(data=data)
         if serializer.is_valid():
-
             serializer.save()
             return Response(serializer.data.get('username'),status=status.HTTP_200_OK)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
@@ -147,6 +149,8 @@ class ChangePasswordAPIView(APIView):
     """ 
     An endpoint for changing password. 
     """ 
+    queryset = User.objects.all()
+    serializer_class = ChangePasswordSerializer
     permission_classes = (permissions.IsAuthenticated,) 
 
     def get_object(self, queryset=None): 
@@ -168,6 +172,45 @@ class ChangePasswordAPIView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class ForgetPasswordAPIView(APIView):
+    queryset = User.objects.all()
+    serializer_class = ForgetPasswordSerializer
+
+    def post(self,request,format=None):
+        data = request.data
+        username = data.get('username')
+        e_mail = data.get('e_mail')
+        try:
+            user = User.objects.get(username__exact=username)
+            if e_mail == user.e_mail:
+                sendemail = SendEmail()
+                sendemail.send(str(e_mail))
+                return Response('resetpassword',status=status.HTTP_200_OK)
+            else:
+                return Response('用户名与邮箱不匹配',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('用户名或邮箱错误',status=status.HTTP_400_BAD_REQUEST)
+
+class ResetPasswordAPIView(APIView):
+    queryset = User.objects.all()
+    serializer_class = ResetPasswordSerializer
+
+    def put(self,request,*args, **kwarge):
+        data = request.data
+        username = data.get('username')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+        self.object = User.objects.get(username__exact=username)
+        if password != confirm_password:
+            return Response('两次输入密码不一致')
+        else:
+            serializer = ResetPasswordSerializer(data=data)
+            if serializer.is_valid():
+                self.object.password = password
+                self.object.confirm_password = confirm_password
+                self.object.save()
+                return Response('重置密码成功',status=status.HTTP_200_OK)
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class Authentication(APIView):
     '''
@@ -191,7 +234,6 @@ class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     
     serializer_class = UserSerializer
-
 
 
 def index(request):

@@ -46,6 +46,8 @@ urlpatterns = [
     path('index/',views.index),
     path('register/',views.UserRegisterAPIView.as_view()),
     path('login/',views.UserLoginAPIView.as_view()),
+    path('forgetpassword',views.ForgetPasswordAPIView.as_view()),
+    path('resetpassword',views.ResetPasswordAPIView.as_view()),
     url(r'^user_profile/(?P<pk>[0-9]+)/$',views.UserProfileAPIView.as_view()),
     url(r'changepassword/',views.ChangePasswordAPIView.as_view()),
 ]

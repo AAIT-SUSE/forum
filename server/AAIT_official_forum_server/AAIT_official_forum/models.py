@@ -283,6 +283,7 @@ class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=45)
     password = models.CharField(max_length=200)
+    confirm_password = models.CharField(max_length=200)
     salt = models.CharField(max_length=45, blank=True, null=True)
     e_mail = models.CharField(max_length=45)
     user_logo = models.CharField(max_length=45, blank=True, null=True)
@@ -298,9 +299,12 @@ class User(models.Model):
         for i in range(10):
             salt += (list(ch)[random.randint(0,25)])
         self.salt = salt
-        passwd_1 = self.password
-        passwd_2 = hashlib.md5(passwd_1.encode('utf-8')).hexdigest()
-        self.password = hashlib.md5(passwd_2.encode('utf-8')+self.salt.encode('utf-8')).hexdigest()
+        passwd = self.password
+        confirm_passwd = self.password
+        passwd_encryption = hashlib.md5(passwd.encode('utf-8')).hexdigest()
+        confirm_passwd_encryption = hashlib.md5(confirm_passwd.encode('utf-8')).hexdigest()
+        self.password = hashlib.md5(passwd_encryption.encode('utf-8')+self.salt.encode('utf-8')).hexdigest()
+        self.confirm_password = hashlib.md5(confirm_passwd_encryption.encode('utf-8')+self.salt.encode('utf-8')).hexdigest()
         super(User,self).save(*args,**kwargs)
 
 
