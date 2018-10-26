@@ -2,7 +2,7 @@
 <p align=center>
 <img src="https://img.shields.io/badge/version-0.0.1-red.svg"> <img src="https://img.shields.io/badge/founder-%E8%94%A1%E4%BB%B2%E6%99%A8-orange.svg"> <img src="https://img.shields.io/badge/%E5%9B%9B%E5%B7%9D%E8%BD%BB%E5%8C%96%E5%B7%A5-AAIT-brightgreen.svg"> <img src="https://img.shields.io/badge/status-Unfinished-lightgrey.svg">
 </p>
-   
+
 <p align=center><b>注意, 这仍是一个未完成版本。</b></p>
 
 > AAIT Official Forum is a UGC based website and mobile hybrid APP for members of AAIT to exchange ideas and share inspirations.
@@ -25,20 +25,256 @@
 初次使用需要在setting.py 中设置一下信息:
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aait_forum', #数据库名
-        'USER': 'root',	#用户名
-        'PASSWORD': 'root',#用户密码
-        'HOST': '127.0.0.1',#数据库地址
-        'PORT': '3306', #数据库端口
-    }
+​    'default': {
+​        'ENGINE': 'django.db.backends.mysql',
+​        'NAME': 'aait_forum', #数据库名
+​        'USER': 'root',	#用户名
+​        'PASSWORD': 'root',#用户密码
+​        'HOST': '127.0.0.1',#数据库地址
+​        'PORT': '3306', #数据库端口
+​    }
 }
 
 >设置好了之后先导入数据库文件 aait_forum.sql 到数据库
 >  test
 
 ## 3 API List
+
+### 用户入口Restful API
+
+#### 用户注册
+
+> GET /register/            		
+>
+> POST /register/
+>
+> > ```
+> > 参数（所有参数必填）
+> > {
+> >     'username':dwy  "用户名"
+> >     'e_mail': 485176679@qq.com  "邮箱“
+> >     'password': 12345  "用户密码"
+> >     'confirm_password': 12345  "确认密码"
+> > }
+> > ```
+>
+> > 成功返回：
+> >
+> > ```
+> > 'dwy'  (用户名)
+> > ```
+> >
+> >
+>
+> > 失败返回：
+> >
+> > ```
+> > '用户名已存在' （该用户名已被注册）
+> > '该邮箱已被注册' （一个邮箱只能被一个用户注册）
+> > '两次输入的密码不一致' （确保两次输入密码一致）
+> > ```
+> >
+> >
+>
+>
+
+####  用户登录
+
+> GET /login/
+>
+> POST /login/
+>
+> > ```
+> > 参数（所有参数必填）
+> > {
+> >     'username':dwy  "已注册的用户名"
+> >     'password':12345 "用户密码"
+> > }
+> > ```
+> >
+> > 成功返回：
+> >
+> > ```
+> > 'msg':'Successed'
+> > 'token': 该用户token信息  （登录时为用户设置token并返回）
+> > ```
+> >
+> > 失败返回：
+> >
+> > ```
+> > '用户名或密码错误'
+> > ```
+> >
+> >
+
+#### 修改密码
+
+> GET /changepassword/
+>
+> PUT /changepassword/
+>
+> > ```
+> > 参数(所有参数必填)
+> > {
+> >     'old_password' : 12345  (用户旧密码)
+> >     'new_password' : 123  (新密码)
+> > }
+> > ```
+> >
+> > 成功返回：
+> >
+> > ```
+> > '修改密码成功'
+> > ```
+> >
+> > 失败返回：
+> >
+> > ```
+> > "old_password": ["Wrong password."]  (旧密码密码)
+> > "detail": "Authentication credentials were not provided."  （没有权限执行此操作）
+> > ```
+> >
+> >
+
+#### 忘记密码
+
+> GET /firgetpassword/
+>
+> POST /forgetpassword/
+>
+> > ```
+> > 参数（所有参数必填）
+> > {
+> >     'username' : dwy  （需要找回密码的用户名称，必须是已注册用户）
+> >     'e_mail' : 485176679@qq.con  (注册时使用的邮箱，用于接收重置密码连接)
+> > }
+> > ```
+> >
+> > 成功返回：
+> >
+> > ```
+> > 'resetpassword' (用于用户重置密码的链接)
+> > ```
+> >
+> > 失败返回：
+> >
+> > ```
+> > '用户名与邮箱不匹配'  (用户注册时使用的邮箱与此输入邮箱不一致)
+> > '用户名或邮箱错误'  （该用户未注册）
+> > ```
+> >
+> >
+
+#### 重置密码
+
+> GET /resetpassword/
+>
+>  PUT /resetpassword/
+>
+> > ```
+> > 参数（所有参数必填）
+> > {
+> >     'username' : dwy  (需要重置密码的用户名)
+> >     'password' : 123  (重置后的密码)
+> >     'confirm_password' : 123  (确认密码)
+> > }
+> > ```
+> >
+> > 成功返回：
+> >
+> > ```
+> > '重置密码成功'
+> > ```
+> >
+> > 失败返回：
+> >
+> > ```
+> > '两次输入密码不一致'
+> > ```
+> >
+> >
+
+#### 查看用户账户
+
+> GET /user_profile/<id>/
+>
+> 成功返回：
+>
+> ```
+> {
+>     "user_id": 2,
+>     "username": "dwy_520",
+>     "e_mail": "dengwenyi88@outlook.com",
+>     "user_logo": null,
+>     "user_description": null,
+>     "last_post_id": null,
+>     "last_article_id": null,
+>     "account": []
+> }
+> ```
+>
+> 失败返回：
+>
+> ```
+> "detail": "Not found."
+> ```
+>
+>
+
+#### 修改用户账户
+
+> PUT /user_profile/<id>/
+>
+> ```
+> 参数
+> {
+>     "username": "dwy_520"  （必填）
+>     "e_mail": "dengwenyi88@outlook.com"  （必填）
+>     "user_logo": null,
+>     "user_description": null,
+>     "last_post_id": null,
+>     "last_article_id": null,
+> }
+> ```
+>
+> 成功返回：
+>
+> ```
+> (修改后的数据)
+>     "user_id": 2,
+>     "username": "dwy_520",
+>     "e_mail": "dengwenyi88@outlook.com",
+>     "user_logo": null,
+>     "user_description": null,
+>     "last_post_id": null,
+>     "last_article_id": null,
+>     "account": []
+> ```
+>
+> 失败返回：
+>
+> ```
+>     "username": [
+>         "This field may not be blank."
+>     ],
+>     "e_mail": [
+>         "This field may not be blank."
+>     ]
+> ```
+>
+>
+
+#### 删除用户
+
+> DELETE /user_profile/<id>/
+>
+> 失败返回：
+>
+> ```
+>  "detail": "Authentication credentials were not provided."
+> ```
+>
+>
 
 ### 论坛
 

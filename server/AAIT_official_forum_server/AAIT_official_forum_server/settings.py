@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'AAIT_official_forum_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
+        'NAME': 'aait',
         'USER': 'root',
-        'PASSWORD': 'a18381801393',
+        'PASSWORD': 'DWY5201314',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
