@@ -130,7 +130,7 @@ DATABASES = {
 > > 失败返回：
 > >
 > > ```
-> > "old_password": ["Wrong password."]  (旧密码密码)
+> > "old_password": ["Wrong password."]  (旧密码错误)
 > > "detail": "Authentication credentials were not provided."  （没有权限执行此操作）
 > > ```
 > >
