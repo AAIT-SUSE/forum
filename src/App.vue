@@ -3,9 +3,10 @@
     <SideMenu></SideMenu>
 
     <Toolbar></Toolbar>
-  
+    
     <v-content>
-      <Home></Home>
+      <router-view></router-view>
+
     </v-content>
   
     <v-footer app dark>
@@ -21,7 +22,7 @@
   import HelloWorld from "./components/HelloWorld.vue"
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
-  import Home from './views/Home.vue'
+  import Home from './views/home/Home.vue'
 
   export default {
     name: "App",

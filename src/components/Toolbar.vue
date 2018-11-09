@@ -3,7 +3,7 @@
   <v-toolbar app dark clipped-left>
     <v-toolbar-title v-text="title"></v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <v-btn icon to="/user/mynews">
       <v-icon>textsms</v-icon>
     </v-btn>
     <v-btn icon>

@@ -26,7 +26,7 @@
 
     <v-list class="pt-0">
       <v-divider light></v-divider>
-      <v-list-tile v-for="item in items" :key="item.title" :to="item.link">
+      <v-list-tile v-for="item in items" :key="item.title" :to="item.link" class="white--text">
         <v-list-tile-action>
           <v-icon>{{item.icon}}</v-icon>
         </v-list-tile-action>
@@ -57,7 +57,7 @@ export default {
         {
           icon: "home",
           title: "首页",
-          link: "/Test/"
+          link: "/home"
         },
         {
           icon: "forum",
@@ -69,7 +69,8 @@ export default {
         },
         {
           icon: "account_circle",
-          title: "个人中心"
+          title: "个人中心",
+          link: "/user",
         }
       ],
     }
