@@ -67,7 +67,7 @@ Then, `cd` to your project folder, and excute
 npm run serve
 ```
 
-to run the developement server. Open your browser, type:
+to run the developement server. Open your browser, visit:
 
 ```
 localhost:8080
@@ -92,8 +92,9 @@ You can get familiar with the application you have just created, do some modific
 
 当你熟悉了基本的操作流程和**vuetify**之后，你就可以参与开发了。在本地创建一个新项目后，在本Github仓库中下载`.zip`压缩包，解压后得到的文件复制到项目目录中即可。
 
-## 2 Server Side Enviroment
+## 2 Server Side Environment
 
+<<<<<<< HEAD
 > 这一部分文档将会指引你搭建服务端的本地开发环境，并初步了解如何使用 Django 框架进行后端开发.
 
 AAIT Forum 项目，*以下简称AF*，在服务端使用基于python，且遵循MVC 标准的 **django** 框架,但在本项目中后端开发人员只需要考虑视图层中api设计，不需要考虑界面设计。 
@@ -221,3 +222,6 @@ urlpatterns=[
 此项目开发中需要你对数据库有较为熟练的认识，如果没有学习过数据库的话，你可以通过学习快速入门教程学习 [http://www.runoob.com/mysql/mysql-tutorial.html].
 
 
+=======
+In order to setup **server side environment** of Envision, please refer to this [link](https://github.com/q513021617/forum/blob/master/README.md#2-server-side-enviroment).
+>>>>>>> 4c1c065cd988a86aca4562d099862563ed4f690b
