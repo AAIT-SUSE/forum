@@ -1,6 +1,6 @@
 <template>
-<v-layout>
-  <v-toolbar app :color="userThemeColor" clipped-left>
+<div>
+  <v-toolbar app dark clipped-left>
     <v-toolbar-title v-text="title"></v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon>
@@ -27,13 +27,17 @@
           </p>
           <p>
             Envision 现在由人工智能技术协会 ENVISION 团队负责开发与维护。本项目完全开源免费，也希望对此感兴趣的
-            同学们可以积极加入到对项目的贡献中来。你可以点击这里的链接来<a href="https://shang.qq.com/wpa/qunwpa?idkey=be460a1a06b05ea46997cd1a20bd1a15d3e4301ee28c1123da991e3495d1cfac">
+            同学们可以积极加入到对项目的贡献中来。你可以点击这里的链接来:<a href="https://shang.qq.com/wpa/qunwpa?idkey=be460a1a06b05ea46997cd1a20bd1a15d3e4301ee28c1123da991e3495d1cfac">
             加入我们的项目开发群</a>、去<a href="https://github.com/AAIT-SUSE">我们的Github主页</a>上
-            Star我们，或者<a href="">在商城花费真实货币</a>支持Envision的开发与维护。
+            Star我们，或者<a href="#">在商城花费真实货币</a>支持Envision的开发与维护。
+          </p>
+          <p>
+            点击这里的链接来<a href="#">查看主要开发者及贡献者列表</a>。感谢各位为Envision和人工智能技术协会做
+            出的卓越贡献。
           </p>
         </v-container>
       </v-card-text>
-
+      <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary darken-1" flat="flat" @click="dialogInfo = false" >
@@ -42,7 +46,7 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-</v-layout>
+</div>
   
   
 </template>

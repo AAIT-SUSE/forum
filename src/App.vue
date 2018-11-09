@@ -5,7 +5,7 @@
     <Toolbar></Toolbar>
   
     <v-content>
-      <HelloWorld></HelloWorld>
+      <Home></Home>
     </v-content>
   
     <v-footer app dark>
@@ -21,13 +21,15 @@
   import HelloWorld from "./components/HelloWorld.vue"
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
+  import Home from './views/Home.vue'
 
   export default {
     name: "App",
     components: {
       HelloWorld,
       SideMenu,
-      Toolbar
+      Toolbar,
+      Home
     },
     data() {
       return {
