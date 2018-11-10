@@ -5,7 +5,7 @@
         <UserFeed></UserFeed>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
-        <UserActions order-sm1 order-xs1></UserActions>
+        <UserActions></UserActions>
         <infoPanel></infoPanel>
       </v-flex>
     </v-layout>

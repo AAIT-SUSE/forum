@@ -20,9 +20,9 @@
 <script>
 import userinfo from '@/components/UserInfo.vue'
 import centre from '@/components/Center.vue'
-import usertab from '@/components/usertab.vue'
+import usertab from '@/components/UserTab.vue'
 export default {
-  name:'user',
+  name:'User',
   components:{
     userinfo,
     centre,
