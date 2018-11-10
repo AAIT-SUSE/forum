@@ -11,7 +11,7 @@
 
 
 <script>
-import FoundSearch from './components/FoundSearch.vue'
+import FoundSearch from '@/components/FoundSearch.vue'
 
 export default {
   name:'Found',
