@@ -61,11 +61,12 @@ export default {
         },
         {
           icon: "forum",
-          title: "论坛"
+          title: "论坛",
         },
         {
           icon: "public",
-          title: "发现"
+          title: "发现",
+          link: "/Explore"
         },
         {
           icon: "account_circle",
