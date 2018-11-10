@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import FoundArticle from './found_search/FoundArticle'
-import FoundPost from './found_search/FoundPost'
+import FoundArticle from '@/components/FoundArticle'
+import FoundPost from '@/components/FoundPost'
 
 export default {
     name:'FoundSearch',
