@@ -1,39 +1,35 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card flat v-for="card in cards" :key="card.title"> 
-        <v-container fluid grid-list-lg>
-        <v-img :src="card.src" v-if="card.src!='#'" aspect-ratio="2.75"></v-img>
+      <v-card class="ma-2" raised v-for="post in posts" :key="post.id">
+        <v-img v-if="post.img"
+          :src="post.img"
+          aspect-ratio="2.75"
+        ></v-img>
+
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">{{card.title}}</h3>
-            <div>
-              {{card.content}}
-            </div>
+            {{ post.content }}
           </div>
         </v-card-title>
+
         <v-card-actions>
-          <v-btn flat block color="orange">
-            <v-badge right color="warning">
-              <span  slot="badge">6</span>
-            <v-icon >share</v-icon>
-            </v-badge>
+          <v-spacer></v-spacer>
+          <v-btn 
+            flat
+            :color="post.isInFav ? 'success' : 'grey'"
+            @click="post.isInFav = !post.isInFav"
+          >
+            <v-icon>star</v-icon>
           </v-btn>
-          <v-btn flat block color="orange">
-            <v-badge right color="warning">
-              <span  slot="badge">6</span>
-            <v-icon >comment</v-icon>
-            </v-badge>
-          </v-btn>
-          <v-btn flat block color="orange">
-            <v-badge right color="warning">
-              <span  slot="badge">6</span>
-            <v-icon >favorite</v-icon>
-            </v-badge>
+          <v-btn 
+            flat
+            :color="post.isLiked ? 'red' : 'info'"
+            @click="AddPostToFav(post.id)"
+          >
+            <v-icon left>favorite</v-icon> {{ post.likes }}
           </v-btn>
         </v-card-actions>
-        <v-spacer></v-spacer>
-        </v-container>
       </v-card>
     </v-flex>
   </v-layout>
@@ -44,11 +40,43 @@ export default {
   name:'PostList',
   data() {
     return {
-      cards:[
-        {title:'第一篇帖子',content:'这是第一篇帖子的内容',src:'https://cdn.vuetifyjs.com/images/cards/desert.jpg'},
-        {title:'第二篇帖子',content:'这是第二篇帖子的内容',src:'#'},
-        {title:'第三篇帖子',content:'这是第三篇帖子的内容',src:'#'},
+      posts:[
+        {
+          id: 0,
+          author: 'Owen Tsai',
+          content: '这是澳大利亚袋鼠谷(Kangaroo Valley)的美丽景色。正要日落的时候，太阳从地平线照射过来。\n远处可能有动物，我没看清。',
+          img:'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
+          isLiked: false,
+          likes: 46,
+          isInFav: false,
+        },
+        {
+          id: 1,
+          author: 'Jack Ma',
+          content: '双十一给我送了钱的，请点个赞让我知道一下！',
+          isLiked: false,
+          likes: 123,
+          isInFav: false,
+        },
+        {
+          id: 2,
+          author: 'Tony Owens',
+          content: '多行文本测试\n这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字',
+          isLiked: false,
+          likes: 0,
+          isInFav: false,
+        },
       ]
+    }
+  },
+  methods: {
+    AddPostToFav: function(id) {
+      this.posts[id].isLiked = !this.posts[id].isLiked;
+      if(this.posts[id].isLiked === false) {
+        this.posts[id].likes -= 1;
+      } else {
+        this.posts[id].likes += 1;
+      }
     }
   }
 }
