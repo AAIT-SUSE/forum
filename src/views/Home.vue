@@ -5,7 +5,19 @@
         <UserFeed></UserFeed>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
-        <UserActions></UserActions>
+        <v-card flat>
+          <v-card-text 
+            class="px-0 text-md-center text-sm-center text-xs-center text-lg-center text-xl-center"
+          >
+          <UserActions 
+            v-for="act in userActions"
+            :key="act"
+            v-bind:btnColor="act.color"
+            v-bind:actName="act.name"
+            v-bind:actIcon="act.icon"
+            ></UserActions>
+          </v-card-text>
+        </v-card>
         <infoPanel></infoPanel>
       </v-flex>
     </v-layout>
@@ -23,5 +35,26 @@ export default {
     UserFeed,
     InfoPanel,
   },
+  data() {
+    return {
+      userActions: [
+        {
+          name: '新文章',
+          icon: 'create',
+          color: 'info'
+        },
+        {
+          name: '新动态',
+          icon: 'add_comment',
+          color: 'info'
+        },
+        {
+          name: '提问题',
+          icon: 'help',
+          color: 'info'
+        },
+      ],
+    }
+  }
 }
 </script>

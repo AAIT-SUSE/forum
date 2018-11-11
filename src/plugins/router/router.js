@@ -9,6 +9,7 @@ const user = () => import('@/views/User')
 const home = () => import('@/views/Home')
 const Explore = () => import('@/views/Explore')
 const envision = () => import('@/views/Envision')
+const study = () => import('@/views/Study')
 
 
 //user router
@@ -23,9 +24,6 @@ const myarticle = () => import('@/components/myarticle')
 const my_fav_photos = () => import('@/components/my-fav-photos')
 const my_fav_posts = () => import('@/components/my-fav-posts')
 const my_fav_articles = () => import('@/components/FavArticles')
-
-
-
 
 
 //centre router
@@ -57,6 +55,11 @@ const routes = [{
 		path: '/envision',
 		name: 'envision',
 		component: envision
+	},
+	{
+		path: '/study',
+		name: 'study',
+		component: study
 	},
 	//user children router
 	{

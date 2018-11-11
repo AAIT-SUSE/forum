@@ -60,6 +60,11 @@ export default {
           link: "/home"
         },
         {
+          icon: "school",
+          title: "学习",
+          link: "/study"
+        },
+        {
           icon: "forum",
           title: "论坛",
         },

@@ -2,7 +2,7 @@
   <v-container grid-list-md align-content-center>
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <PostSearch></PostSearch>
+        <TodoListVue></TodoListVue>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -15,50 +15,42 @@
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"
+            class="white--text"
             ></UserActions>
           </v-card-text>
         </v-card>
-        <infoPanel></infoPanel>
+        <RightInfoPanel></RightInfoPanel>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
-
-
 <script>
-import PostSearch from '@/components/PostSearch.vue'
-import UserActions from '@/components/UserActions.vue'
-import InfoPanel from '@/components/RightInfoPanel.vue'
+import TodoListVue from '../components/TodoList.vue'
+import UserActions from '../components/UserActions.vue'
+import RightInfoPanel from '../components/RightInfoPanel.vue'
 
 export default {
-  name:'Explore',
-  components:{
-    PostSearch,
+  components: {
+    TodoListVue,
     UserActions,
-    InfoPanel
+    RightInfoPanel,
   },
-  data() {
+  data(){
     return {
       userActions: [
         {
-          name: '新文章',
-          icon: 'create',
-          color: 'info'
+          name: '创建任务',
+          icon: 'playlist_add',
+          color: 'pink'
         },
         {
-          name: '新动态',
-          icon: 'add_comment',
-          color: 'info'
-        },
-        {
-          name: '提问题',
-          icon: 'help',
-          color: 'info'
+          name: '开始番茄',
+          icon: 'alarm',
+          color: 'pink'
         },
       ],
     }
-  }
+  },
 }
-
 </script>
