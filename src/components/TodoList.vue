@@ -27,47 +27,22 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="category in categories" :key="category">
-        <v-list two-line>
-          <template v-for="(task, index) in tasks" v-if="task.category === categories.indexOf(category)">
-            <v-list-tile
+        <v-list three-line>
+          <template v-for="(task, index) in tasks" 
+            v-if="task.category === categories.indexOf(category)"
+          >
+            <ClickableListItem
               :key="task.id"
-              avatar
-              @click="AddToPriority(index)"
-            >
-              <v-list-tile-content>
-                <v-list-tile-title>{{ task.title }}</v-list-tile-title>
-                <v-list-tile-sub-title
-                  style="color: red"
-                  v-if="priority.indexOf(index) >= 0"
-                >
-                  [ 重要任务 ]
-                </v-list-tile-sub-title>
-                <v-list-tile-sub-title>{{ task.description }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-
-              <v-list-tile-action>
-                <v-list-tile-action-text>{{ task.dueTime }}</v-list-tile-action-text>
-                <span v-if="priority.indexOf(index) < 0">
-                  <v-icon
-                    color="grey lighten-1"
-                  >
-                    flag
-                  </v-icon>
-                </span>
-                <span v-else>
-                  <v-icon
-                    color="red lighten-1"
-                  >
-                    flag
-                  </v-icon>
-                </span>
-              </v-list-tile-action>
-
-            </v-list-tile>
-            <v-divider
-              v-if="index + 1 < tasks.length"
-              :key="index"
-            ></v-divider>
+              :showSubtitle="priority.indexOf(index) >= 0"
+              :subtitle="'[ 重要任务 ]'"
+              :title="task.title"
+              :description="task.description"
+              :dueTime="task.dueTime"
+              :icons="task.currentIcons"
+              hasDropdownMenu
+              :menuItems="menuItems"
+            ></ClickableListItem>
+            <v-divider :key="task"></v-divider>
           </template>
         </v-list>
       </v-tab-item>
@@ -76,7 +51,12 @@
 </template>
 
 <script>
+import ClickableListItem from './ClickableListItem.vue'
+
 export default {
+  components: {
+    ClickableListItem
+  },
   data() {
     return {
       tab: null,
@@ -87,47 +67,66 @@ export default {
         {
           id: 0,
           title: '高等数学练习',
-          description: '完成高等数学第8章的课后练习题',
+          description: '完成高等数学第8章的课后练习题完成高等数学第8章的课后练习题完成高等数学第8章的课后练习题完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 1
+          category: 1,
+          currentIcons: [],
         },
         {
           id: 1,
           title: '高等数学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 1
+          category: 1,
+          currentIcons: [],
         },
         {
           id: 2,
           title: '高等数学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 2
+          category: 2,
+          currentIcons: [],
         },
         {
           id: 3,
           title: '高等数学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 3
+          category: 3,
+          currentIcons: [],
         },
         {
           id: 4,
           title: '高等数学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 3
+          category: 3,
+          currentIcons: [],
         },
         {
           id: 5,
           title: '高等数学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
-          category: 3
+          category: 3,
+          currentIcons: [],
+        },
+        {
+          id: 6,
+          title: '高等数学练习',
+          description: '完成高等数学第8章的课后练习题',
+          dueTime: '11月12日',
+          category: 3,
+          currentIcons: [],
         }
       ],
       priority: [],
+      menuItems: [
+        {name: '标记/取消星标'},
+        {name: '完成该任务'},
+        {name: '删除该任务'},
+      ]
     }
   },
   methods: {
