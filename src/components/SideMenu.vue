@@ -67,6 +67,7 @@ export default {
         {
           icon: "forum",
           title: "论坛",
+          link: "/forum"
         },
         {
           icon: "public",

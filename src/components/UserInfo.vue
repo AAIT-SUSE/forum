@@ -1,6 +1,11 @@
 <template>
   <v-card>
-    <v-layout align-center justify-center style="height: 300px; background: url('https://pic4.zhimg.com/80/v2-c756e2f56c06f55893fbf5130b422402_r.jpg') no-repeat; background-size: conver; z-index: -99">
+    <v-layout align-center justify-center style="
+      height: 300px; 
+      background: url('https://pic4.zhimg.com/80/v2-c756e2f56c06f55893fbf5130b422402_r.jpg') no-repeat; 
+      background-size: conver; 
+      z-index: -99
+    ">
       <v-flex xs3>
         <v-img
           src="https://randomuser.me/api/portraits/men/85.jpg"

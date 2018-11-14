@@ -10,6 +10,7 @@ const home = () => import('@/views/Home')
 const Explore = () => import('@/views/Explore')
 const envision = () => import('@/views/Envision')
 const study = () => import('@/views/Study')
+const forum = () => import('@/views/Forum')
 
 
 //user router
@@ -60,6 +61,11 @@ const routes = [{
 		path: '/study',
 		name: 'study',
 		component: study
+	},
+	{
+		path: '/forum',
+		name: 'forum',
+		component: forum
 	},
 	//user children router
 	{
