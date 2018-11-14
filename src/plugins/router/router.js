@@ -5,35 +5,35 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //view router
-const user = () => import('@/views/user/user')
-const home = () => import('@/views/home/Home')
-const forum = () => import('@/views/forum/forum')
-const envision = () => import('@/views/envision/envision')
+const user = () => import('@/views/User')
+const home = () => import('@/views/Home')
+const forum = () => import('@/views/Forum')
+const envision = () => import('@/views/Envision')
 
 
 //user router
-const userdata = () => import('@/views/user/components/userdata')
-const mynews = () => import('@/views/user/components/mynews')
-const mycreations = () => import('@/views/user/components/mycreations')
-const myfavorites = () => import('@/views/user/components/myfavorites')
-const myfocus = () => import('@/views/user/components/myfocus')
-const myachievement = () => import('@/views/user/components/myachievement')
-const mypost = () => import('@/views/user/components/mypost')
-const myarticle = () => import('@/views/user/components/myarticle')
-const my_fav_photos = () => import('@/views/user/components/my-fav-photos')
-const my_fav_posts = () => import('@/views/user/components/my-fav-posts')
-const my_fav_articles = () => import('@/views/user/components/my-fav-articles')
+const userdata = () => import('@/components/UserData')
+const mynews = () => import('@/components/MyNews')
+const mycreations = () => import('@/components/MyCreations')
+const myfavorites = () => import('@/components/MyFavorites')
+const myfocus = () => import('@/components/MyFocus')
+const myachievement = () => import('@/components/MyAchievement')
+const mypost = () => import('@/components/MyPost')
+const myarticle = () => import('@/components/MyArticle')
+const my_fav_photos = () => import('@/components/My-Fav-Photos')
+const my_fav_posts = () => import('@/components/My-Fav-Posts')
+const my_fav_articles = () => import('@/components/FavArticles')
 
 
 
 
 
 //centre router
-const shop = () => import('@/views/user/components/centre/shop')
-const about = () => import('@/views/user/components/centre/about')
-const group = () => import('@/views/user/components/centre/group')
-const suggestions = () => import('@/views/user/components/centre/suggestions')
-const settings = () => import('@/views/user/components/centre/settings')
+const shop = () => import('@/components/Shop')
+const about = () => import('@/components/About')
+const group = () => import('@/components/Group')
+const suggestions = () => import('@/components/Suggestions')
+const settings = () => import('@/components/Settings')
 //home router
 
 

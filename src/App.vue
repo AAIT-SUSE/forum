@@ -22,7 +22,7 @@
   import HelloWorld from "./components/HelloWorld.vue"
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
-  import Home from './views/home/Home.vue'
+  import Home from './views/Home.vue'
 
   export default {
     name: "App",
