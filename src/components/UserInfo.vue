@@ -2,7 +2,8 @@
   <v-card>
     <v-layout align-center justify-center style="
       height: 300px; 
-      background: url('https://pic4.zhimg.com/80/v2-c756e2f56c06f55893fbf5130b422402_r.jpg') no-repeat; 
+      background-image: url('https://raw.githubusercontent.com/AAIT-SUSE/forum/master/src/assets/img/profile-bg.jpg');
+      background-repeat: no-repeat;
       background-size: conver; 
       z-index: -99
     ">
@@ -51,7 +52,7 @@ export default {
     return {
       username: 'Owen Tsai',
       userCredits: '666',
-      userSignature: '这个人很懒，没有留下任何个性签名'
+      userSignature: 'Envision 项目发起人'
     }
   }
 }
