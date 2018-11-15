@@ -10,9 +10,9 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.value">
         <v-card flat>
-          <MyCreations v-if="item.value=='MyCreations'"></MyCreations>
+          <!-- <MyCreations v-if="item.value=='MyCreations'"></MyCreations>
           <MyFavorites v-if="item.value=='MyFavorites'"></MyFavorites>
-          <MyFocus v-if="item.value=='MyFocus'"></MyFocus>
+          <MyFocus v-if="item.value=='MyFocus'"></MyFocus> -->
           <!-- <MyAchievements v-if="item.value=='MyAchievements'"></MyAchievements> -->
         </v-card>
       </v-tab-item>

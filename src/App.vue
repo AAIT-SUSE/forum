@@ -30,7 +30,6 @@
 
 
 <script>
-  import HelloWorld from "./components/HelloWorld.vue"
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
   import Home from './views/Home.vue'
@@ -38,7 +37,6 @@
   export default {
     name: "App",
     components: {
-      HelloWorld,
       SideMenu,
       Toolbar,
       Home
