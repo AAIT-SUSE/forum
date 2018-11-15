@@ -46,37 +46,19 @@
 
 <script>
 export default {
-  data () {
-    return {
-      topTitle: '论坛',
-      groups: [
-        {
-          id: 0,
-          name: '公告与新闻',
-          items: [
-            {id: 0, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'announcement'},
-            {id: 1, title: '活动', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'local_activity'},
-          ]
-        },
-        {
-          id: 1,
-          name: '公告与新闻',
-          items: [
-            {id: 3, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'folder'},
-            {id: 4, title: '公告', subtitle: '无 最新消息', iconClass: 'info white--text', icon: 'folder'},
-            {id: 5, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'folder'},
-          ]
-        },
-      ]
+  props: {
+    topTitle: String,
+    groups: {
+      id: Number,
+      name: String,
+      items: {
+        id: Number,
+        title: String,
+        subtitle: String,
+        iconClass: String,
+        icon: String,
+      }
     }
   },
-  methods: {
-    ShowSearchInput: function() {
-
-    },
-    ItemHover: function() {
-      console.log(this.$el);
-    }
-  }
 }
 </script>

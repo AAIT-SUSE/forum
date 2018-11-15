@@ -2,7 +2,10 @@
   <v-container grid-list-md align-content-center>
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <GroupedPanel></GroupedPanel>
+        <GroupedPanel
+          :topTitle='topTitle'
+          :groups='groups'
+        ></GroupedPanel>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -49,6 +52,26 @@ export default {
           color: 'success'
         },
       ],
+      topTitle: '论坛',
+      groups: [
+        {
+          id: 0,
+          name: '公告与新闻',
+          items: [
+            {id: 0, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'announcement'},
+            {id: 1, title: '活动', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'local_activity'},
+          ]
+        },
+        {
+          id: 1,
+          name: '公告与新闻',
+          items: [
+            {id: 3, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'folder'},
+            {id: 4, title: '公告', subtitle: '无 最新消息', iconClass: 'info white--text', icon: 'folder'},
+            {id: 5, title: '公告', subtitle: '无最新消息', iconClass: 'info white--text', icon: 'folder'},
+          ]
+        },
+      ]
     }
   },
 }
