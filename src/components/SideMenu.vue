@@ -60,12 +60,19 @@ export default {
           link: "/home"
         },
         {
+          icon: "school",
+          title: "学习",
+          link: "/study"
+        },
+        {
           icon: "forum",
-          title: "论坛"
+          title: "论坛",
+          link: "/forum"
         },
         {
           icon: "public",
-          title: "发现"
+          title: "发现",
+          link: "/Explore"
         },
         {
           icon: "account_circle",

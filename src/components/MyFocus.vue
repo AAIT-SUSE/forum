@@ -1,52 +1,49 @@
 <template>
+  <v-card>
+    <v-list subheader>
+      <v-subheader>今日关注</v-subheader>
+      <v-list-tile
+      v-for="item in items"
+      :key="item.title"
+      avatar
+      >
+        <v-list-tile-avatar>
+          <img :src="item.avatar">
+        </v-list-tile-avatar>
 
-      <v-card>
-        <v-list subheader>
-          <v-subheader>今日关注</v-subheader>
-          <v-list-tile
-            v-for="item in items"
-            :key="item.title"
-            avatar
+        <v-list-tile-content>
+          <v-list-tile-title v-html="item.title"></v-list-tile-title>
+        </v-list-tile-content>
 
-          >
-            <v-list-tile-avatar>
-              <img :src="item.avatar">
-            </v-list-tile-avatar>
+        <v-list-tile-action>
+          <v-icon :color="item.active ? 'teal' : 'grey'">chevron_right</v-icon>
+        </v-list-tile-action>
+      </v-list-tile>
+    </v-list>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            </v-list-tile-content>
+    <v-divider></v-divider>
 
-            <v-list-tile-action>
-              <v-icon :color="item.active ? 'teal' : 'grey'">chevron_right</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
+    <v-list subheader>
+      <v-subheader>过去关注</v-subheader>
 
-        <v-divider></v-divider>
+        <v-list-tile
+          v-for="item in items2"
+          :key="item.title"
+          avatar
+        >
+          <v-list-tile-avatar>
+            <img :src="item.avatar">
+          </v-list-tile-avatar>
 
-        <v-list subheader>
-          <v-subheader>过去关注</v-subheader>
-
-          <v-list-tile
-            v-for="item in items2"
-            :key="item.title"
-            avatar
-
-          >
-            <v-list-tile-avatar>
-              <img :src="item.avatar">
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
-              <v-icon :color="item.active ? 'teal' : 'grey'">chevron_right</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
-      </v-card>
+          <v-list-tile-content>
+            <v-list-tile-title v-html="item.title"></v-list-tile-title>
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-icon :color="item.active ? 'teal' : 'grey'">chevron_right</v-icon>
+          </v-list-tile-action>
+        </v-list-tile>
+    </v-list>
+  </v-card>
 
 </template>
 

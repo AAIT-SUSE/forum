@@ -1,13 +1,7 @@
 <template>
-    <v-card
-      class="mx-auto"
-    >
+    <v-card class="mx-auto">
       <v-subheader>番茄收益</v-subheader>
-        <v-card
-          dark
-          flat
-        >
-          
+        <v-card dark flat>   
           <v-card-title class="pa-2 purple lighten-3">
             <v-btn icon>
               <v-icon>mdi-menu</v-icon>
@@ -113,7 +107,7 @@
             </v-timeline-item>
           </v-timeline>
         </v-card-text>
-      </v-card>
+    </v-card>
 </template>
 
 <script>

@@ -9,7 +9,6 @@
             v-for="item in items"
             :key="item.title"
             avatar
-   
           >
             <v-list-tile-avatar>
               <img :src="item.avatar">

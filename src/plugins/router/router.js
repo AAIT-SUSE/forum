@@ -7,8 +7,10 @@ Vue.use(VueRouter)
 //view router
 const user = () => import('@/views/User')
 const home = () => import('@/views/Home')
+const Explore = () => import('@/views/Explore')
 const forum = () => import('@/views/Forum')
-const envision = () => import('@/views/Envision')
+const study = () => import('@/views/Study')
+
 
 
 //user router
@@ -54,9 +56,19 @@ const routes = [{
         component: forum
     },
     {
-        path: '/envision',
-        name: 'envision',
-        component: envision
+        path: '/study',
+        name: 'study',
+        component: study
+    },
+    {
+        path: '/Explore',
+        name: 'Explore',
+        component: Explore
+    },
+    {
+        path: '/forum',
+        name: 'forum',
+        component: forum
     },
     //user children router
     {

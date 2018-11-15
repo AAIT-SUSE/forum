@@ -1,5 +1,5 @@
 <template>
-   <v-container grid-list-md align-content-center>
+  <v-container grid-list-md align-content-center>
     <v-layout row wrap> 
       <v-flex xl7 lg12 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
         <userinfo></userinfo> 
@@ -11,7 +11,7 @@
         <centre order-sm1 order-xs1></centre> 
       </v-flex>
     </v-layout>
-   </v-container>
+  </v-container>
 
 </template>
 

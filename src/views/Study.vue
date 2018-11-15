@@ -2,7 +2,7 @@
   <v-container grid-list-md align-content-center>
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <GroupedPanel></GroupedPanel>
+        <TodoListVue></TodoListVue>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -15,6 +15,7 @@
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"
+            class="white--text"
             ></UserActions>
           </v-card-text>
         </v-card>
@@ -25,13 +26,13 @@
 </template>
 
 <script>
-import GroupedPanel from '../components/GroupedPanel.vue'
+import TodoListVue from '../components/TodoList.vue'
 import UserActions from '../components/UserActions.vue'
 import RightInfoPanel from '../components/RightInfoPanel.vue'
 
 export default {
   components: {
-    GroupedPanel,
+    TodoListVue,
     UserActions,
     RightInfoPanel,
   },
@@ -39,22 +40,17 @@ export default {
     return {
       userActions: [
         {
-          name: '发表主题',
-          icon: 'note_add',
-          color: 'success'
+          name: '创建任务',
+          icon: 'playlist_add',
+          color: 'pink'
         },
         {
-          name: '加入小组',
-          icon: 'group_add',
-          color: 'success'
+          name: '开始番茄',
+          icon: 'alarm',
+          color: 'pink'
         },
       ],
     }
   },
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
