@@ -27,7 +27,7 @@
         </v-card>
 
         <v-card>
-            <v-subheader>2018年10月27日</v-subheader>
+          <v-subheader>2018年10月27日</v-subheader>
           <v-card-actions>
             <v-select :items="items" v-model="size" label="Size"></v-select>
             <v-spacer></v-spacer>
