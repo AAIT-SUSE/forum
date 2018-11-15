@@ -3,7 +3,7 @@
     <v-card color="blue-grey darken-2" class="white--text mx-5 mb-4">
       <v-card-text primary-title>
         <div>
-          ENVISION is founded by Owen Tsai @ AAIT-SUSE and created by volunteers. Completely open source
+          ENVISION is founded by Owen Tsai @ AAIT-SUSE and developed by volunteers. Completely open source
           and avaliable at our 
           <a href="https://github.com/AAIT-SUSE/forum" class="white--text">
             Github page

@@ -10,10 +10,9 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.value">
         <v-card flat>
-          <!-- <MyCreations v-if="item.value=='MyCreations'"></MyCreations>
-          <MyFavorites v-if="item.value=='MyFavorites'"></MyFavorites>
-          <MyFocus v-if="item.value=='MyFocus'"></MyFocus> -->
-          <!-- <MyAchievements v-if="item.value=='MyAchievements'"></MyAchievements> -->
+          <PostList v-if="item.value === 'Post'" :showCtrlBtns="false"></PostList>
+          <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="false"></ArticleList>
+          <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -22,17 +21,15 @@
 
 
 <script>
-import MyCreations from './MyCreations.vue'
-import MyFocus from './MyFocus.vue'
-import MyFavorites from './MyFavorites.vue'
-import MyAchievements from './MyAchievements.vue'
+import ArticleList from './ArticleList.vue'
+import PostList from './PostList.vue'
+import DirectAnswerList from './DirectAnswerList.vue'
 
 export default {
   components: {
-    MyCreations,
-    MyFocus,
-    MyFavorites,
-    MyAchievements,
+    ArticleList,
+    PostList,
+    DirectAnswerList
   },
   data () {
     return {
@@ -40,15 +37,15 @@ export default {
       items: [
         {
           message: '我的文章',
-          value: 'MyArticles',
+          value: 'Article',
         },
         {
           message: '我的帖子',
-          value: 'MyPosts',
+          value: 'Post',
         },
         {
           message: '我的直答',
-          value: 'MyQAs'
+          value: 'Answer'
         },
         {
           message:'我的收藏',

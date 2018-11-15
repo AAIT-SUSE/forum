@@ -16,7 +16,7 @@
           </div>
         </v-card-title>
 
-        <v-card-actions>
+        <v-card-actions v-if="showCtrlBtns === true">
           <v-spacer></v-spacer>
           <v-btn 
             flat
@@ -40,18 +40,18 @@ export default {
       articles:[
         {
           id: 0,
+          title: '第二篇文章',
+          author: 'Jack Ma',
+          isLiked: false,
+          likes: 123,
+        },
+        {
+          id: 1,
           title: '第一篇文章',
           author: 'Owen Tsai',
           img:'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
           isLiked: false,
           likes: 46,
-        },
-        {
-          id: 1,
-          title: '第二篇文章',
-          author: 'Jack Ma',
-          isLiked: false,
-          likes: 123,
         },
         {
           id: 2,
@@ -72,6 +72,9 @@ export default {
         this.articles[id].likes += 1;
       }
     }
+  },
+  props: {
+    showCtrlBtns: Boolean
   }
 }
 </script>

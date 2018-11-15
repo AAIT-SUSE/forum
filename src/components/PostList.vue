@@ -13,7 +13,7 @@
           </div>
         </v-card-title>
 
-        <v-card-actions>
+        <v-card-actions v-if="showCtrlBtns === true">
           <v-spacer></v-spacer>
           <v-btn 
             flat
@@ -78,6 +78,9 @@ export default {
         this.posts[id].likes += 1;
       }
     }
+  },
+  props: {
+    showCtrlBtns: Boolean
   }
 }
 </script>

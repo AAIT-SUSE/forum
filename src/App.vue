@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: white">
     <SideMenu></SideMenu>
 
     <Toolbar></Toolbar>
@@ -55,3 +55,9 @@
   };
 
 </script>
+
+<style scoped>
+body{
+  background-color: white;
+}
+</style>

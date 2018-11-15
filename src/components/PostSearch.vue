@@ -15,8 +15,9 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.message">
         <v-card flat>
-          <PostList v-if="item.value === 'Post'"></PostList>
-          <ArticleList v-if="item.value === 'Article'"></ArticleList>
+          <PostList v-if="item.value === 'Post'" :showCtrlBtns="true"></PostList>
+          <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="true"></ArticleList>
+          <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -26,12 +27,14 @@
 <script>
 import ArticleList from '@/components/ArticleList'
 import PostList from '@/components/PostList'
+import DirectAnswerList from "@/components/DirectAnswerList";
 
 export default {
   name:'PostSearch',
   components:{
     ArticleList,
     PostList,
+    DirectAnswerList
   },
   data() {
     return {
@@ -46,6 +49,10 @@ export default {
         {
           message: "文章",
           value:'Article'
+        },
+        {
+          message: "直答",
+          value: 'Answer'
         }
       ]
     };
