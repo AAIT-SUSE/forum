@@ -14,7 +14,7 @@
           >
           <UserActions 
             v-for="act in userActions"
-            :key="act"
+            :key="act.name"
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"

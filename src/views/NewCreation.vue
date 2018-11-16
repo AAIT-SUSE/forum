@@ -2,7 +2,7 @@
   <v-container grid-list-md align-content-center>
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <PostSearch></PostSearch>
+
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -18,47 +18,38 @@
             ></UserActions>
           </v-card-text>
         </v-card>
-        <infoPanel></infoPanel>
+        <right-info-panel></right-info-panel>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
-
-
 <script>
-import PostSearch from '@/components/PostSearch.vue'
 import UserActions from '@/components/UserActions.vue'
-import InfoPanel from '@/components/RightInfoPanel.vue'
+import RightInfoPanel from '@/components/RightInfoPanel.vue'
 
 export default {
-  name:'Explore',
-  components:{
-    PostSearch,
+  name: 'newCreation',
+  components: {
+    RightInfoPanel,
     UserActions,
-    InfoPanel
   },
   data() {
     return {
+      content: '<h1>Just show up</h1>',
       userActions: [
         {
-          name: '新文章',
-          icon: 'create',
-          color: 'info'
+          name: '保存为草稿',
+          icon: 'save',
+          color: 'warning'
         },
         {
-          name: '新动态',
-          icon: 'add_comment',
-          color: 'info'
-        },
-        {
-          name: '提问题',
-          icon: 'help',
-          color: 'info'
-        },
-      ],
+          name: '发布',
+          icon: 'publish',
+          color: 'warning'
+        }
+      ]
     }
   }
 }
-
 </script>

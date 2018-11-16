@@ -1,6 +1,6 @@
 <template>
   <!-- User Actions -->
-  <v-btn :color="btnColor">
+  <v-btn :color="btnColor" @click="onClickHandler(actName)">
     {{ actName }}
     <v-icon right dark>{{ actIcon }}</v-icon>
   </v-btn>
@@ -12,6 +12,7 @@ export default {
     btnColor: String,
     actName: String,
     actIcon: String,
+    onClickHandler: Function
   }
 }
 </script>

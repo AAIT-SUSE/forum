@@ -97,23 +97,6 @@ export default {
           totalRead: 3,
           modal: 'dialog'
         },
-        {
-          id: 1,
-          title: '为什么 C51 单片机的蓝牙串口通信失败？',
-          author: '由 Owen Tsai 向 James 提问',
-          isLiked: false,
-          likes: 123,
-          totalRead: 143
-        },
-        {
-          id: 0,
-          title: 'C/C++ 中如何实现如图所示的输出？',
-          author: '由 Jack Ma 向 Owen Tsai 提问',
-          img:'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-          isLiked: false,
-          likes: 46,
-          totalRead: 47
-        },
       ]
     }
   },

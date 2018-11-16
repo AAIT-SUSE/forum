@@ -9,12 +9,13 @@
           <v-card-text 
             class="px-0 text-md-center text-sm-center text-xs-center text-lg-center text-xl-center"
           >
-          <UserActions 
+          <UserActions
             v-for="act in userActions"
-            :key="act"
+            :key="act.name"
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"
+            :onClickHandler="ExcuteUserAction"
             ></UserActions>
           </v-card-text>
         </v-card>
@@ -28,6 +29,7 @@
 import UserActions from '../components/UserActions.vue';
 import UserFeed from '../components/FeedPost.vue';
 import InfoPanel from '../components/RightInfoPanel.vue';
+import router from '@/plugins/router/router.js'
 
 export default {
   components: {
@@ -41,19 +43,30 @@ export default {
         {
           name: '新文章',
           icon: 'create',
-          color: 'info'
+          color: 'info',
         },
         {
           name: '新动态',
           icon: 'add_comment',
-          color: 'info'
+          color: 'info',
         },
         {
           name: '提问题',
           icon: 'help',
-          color: 'info'
+          color: 'info',
         },
       ],
+    }
+  },
+  methods: {
+    ExcuteUserAction: function(action) {
+      switch(action) {
+        case '新文章': 
+          router.push('/newPost');
+          break;
+        default: 
+          router.push('/user');
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar color="warning" prominent tabs>
-      <v-text-field append-icon="mic" class="mx-3" flat 
+      <v-text-field class="mx-3" flat 
         :label="searchPlaceholder" 
         prepend-inner-icon="search" solo
       >

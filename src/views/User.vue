@@ -8,7 +8,7 @@
         <usertab></usertab>
       </v-flex>
       <v-flex xl6 lg4 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <centre order-sm1 order-xs1></centre> 
+        <profile-action-panel order-sm1 order-xs1></profile-action-panel> 
       </v-flex>
     </v-layout>
    </v-container>
@@ -19,13 +19,13 @@
 
 <script>
 import userinfo from '@/components/UserInfo.vue'
-import centre from '@/components/Center.vue'
+import ProfileActionPanel from '@/components/ProfileActionPanel.vue'
 import usertab from '@/components/UserTab.vue'
 export default {
   name:'User',
   components:{
     userinfo,
-    centre,
+    ProfileActionPanel,
     usertab,
   }
  

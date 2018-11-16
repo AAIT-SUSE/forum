@@ -19,20 +19,20 @@
       >
         <v-tabs-slider color="white"></v-tabs-slider>
 
-        <v-tab v-for="category in categories" :key="category">
-          {{ category }}
+        <v-tab v-for="category in categories" :key="category.name">
+          {{ category.name }}
         </v-tab>
       </v-tabs>
     </v-toolbar>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="category in categories" :key="category">
+      <v-tab-item v-for="category in categories" :key="category.name">
         <v-list three-line>
           <template v-for="(task, index) in tasks" 
             v-if="task.category === categories.indexOf(category)"
           >
             <ClickableListItem
-              :key="task.id"
+              :key="task.title"
               :showSubtitle="priority.indexOf(index) >= 0"
               :subtitle="'[ 重要任务 ]'"
               :title="task.title"
@@ -42,7 +42,7 @@
               hasDropdownMenu
               :menuItems="menuItems"
             ></ClickableListItem>
-            <v-divider :key="task"></v-divider>
+            <v-divider :key="task.id"></v-divider>
           </template>
         </v-list>
       </v-tab-item>
@@ -61,7 +61,30 @@ export default {
     return {
       tab: null,
       categories: [
-        '重要', '全部', '学习', '任务', '待办', '其他'
+        {
+          name: '重要',
+          cid: 20,
+        },
+        {
+          name: '全部',
+          cid: 21,
+        },
+        {
+          name: '学习',
+          cid: 22,
+        },
+        {
+          name: '任务',
+          cid: 23,
+        },
+        {
+          name: '待办',
+          cid: 24,
+        },
+        {
+          name: '其他',
+          cid: 25,
+        },
       ],
       tasks: [
         {
@@ -74,7 +97,7 @@ export default {
         },
         {
           id: 1,
-          title: '高等数学练习',
+          title: 'sdg',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 1,
@@ -82,7 +105,7 @@ export default {
         },
         {
           id: 2,
-          title: '高等数学练习',
+          title: '高等fgh数fgh学练习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 2,
@@ -90,7 +113,7 @@ export default {
         },
         {
           id: 3,
-          title: '高等数学练习',
+          title: '高dfghtdhgf习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 3,
@@ -98,7 +121,7 @@ export default {
         },
         {
           id: 4,
-          title: '高等数学练习',
+          title: '高等fgh56习',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 3,
@@ -106,7 +129,7 @@ export default {
         },
         {
           id: 5,
-          title: '高等数学练习',
+          title: 'fghjdgfh',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 3,
@@ -114,7 +137,7 @@ export default {
         },
         {
           id: 6,
-          title: '高等数学练习',
+          title: 'r567tyhgf',
           description: '完成高等数学第8章的课后练习题',
           dueTime: '11月12日',
           category: 3,
