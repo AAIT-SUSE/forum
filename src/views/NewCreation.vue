@@ -49,10 +49,12 @@ export default {
         modules: {
           toolbar: [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'header': 1 }, { 'header': 2 }],
             [{ 'align': [] }],
             ['bold', 'italic', 'underline', 'strike'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }]
+            ['blockquote', 'code-block'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'color': [] }],
+            [{ 'font': [] }],
           ]
         },
       },
