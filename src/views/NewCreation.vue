@@ -2,7 +2,13 @@
   <v-container grid-list-md align-content-center>
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-
+        <v-card style="min-height: 400px;">
+          <quill-editor 
+            v-model="addContent" 
+            :options="editorOption"
+            >
+          </quill-editor>
+        </v-card>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -27,16 +33,29 @@
 <script>
 import UserActions from '@/components/UserActions.vue'
 import RightInfoPanel from '@/components/RightInfoPanel.vue'
+import { quillEditor } from 'vue-quill-editor'
 
 export default {
   name: 'newCreation',
   components: {
     RightInfoPanel,
     UserActions,
+    quillEditor 
   },
   data() {
     return {
       content: '<h1>Just show up</h1>',
+      editorOption: {
+        modules: {
+          toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'header': 1 }, { 'header': 2 }],
+            [{ 'align': [] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }]
+          ]
+        },
+      },
       userActions: [
         {
           name: '保存为草稿',
@@ -53,3 +72,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .quill-editor{
+    border: none;
+  }
+</style>
