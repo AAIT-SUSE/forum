@@ -20,7 +20,7 @@
 <script>
 import userinfo from '@/components/UserInfo.vue'
 import ProfileActionPanel from '@/components/ProfileActionPanel.vue'
-import usertab from '@/components/UserTab.vue'
+import usertab from '@/components/usertab.vue'
 export default {
   name:'User',
   components:{
