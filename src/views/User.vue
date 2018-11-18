@@ -53,13 +53,18 @@ export default {
         },
         {
           title: '积分商城',
-          icon: 'shop',
+          icon: 'shopping_cart',
           link: '/shop'
         },
         {
           title: '意见与反馈',
           icon: 'mail',
           link: '/feedback'
+        },
+        {
+          title: '管理中心',
+          icon: 'assignment',
+          link: '/admin'
         }
       ]
     }

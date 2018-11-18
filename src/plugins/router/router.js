@@ -10,6 +10,7 @@ const home = () => import('@/views/Home')
 const Explore = () => import('@/views/Explore')
 const study = () => import('@/views/Study')
 const forum = () => import('@/views/Forum')
+const admin = () => import('@/views/Admin')
 const newCreation = () => import('@/views/NewCreation')
 
 
@@ -66,6 +67,11 @@ const routes = [{
 		path: '/newPost',
 		name: 'newPost',
 		component: newCreation
+	},
+	{
+		path: '/admin',
+		name: 'admin',
+		component: admin
 	},
 	//user children router
 	// {
