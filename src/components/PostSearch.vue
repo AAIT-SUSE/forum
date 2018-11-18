@@ -15,7 +15,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.message">
         <v-card flat>
-          <PostList v-if="item.value === 'Post'" :showCtrlBtns="true"></PostList>
+          <PostList v-if="item.value === 'Feed'" :showCtrlBtns="true"></PostList>
           <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="true"></ArticleList>
           <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
         </v-card>
@@ -44,7 +44,7 @@ export default {
       items: [
         {
           message: "动态",
-          value:'Post'
+          value:'Feed'
         },
         {
           message: "文章",
