@@ -22,6 +22,7 @@
       color="error"
       fixed
       @click="ScrollToTop()"
+      v-show="toTopShow" 
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
@@ -43,14 +44,46 @@
     },
     data() {
       return {
+        toTopShow:false,
         title: "ENVISION - 因问",
       };
     },
     methods: {
-      ScrollToTop: function() {
-        alert("前端请安排人写一下滚动返回顶部的函数。目前这里直接回到页面顶部，没有动画效果，比较生硬");
-        document.documentElement.scrollTop = 0;  
+      handleScroll() {
+        //修改相对滚动条位置
+        this.scrollTop =  window.pageYOffset || document.body.scrollTop
+        if(this.scrollTop > 100){
+          this.toTopShow = true
+        }else{
+          this.toTopShow = false
+        }
+      },
+      ScrollToTop() {
+        let timer = null
+        let _that = this
+        //使用requestAnimationFrame代替setInterval
+        cancelAnimationFrame(timer)
+        timer = requestAnimationFrame(function fn() {
+          if(_that.scrollTop > 0){
+            _that.scrollTop -= 30
+            //修改这里实现动画滚动效果
+            document.body.scrollTop = document.documentElement.scrollTop = _that.scrollTop
+            timer = requestAnimationFrame(fn)
+          }else{
+            cancelAnimationFrame(timer)
+            _that.toTopShow = false
+          }
+        })
       }
+    },
+    mounted() {
+      this.$nextTick(function () {
+        //修改事件监听
+        window.addEventListener('scroll',this.handleScroll)
+      })
+    },
+    destroyed() {
+      window.removeEventListener('scroll',this.handleScroll)
     }
   };
 
