@@ -1,14 +1,14 @@
 <template>
   <v-card>
     <v-toolbar dense color="light-blue" dark prominent tabs>
-      <v-flex lg11>
+      <v-flex xl11 lg11 md11 sm11 xs10>
         <v-tabs slot="extension" v-model="tab" left color="transparent" slider-color="red">
           <v-tab v-for="item in items" :key="item.name">
             {{ item.name }}
           </v-tab>
         </v-tabs>
       </v-flex>
-      <v-flex lg1>
+      <v-flex xl1 lg1 md1 sm1 xs2>
         <v-btn icon @click="ShowSearchInput()">
          <v-icon>search</v-icon>
        </v-btn>
