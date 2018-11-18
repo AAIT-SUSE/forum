@@ -15,22 +15,18 @@
     </div>
 
     <v-layout>
-      <v-flex xs8>
+      <v-flex xs9>
         <celled-panel></celled-panel>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs3>
         <v-card color="warning darken">
           <v-card-title primary-title>
             <div class="headline">通知事项</div>
           </v-card-title>
           <v-divider></v-divider>
-          <v-card-text style="min-height: 300px;">
+          <v-card-text style="min-height: 460px;">
             没有通知或事项
           </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn flat dark>立即查看</v-btn>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

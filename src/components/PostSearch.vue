@@ -43,7 +43,7 @@ export default {
       searchPlaceholder: '搜索文章或帖子',
       items: [
         {
-          message: "帖子",
+          message: "动态",
           value:'Post'
         },
         {
