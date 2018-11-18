@@ -5,10 +5,23 @@
         <userinfo></userinfo> 
       </v-flex>
       <v-flex xl8 lg8 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <usertab></usertab>
+        <user-tab></user-tab>
       </v-flex>
       <v-flex xl6 lg4 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-        <profile-action-panel order-sm1 order-xs1></profile-action-panel> 
+        <v-card>
+          <v-toolbar dense dark color="light-blue">
+            <v-toolbar-title>快捷面板</v-toolbar-title>
+          </v-toolbar>
+          <v-list>
+            <clickable-list-item v-for="act in actions" :key="act.title"
+              :title="act.title"
+              :tileIcon="act.icon"
+              :tileAvatar="true"
+              :tileClickHandler="PushRouterTo"
+              :linkToPush="act.link"
+            ></clickable-list-item>
+          </v-list>
+        </v-card>
       </v-flex>
     </v-layout>
    </v-container>
@@ -18,15 +31,43 @@
 
 
 <script>
+import router from '@/plugins/router/router.js'
 import userinfo from '@/components/UserInfo.vue'
-import ProfileActionPanel from '@/components/ProfileActionPanel.vue'
-import usertab from '@/components/usertab.vue'
+import UserTab from '@/components/UserTab.vue'
+import ClickableListItem from '@/components/ClickableListItem'
+
 export default {
   name:'User',
   components:{
     userinfo,
-    ProfileActionPanel,
-    usertab,
+    UserTab,
+    ClickableListItem
+  },
+  data() {
+    return {
+      actions: [
+        {
+          title: '小组建设',
+          icon: 'group_work',
+          link: '/groupDetail'
+        },
+        {
+          title: '积分商城',
+          icon: 'shop',
+          link: '/shop'
+        },
+        {
+          title: '意见与反馈',
+          icon: 'mail',
+          link: '/feedback'
+        }
+      ]
+    }
+  },
+  methods: {
+    PushRouterTo: function(link) {
+      router.push(link);
+    }
   }
  
 }

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-list-tile avatar>
+    <v-list-tile avatar @click="tileClickHandler(linkToPush)">
+      <v-list-tile-avatar v-if="tileAvatar === true">
+        <v-icon>{{ tileIcon }}</v-icon>
+      </v-list-tile-avatar>
+
       <v-list-tile-content>
         <v-list-tile-title>{{ title }}</v-list-tile-title>
         <v-list-tile-sub-title
@@ -47,11 +51,15 @@ export default {
   name: 'ClickableListItem',
   props: {
     showSubtitle: Boolean,
+    tileAvatar: Boolean,
+    tileIcon: String,
     sbtitle: String,
     title: String,
     description: String,
     dueTime: String,
     hasDropdownMenu: Boolean,
+    tileClickHandler: Function,
+    linkToPush: String,
     icons: {
       iconName: String,
     },
