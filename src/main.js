@@ -10,6 +10,11 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+
+import Vuelidate from 'vuelidate'
+
+
+Vue.use(Vuelidate)
 // 富文本编辑器
 Vue.use(VueQuillEditor)
 
