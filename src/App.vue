@@ -5,10 +5,10 @@
     <Toolbar></Toolbar>
     
     <v-content>
-      <v-layout>
+      <v-layout v-if="isUserLogged">
         <router-view></router-view>
       </v-layout>
-      <v-layout justify-center align-center fill-height>
+      <v-layout justify-center align-center fill-height v-if="!isUserLogged">
         <login-panle></login-panle>
       </v-layout>
     </v-content>
@@ -38,10 +38,10 @@
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
   import LoginPanle from './components/LoginAndRegister.vue'
+  import router from './plugins/router/router.js'
 
   export default {
     name: "App",
-    isUserLogged: false,
     components: {
       SideMenu,
       Toolbar,
@@ -51,6 +51,7 @@
       return {
         toTopShow:false,
         title: "ENVISION - 因问",
+        isUserLogged: true,
       };
     },
     methods: {
@@ -82,6 +83,7 @@
       }
     },
     mounted() {
+      router.push('/home');
       this.$nextTick(function () {
         //修改事件监听
         window.addEventListener('scroll',this.handleScroll)
