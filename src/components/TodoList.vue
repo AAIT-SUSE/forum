@@ -149,7 +149,8 @@ export default {
         {name: '标记/取消星标'},
         {name: '完成该任务'},
         {name: '删除该任务'},
-      ]
+      ],
+      tab: 1
     }
   },
   methods: {

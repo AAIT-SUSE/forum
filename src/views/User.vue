@@ -54,7 +54,7 @@ export default {
         {
           title: '积分商城',
           icon: 'shopping_cart',
-          link: '/shop'
+          link: '/comingSoon'
         },
         {
           title: '意见与反馈',

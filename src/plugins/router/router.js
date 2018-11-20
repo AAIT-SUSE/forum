@@ -13,6 +13,7 @@ const forum = () => import('@/views/Forum')
 const admin = () => import('@/views/Admin')
 const newCreation = () => import('@/views/NewCreation')
 const management = () => import('@/views/Management')
+const placeHolder = () => import('@/views/ComingSoon')
 
 //user router
 // const userdata = () => import('@/components/userdata')
@@ -42,7 +43,11 @@ const routes = [{
 		name: 'user',
 		component: user,
 	},
-
+	{
+		path: '/comingSoon',
+		name: 'placeHolder',
+		component: placeHolder,
+	},
 	{
 		path: '/home',
 		name: 'home',
