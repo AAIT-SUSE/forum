@@ -21,7 +21,6 @@
 
     <div>
       <v-data-table
-        v-if="topTitle === '用户管理'"
         :headers="tableHeaders"
         :items="tableItems"
         class="elevation-2"
@@ -90,6 +89,14 @@ export default {
         { text: '置顶权重', value: 'topLevel', sortable: false },
         { text: '操作', value: 'actions', sortable: false }
       ],
+      feedHeaders: [
+        { text: '动态id', value: 'fid' },
+        { text: '作者id', value: 'uid' },
+        { text: '作者名', value: 'username', sortable: false },
+        { text: '赞同数', value: 'likes' },
+        { text: '置顶权重', value: 'topLevel', sortable: false },
+        { text: '操作', value: 'actions', sortable: false }
+      ],
       articleHeaders: [
         { text: '作品id', value: 'aid' },
         { text: '作品名', value: 'articleName' },
@@ -102,19 +109,34 @@ export default {
       ],
       groupHeaders: [
         { text: '小组id', value: 'gid' },
-        { text: '小组名', value: 'username' ,sortable: false, },
-        { text: '负责人', value: 'major', sortable: false },
-        { text: '成员数', value: 'class', sortable: false },
-        { text: '威望值', value: 'identity', sortable: false },
-        { text: '所属部门', value: 'dept', sortable: false },
+        { text: '小组名', value: 'groupName' ,sortable: false, },
+        { text: '负责人', value: 'chief', sortable: false },
+        { text: '成员数', value: 'membersCount' },
+        { text: '威望值', value: 'prValue' },
+        { text: '所属部门', value: 'supervisDept', sortable: false },
+        { text: '操作', value: 'actions', sortable: false }
+      ],
+      shopHeaders: [
+        { text: '商品id', value: 'productId' },
+        { text: '商品名称', value: 'productName', sortable: false },
+        { text: '所属类别', value: 'productCat', sortable: false },
+        { text: '所需积分', value: 'creditsPrice' },
+        { text: '剩余数量', value: 'amountLeft' },
         { text: '操作', value: 'actions', sortable: false }
       ],
       forumHeaders: [
-        { text: '板块id', sortable: true, value: 'uid' },
-        { text: '板块名称', sortable: false, value: 'username' },
-        { text: '所属类别', value: 'major', sortable: false },
-        { text: '主题数量', value: 'class', sortable: false },
-        { text: '上次活跃时间', value: 'identity', sortable: false },
+        { text: '板块id', value: 'sectionId' },
+        { text: '板块名称', value: 'sectionName', sortable: false },
+        { text: '所属类别', value: 'sectionCat', sortable: false },
+        { text: '主题数量', value: 'postsCount' },
+        { text: '上次活跃时间', value: 'lastActiveTime', sortable: false },
+        { text: '操作', value: 'actions', sortable: false }
+      ],
+      achievementHeaders: [
+        { text: '成就id', value: 'achievementId' },
+        { text: '成就名称', value: 'achievementName', sortable: false },
+        { text: '显示权重', value: 'displayPriority' },
+        { text: '已获取人数', value: 'ownersCount' },
         { text: '操作', value: 'actions', sortable: false }
       ],
       desserts: [],
@@ -144,20 +166,50 @@ export default {
       break;
 
       case 'group':
-        this.topTitle = '论坛与小组管理';
-        // this.tableHeaders = groupHeaders;
+        this.topTitle = '小组管理';
+        this.tableHeaders = this.groupHeaders;
         // this.tableItems GET via ajax
       break;
 
       case 'post':
-        this.topTitle = '帖子与文章管理';
-        // this.tableHeaders = postHeaders;
+        this.topTitle = '主题/帖子管理';
+        this.tableHeaders = this.postHeaders;
+        // this.tableItems GET via ajax
+      break;
+
+      case 'article':
+        this.topTitle = '文章管理';
+        this.tableHeaders = this.articleHeaders;
+        // this.tableItems GET via ajax
+      break;
+
+      case 'feed':
+        this.topTitle = '动态管理';
+        this.tableHeaders = this.feedHeaders;
+        // this.tableItems GET via ajax
+      break;
+
+      case 'shop':
+        this.topTitle = '商城管理';
+        this.tableHeaders = this.shopHeaders;
+        // this.tableItems GET via ajax
+      break;
+
+      case 'achievement':
+        this.topTitle = '成就授予';
+        this.tableHeaders = this.achievementHeaders;
+        // this.tableItems GET via ajax
+      break;
+
+      case 'forum':
+        this.topTitle = '论坛管理';
+        this.tableHeaders = this.forumHeaders;
         // this.tableItems GET via ajax
       break;
 
       default:
-        this.topTitle = '系统管理';
-        // this.tableHeaders = systemHeaders;
+        this.topTitle = '信息系统';
+        this.tableHeaders = this.systemHeaders;
         // this.tableItems GET via ajax
       break;
     }

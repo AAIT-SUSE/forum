@@ -19,7 +19,7 @@
             <div>删除、查找或编辑任何一位用户的文章。同时，也可以调整权重标记，将某文章置顶。</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark @click="PushRouterTo('post')">管理文章</v-btn>
+            <v-btn flat dark @click="PushRouterTo('article')">管理文章</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -43,7 +43,7 @@
             <div>新增、删除、查找或编辑论坛的版块名称和图标。</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark @click="PushRouterTo('group')">管理论坛</v-btn>
+            <v-btn flat dark @click="PushRouterTo('forum')">管理论坛</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -54,7 +54,7 @@
             <div>授予某位用户以奖杯、勋章等成就，或者剥夺某位用户的成就。</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark @click="PushRouterTo('group')">授予成就</v-btn>
+            <v-btn flat dark @click="PushRouterTo('achievement')">授予成就</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -65,7 +65,7 @@
             <div>查找、删除或编辑任何一位用户发表的动态。</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark @click="PushRouterTo('system')">管理动态</v-btn>
+            <v-btn flat dark @click="PushRouterTo('feed')">管理动态</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -78,7 +78,7 @@
             <div>新增、删除、查找或编辑 Envision 商城中可供兑换的物品。</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat @click="PushRouterTo('group')">管理商城</v-btn>
+            <v-btn flat @click="PushRouterTo('shop')">管理商城</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
