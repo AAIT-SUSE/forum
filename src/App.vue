@@ -1,12 +1,16 @@
 <template>
   <v-app style="background-color: white">
-    <SideMenu></SideMenu>
+    <SideMenu v-if="isUserLogged"></SideMenu>
 
     <Toolbar></Toolbar>
     
     <v-content>
-      <router-view></router-view>
-
+      <v-layout>
+        <router-view></router-view>
+      </v-layout>
+      <v-layout justify-center align-center fill-height>
+        <login-panle></login-panle>
+      </v-layout>
     </v-content>
   
     <v-footer app dark>
@@ -33,14 +37,15 @@
 <script>
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
-  import Home from './views/Home.vue'
+  import LoginPanle from './components/LoginAndRegister.vue'
 
   export default {
     name: "App",
+    isUserLogged: false,
     components: {
       SideMenu,
       Toolbar,
-      Home
+      LoginPanle,
     },
     data() {
       return {
@@ -80,7 +85,8 @@
       this.$nextTick(function () {
         //修改事件监听
         window.addEventListener('scroll',this.handleScroll)
-      })
+      });
+      
     },
     destroyed() {
       window.removeEventListener('scroll',this.handleScroll)
