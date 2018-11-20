@@ -5,36 +5,45 @@ import random
 class Administrator(models.Model):
     administrator_id = models.PositiveIntegerField(primary_key=True)
     user_id = models.IntegerField()
-'''
+
     class Meta:
-        managed = False
         db_table = 'administrator'
-'''
+
+class Feed(models.Model):
+    feed_id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField(blank=True,null=True)
+    user_name = models.CharField(max_length=45,blank=True,null=True)
+    applaud = models.IntegerField(blank=True,null=True)
+    content = models.TextField(blank=True,null=True)
+
+    class Meta:
+        db_table = 'feed'
+
 
 class Article(models.Model):
     article_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField(blank=True, null=True)
+    user_name = models.CharField(max_length=45,blank=True,null=True)
     article_time = models.DateTimeField(blank=True, null=True)
     title = models.CharField(max_length=45, blank=True, null=True)
     is_valid = models.IntegerField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     article_board_id = models.IntegerField(blank=True, null=True)
-'''
+    applaud = models.IntegerField(blank=True,null=True)
+
     class Meta:
-        managed = False
         db_table = 'article'
-'''
+
 
 class ArticleBoard(models.Model):
     article_board_id = models.AutoField(primary_key=True)
     board_name = models.CharField(max_length=45, blank=True, null=True)
     board_description = models.TextField(blank=True, null=True)
     last_article_id = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'article_board'
-'''
+
 
 class ArticleComment(models.Model):
     article_comment_id = models.PositiveIntegerField(primary_key=True)
@@ -42,11 +51,10 @@ class ArticleComment(models.Model):
     article_id = models.IntegerField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     time = models.DateTimeField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'article_comment'
-'''
+
 
 class Goods(models.Model):
     goods_id = models.AutoField(primary_key=True)
@@ -55,11 +63,10 @@ class Goods(models.Model):
     goods_image = models.CharField(max_length=45, blank=True, null=True)
     goods_info = models.TextField(blank=True, null=True)
     is_online = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'goods'
-'''
+
 
 class Group(models.Model):
     group_id = models.AutoField(primary_key=True)
@@ -69,11 +76,10 @@ class Group(models.Model):
     description = models.TextField(blank=True, null=True)
     group_name = models.CharField(max_length=45, blank=True, null=True)
     group_type = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group'
-'''
+
 
 class GroupActivity(models.Model):
     group_activity_id = models.AutoField(primary_key=True)
@@ -87,11 +93,10 @@ class GroupActivity(models.Model):
     remind_time = models.DateTimeField(blank=True, null=True)
     appendix = models.CharField(max_length=45, blank=True, null=True)
     group_activity_cover = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group_activity'
-'''
+
 
 class GroupBulletin(models.Model):
     group_bulletin_id = models.AutoField(primary_key=True)
@@ -99,22 +104,20 @@ class GroupBulletin(models.Model):
     time = models.DateTimeField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group_bulletin'
-'''
+
 
 class GroupMembers(models.Model):
     group_members_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField(blank=True, null=True)
     is_administrator = models.IntegerField(blank=True, null=True)
     group_id = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group_members'
-'''
+
 
 class GroupTask(models.Model):
     group_task_id = models.AutoField(primary_key=True)
@@ -125,11 +128,10 @@ class GroupTask(models.Model):
     user_id = models.IntegerField(blank=True, null=True)
     appendix = models.CharField(max_length=45, blank=True, null=True)
     group_task_cover = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group_task'
-'''
+
 
 class GroupTaskJoin(models.Model):
     group_task_join_id = models.IntegerField(primary_key=True)
@@ -139,11 +141,10 @@ class GroupTaskJoin(models.Model):
     group_id = models.IntegerField(blank=True, null=True)
     finish_time = models.DateTimeField(blank=True, null=True)
     join_time = models.DateTimeField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'group_task_join'
-'''
+
 
 class JoinGroupActivity(models.Model):
     join_group_activity_id = models.AutoField(primary_key=True)
@@ -153,36 +154,35 @@ class JoinGroupActivity(models.Model):
     join_time = models.DateTimeField(blank=True, null=True)
     is_join_finish = models.IntegerField(blank=True, null=True)
     is_expire = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'join_group_activity'
-'''
+
 
 class PoromodoClock(models.Model):
     poromodo_clock_id = models.AutoField(db_column='Poromodo_Clock_id', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(blank=True, null=True)
     clock_count = models.SmallIntegerField(blank=True, null=True)
     invalid_poromodo_clock = models.SmallIntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'poromodo_clock'
-'''
+
 
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField(blank=True, null=True)
+    user_name = models.CharField(max_length=45,blank=True,null=True)
     post_time = models.DateTimeField(blank=True, null=True)
     post_content = models.TextField(blank=True, null=True)
     title = models.CharField(max_length=45, blank=True, null=True)
     post_board_id = models.CharField(max_length=45, blank=True, null=True)
     is_vaild = models.IntegerField(blank=True, null=True)
-'''
+    applaud = models.IntegerField(blank=True,null=True)
+
     class Meta:
-        managed = False
         db_table = 'post'
-'''
+
 
 class PostBoard(models.Model):
     post_board_id = models.AutoField(primary_key=True)
@@ -190,11 +190,10 @@ class PostBoard(models.Model):
     post_theme_id = models.IntegerField(blank=True, null=True)
     last_post_id = models.IntegerField(blank=True, null=True)
     board_name = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'post_board'
-'''
+
 
 class PostComment(models.Model):
     post_comment_id = models.AutoField(primary_key=True)
@@ -203,11 +202,10 @@ class PostComment(models.Model):
     post_comment_time = models.DateTimeField(blank=True, null=True)
     post_id = models.IntegerField(blank=True, null=True)
     is_have_comment = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'post_comment'
-'''
+
 
 class PostCommentReply(models.Model):
     post_comment_reply_id = models.AutoField(primary_key=True)
@@ -215,21 +213,19 @@ class PostCommentReply(models.Model):
     user_id = models.IntegerField(blank=True, null=True)
     reply_content = models.TextField(blank=True, null=True)
     reply_time = models.DateTimeField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'post_comment_reply'
-'''
+
 
 class PostTheme(models.Model):
     post_theme_id = models.IntegerField(primary_key=True)
     theme_name = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'post_theme'
 
-'''
+
 class Prize(models.Model):
     prize_id = models.IntegerField(primary_key=True)
     prize_image = models.CharField(max_length=45, blank=True, null=True)
@@ -238,11 +234,10 @@ class Prize(models.Model):
     prize_description = models.TextField(blank=True, null=True)
     prize_stock = models.IntegerField(blank=True, null=True)
     is_online = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'prize'
-'''
+
 
 class Schedule(models.Model):
     schedule_id = models.AutoField(primary_key=True)
@@ -253,31 +248,28 @@ class Schedule(models.Model):
     schedule_class_id = models.IntegerField(blank=True, null=True)
     is_finish = models.IntegerField(blank=True, null=True)
     is_delete = models.IntegerField(blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'schedule'
-'''
+
 
 class ScheduleClassify(models.Model):
     schedule_classify_id = models.IntegerField(primary_key=True)
     classify_info = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'schedule_classify'
-'''
+
 
 class ScheduleTag(models.Model):
     schedule_tag_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField(blank=True, null=True)
     schedule_id = models.IntegerField(blank=True, null=True)
     tag = models.CharField(max_length=45, blank=True, null=True)
-'''
+
     class Meta:
-        managed = False
         db_table = 'schedule_tag'
-'''
+
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -290,6 +282,10 @@ class User(models.Model):
     user_description = models.CharField(max_length=200, blank=True, null=True)
     last_post_id = models.IntegerField(blank=True, null=True)
     last_article_id = models.IntegerField(blank=True, null=True)
+    QQ_number = models.CharField(max_length=45)
+    major = models.CharField(max_length=45)
+    _class = models.CharField(max_length=45)
+    really_name = models.CharField(max_length=45)
 
     #递归~保存随机盐值并加密用户密码
 
@@ -306,7 +302,8 @@ class User(models.Model):
         self.password = hashlib.md5(passwd_encryption.encode('utf-8')+self.salt.encode('utf-8')).hexdigest()
         self.confirm_password = hashlib.md5(confirm_passwd_encryption.encode('utf-8')+self.salt.encode('utf-8')).hexdigest()
         super(User,self).save(*args,**kwargs)
-
+    class Meta:
+        db_table = 'user'
 
 
 class UserAccount(models.Model):
@@ -317,10 +314,13 @@ class UserAccount(models.Model):
 
     def __str__(self):
         return('user_score:' '%d' '       ' 'user_rank:' '%d'  % (self.user_score,self.user_rank))
-
+    class Meta:
+        db_table = 'user_account'
 
 
 class UserToken(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     token = models.CharField(max_length=64)
 
+    class Meta:
+        db_table = 'user_token'

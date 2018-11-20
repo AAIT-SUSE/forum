@@ -1,17 +1,22 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,Post,PoromodoClock,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity,User,UserAccount,UserToken
+from .models import Administrator,Feed,Article,ArticleBoard,ArticleComment,Goods,Post,PoromodoClock,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupActivity,GroupBulletin,GroupMembers,GroupTask,GroupTaskJoin,JoinGroupActivity,User,UserAccount,UserToken
 
 class AdministratorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Administrator
         fields=("administrator_id","user_id")
 
+class FeedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feed
+        fields = ('feed_id','user_id','user_name','applaud','content')
+
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields=("article_id","user_id","article_time","title","is_valid","content","article_board_id")
+        fields=("article_id","user_id","user_name","article_time","title","is_valid","content","article_board_id","applaud")
 
 
 class ArticleBoardSerializer(serializers.ModelSerializer):
@@ -39,7 +44,7 @@ class PoromodoClockSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model=Post
-        fields = ("post_id", "user_id", "post_time", "post_content", "title", "post_board_id","is_vaild")
+        fields = ("post_id", "user_id","user_name", "post_time", "post_content", "title", "post_board_id","is_vaild",'applaud')
 
 
 class PostBoardSerializer(serializers.ModelSerializer):
@@ -111,7 +116,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password','confirm_password','e_mail')
+        fields = ('username','password','confirm_password','e_mail','major','_class','really_name','QQ_number')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):

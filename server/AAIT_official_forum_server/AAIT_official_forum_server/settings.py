@@ -23,11 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3&mn8w#x4o$f%a8f$re-6_0ec2fj%a6!th#rk(olgkn$j3$^76'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     #'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoObjectPermissionsFilter',)
@@ -43,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'AAIT_official_forum'
+    'AAIT_official_forum',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +83,7 @@ WSGI_APPLICATION = 'AAIT_official_forum_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aait_forum',
+        'NAME': 'db_envision',
         'USER': '',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
@@ -135,5 +133,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+MEDIA_DIR = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

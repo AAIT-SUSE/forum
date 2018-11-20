@@ -36,7 +36,7 @@ router.register(r'JoinGroupActivityViewSet',views.JoinGroupActivityViewSet)
 router.register(r'GoodsViewSet',views.GoodsViewSet)
 router.register(r'PoromodoClockViewSet',views.PoromodoClockViewSet)
 
-
+router.register(r'FeedViewSet',views.FeedViewSet)
 
 
 
@@ -44,6 +44,7 @@ urlpatterns = [
     url('^api/',include(router.urls)),
     path('admin/', admin.site.urls),
     path('index/',views.index),
+    path('test/',views.test),
     path('register/',views.UserRegisterAPIView.as_view()),
     path('login/',views.UserLoginAPIView.as_view()),
     path('forgetpassword',views.ForgetPasswordAPIView.as_view()),

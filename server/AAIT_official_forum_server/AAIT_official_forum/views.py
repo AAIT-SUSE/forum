@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.hashers import hashlib
 from rest_framework.authentication import BasicAuthentication
-from .models import Administrator,Article,ArticleBoard,ArticleComment,Goods,PoromodoClock,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
-from .serializers import AdministratorSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PoromodoClockSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer,ForgetPasswordSerializer,ResetPasswordSerializer
+from .models import Administrator,Feed,Article,ArticleBoard,ArticleComment,Goods,PoromodoClock,Post,PostBoard,PostComment,PostCommentReply,PostTheme,Group,GroupTaskJoin,GroupTask,GroupMembers,GroupBulletin,GroupActivity,JoinGroupActivity,User,UserAccount,UserToken
+from .serializers import AdministratorSerializer,FeedSerializer,ArticleSerializer,ArticleBoardSerializer,ArticleCommentSerializer,GoodsSerializer,PoromodoClockSerializer,PostThemeSerializer,PostCommentReplySerializer,PostSerializer,PostBoardSerializer,PostCommentSerializer,GroupActivitySerializer,GroupBulletinSerializer,GroupMembersSerializer,GroupSerializer,GroupTaskJoinSerializer,GroupTaskSerializer,JoinGroupActivitySerializer,UserRegisterSerializer,UserLoginSerializer,UserSerializer,ChangePasswordSerializer,ForgetPasswordSerializer,ResetPasswordSerializer
 from .Send_email import SendEmail
 
 # Create your views here.
@@ -19,6 +19,9 @@ class AdministratorViewSet(viewsets.ModelViewSet,generics.RetrieveUpdateAPIView,
     serializer_class = AdministratorSerializer
 
 
+class FeedViewSet(viewsets.ModelViewSet,generics.RetrieveUpdateDestroyAPIView):
+    queryset= Feed.objects.all()
+    serializer_class = FeedSerializer
 
 class ArticleViewSet(viewsets.ModelViewSet,generics.RetrieveUpdateAPIView,generics.RetrieveDestroyAPIView):
     queryset = Article.objects.all()
@@ -237,10 +240,13 @@ class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    #permission_classes = (permissions.IsAuthenticated,)
 
 
 def index(request):
     if(request.method=='GET'):
         context = {"msg": "GET请求成功！", "code": 0}
         return render(request, 'index.html', {'context':context})
+
+def test (request):
+    return render(request,'test.html',{'book':'Hello Django'})
