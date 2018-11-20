@@ -19,6 +19,7 @@
             ></UserActions>
           </v-card-text>
         </v-card>
+        <tbc-alert :class="eclass"></tbc-alert>
         <RightInfoPanel></RightInfoPanel>
       </v-flex>
     </v-layout>
@@ -29,15 +30,18 @@
 import TodoListVue from '../components/TodoList.vue'
 import UserActions from '../components/UserActions.vue'
 import RightInfoPanel from '../components/RightInfoPanel.vue'
+import TbcAlert from '../components/RightAlertInfo.vue'
 
 export default {
   components: {
     TodoListVue,
     UserActions,
     RightInfoPanel,
+    TbcAlert
   },
   data(){
     return {
+      eclass: 'mx-5',
       userActions: [
         {
           name: '创建任务',

@@ -22,6 +22,7 @@
             ></clickable-list-item>
           </v-list>
         </v-card>
+        <tbc-alert></tbc-alert>
       </v-flex>
     </v-layout>
    </v-container>
@@ -35,13 +36,15 @@ import router from '@/plugins/router/router.js'
 import userinfo from '@/components/UserInfo.vue'
 import UserTab from '@/components/UserTab.vue'
 import ClickableListItem from '@/components/ClickableListItem'
+import TbcAlert from '../components/RightAlertInfo.vue'
 
 export default {
   name:'User',
   components:{
     userinfo,
     UserTab,
-    ClickableListItem
+    ClickableListItem,
+    TbcAlert
   },
   data() {
     return {

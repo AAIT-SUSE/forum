@@ -59,7 +59,6 @@ export default {
   },
   data() {
     return {
-      tab: null,
       categories: [
         {
           name: '重要',
