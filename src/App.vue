@@ -35,7 +35,14 @@
             </defs>
           </svg>
         </div>
-        <login-panle style="z-index: 99"></login-panle>
+        <login-panle style="z-index: 99" 
+          v-if="currentPanel === 'login'" 
+          :switchPanel="SwitchPanel"
+        ></login-panle>
+        <reg-panle style="z-index: 99" 
+          v-if="currentPanel === 'reg'" 
+          :switchPanel="SwitchPanel"
+        ></reg-panle>
       </v-layout>
     </v-content>
   
@@ -63,7 +70,8 @@
 <script>
   import SideMenu from './components/SideMenu.vue'
   import Toolbar from './components/Toolbar.vue'
-  import LoginPanle from './components/LoginAndRegister.vue'
+  import RegPanle from './components/Register.vue'
+  import LoginPanle from './components/Login.vue'
   import router from './plugins/router/router.js'
 
   export default {
@@ -72,12 +80,15 @@
       SideMenu,
       Toolbar,
       LoginPanle,
+      RegPanle,
     },
     data() {
       return {
         toTopShow:false,
         title: "ENVISION - 因问",
         isUserLogged: false,
+        currentPanel: 'login',
+        currentBtnText: '没有账号？立即注册'
       };
     },
     methods: {
@@ -106,6 +117,9 @@
             _that.toTopShow = false
           }
         })
+      },
+      SwitchPanel: function(p) {
+        this.currentPanel = p; 
       }
     },
     mounted() {

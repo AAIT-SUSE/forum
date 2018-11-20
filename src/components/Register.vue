@@ -1,5 +1,5 @@
 <template>
-  <div id="loginWindow">
+  <div id="regWindow">
     <v-card
       class="mx-auto"
       width="550px"
@@ -139,8 +139,9 @@
         >
           上一步
         </v-btn>
-        <v-spacer v-if="step === 4"></v-spacer>
+        <v-spacer v-if="step === 4 || step === 1"></v-spacer>
         <v-btn v-if="step === 4" color="error" @click="GetAvatar()">换一个头像</v-btn>
+        <v-btn v-if="step === 1" outline color="white" @click="switchPanel('login')">已有账号，直接登录</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
@@ -201,6 +202,9 @@ export default {
     depts: {
       required
     }
+  },
+  props: {
+    switchPanel: Function,
   },
   computed: {
     currentTitle () {
