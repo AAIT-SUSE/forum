@@ -15,11 +15,11 @@
           <v-card-text>
             <v-text-field
               label="邮箱"
-              v-model="email"
+              v-model="username"
               type="text"
               :error-messages="emailErrors"
-              @input="$v.email.$touch()"
-              @blur="$v.email.$touch()"
+              @input="$v.username.$touch()"
+              @blur="$v.username.$touch()"
             ></v-text-field>
             <v-text-field
               label="密码"
@@ -59,13 +59,13 @@ import { required, email } from 'vuelidate/lib/validators'
 export default {
   data() {
     return {
-      email: '',
+      username: '',
       password: '',
       nextBtnText: '登录',
     }
   },
   validations: {
-    email: {
+    username: {
       required,
       email
     },
@@ -79,9 +79,9 @@ export default {
   computed: {
     emailErrors () {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push('邮箱格式不正确');
-      !this.$v.email.required && errors.push('这是一个必填项目');
+      if (!this.$v.username.$dirty) return errors;
+      !this.$v.username.email && errors.push('邮箱格式不正确');
+      !this.$v.username.required && errors.push('这是一个必填项目');
       return errors;
     },
     passwordErrors () {
@@ -93,8 +93,8 @@ export default {
   },
   methods: {
     SubmitLoginForm: function() {
-      this.$v.email.touch()
-      this.$v.password.touch()
+      this.$v.username.$touch()
+      this.$v.password.$touch()
     }
   }
 }

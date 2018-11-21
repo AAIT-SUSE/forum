@@ -77,28 +77,31 @@
               <v-flex xs12 sm12 md6 lg6 xl6 class="mr-1">
                 <v-select
                   :items="years"
+                  v-model="year"
                   label="年级"
                   :error-messages="yearsErrors"
-                  @input="$v.years.$touch()"
-                  @blur="$v.years.$touch()"
+                  @input="$v.year.$touch()"
+                  @blur="$v.year.$touch()"
                 ></v-select>
               </v-flex>
               <v-flex xs12 sm12 md6 lg6 xl6 class="ml-1">
                 <v-select
                   :items="classes"
+                  v-model="uClass"
                   label="班级"
                   :error-messages="classesErrors"
-                  @input="$v.classes.$touch()"
-                  @blur="$v.classes.$touch()"
+                  @input="$v.uClass.$touch()"
+                  @blur="$v.uClass.$touch()"
                 ></v-select>
               </v-flex>
             </v-layout>
             <v-select
               :items="depts"
+              v-model="dept"
               label="所属部门"
               :error-messages="deptsErrors"
-              @input="$v.depts.$touch()"
-              @blur="$v.depts.$touch()"
+              @input="$v.dept.$touch()"
+              @blur="$v.dept.$touch()"
             ></v-select>
             <span class="caption grey--text text--darken-1">
               为了验证你的身份，你需要填写以上信息。您稍后可以选择是否在您的个人面板中展示这些信息
@@ -170,6 +173,9 @@ export default {
       realname: '',
       nextBtnText: '下一步',
       years: ['2015级', '2016级', '2017级', '2018级', '教师'],
+      year: '',
+      uClass: '',
+      dept: '',
       classes: ['教研组', '1班', '2班', '3班', '4班', '5班', '6班', '7班', '8班', '卓越班'],
       depts: ['会员', '游客', '理事会', '软件开发技术部', '机器人技术部', '嵌入式技术部', '办公室', '宣传策划部', '机器人技术部', '学习实践部', '退休办'],
     }
@@ -193,13 +199,13 @@ export default {
     realname: {
       required
     },
-    years: {
+    year: {
       required
     },
-    classes: {
+    uClass: {
       required
     },
-    depts: {
+    dept: {
       required
     }
   },
@@ -251,20 +257,20 @@ export default {
     },
     yearsErrors () {
       const errors = []
-      if (!this.$v.years.$dirty) return errors
-      !this.$v.years.required && errors.push('这是一个必填项目')
+      if (!this.$v.year.$dirty) return errors
+      !this.$v.year.required && errors.push('这是一个必填项目')
       return errors
     },
     classesErrors () {
       const errors = []
-      if (!this.$v.classes.$dirty) return errors
-      !this.$v.classes.required && errors.push('这是一个必填项目')
+      if (!this.$v.uClass.$dirty) return errors
+      !this.$v.uClass.required && errors.push('这是一个必填项目')
       return errors
     },
     deptsErrors () {
       const errors = []
-      if (!this.$v.depts.$dirty) return errors
-      !this.$v.depts.required && errors.push('这是一个必填项目')
+      if (!this.$v.dept.$dirty) return errors
+      !this.$v.dept.required && errors.push('这是一个必填项目')
       return errors
     }
 
@@ -288,11 +294,11 @@ export default {
         case 3: 
           this.$v.realname.$touch()
           this.$v.majors.$touch()
-          this.$v.years.$touch()
-          this.$v.classes.$touch()
-          this.$v.depts.$touch()
+          this.$v.year.$touch()
+          this.$v.uClass.$touch()
+          this.$v.dept.$touch()
           if(!this.$v.realname.$invalid && !this.$v.majors.$invalid &&
-             !this.$v.years.$invalid && !this.$v.classes.$invalid && !this.$v.depts.$invalid) {
+             !this.$v.year.$invalid && !this.$v.uClass.$invalid && !this.$v.dept.$invalid) {
             this.step++
           }
         break;
