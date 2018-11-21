@@ -9,7 +9,7 @@
     ">
       <v-flex xs3>
         <v-img
-          src="https://randomuser.me/api/portraits/men/85.jpg"
+          :src='userAvatar'
           height="125px"
           contain
         ></v-img>
@@ -56,7 +56,8 @@ export default {
     return {
       username: 'Owen Tsai',
       userCredits: '666',
-      userSignature: 'Envision 项目发起人'
+      userSignature: 'Envision 项目发起人',
+      userAvatar: 'https://randomuser.me/api/portraits/men/85.jpg'
     }
   }
 }

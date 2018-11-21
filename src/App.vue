@@ -111,8 +111,9 @@
           return false;
         }
       },
-      ChangeLoginStatus: function() {
+      ChangeLoginStatus: function(userEmail) {
         this.isUserLogged = true;
+        window.localStorage.setItem('envision_username', userEmail);
         router.push('/home');
       }
     },

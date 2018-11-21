@@ -365,7 +365,7 @@ export default {
         'department': this.dept,
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus');
+        self.$emit('changeLoginStatus', [response.data]);
       }).
       catch(function(error) {
         console.log(error);
