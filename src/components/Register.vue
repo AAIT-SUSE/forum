@@ -1,8 +1,7 @@
 <template>
   <div id="regWindow">
     <v-card
-      class="mx-auto"
-      width="550px"
+      max-width="400px"
       raised
       dark
     >
@@ -27,8 +26,15 @@
               @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
             ></v-text-field>
+            <v-text-field
+              label="你的昵称"
+              v-model="nickname"
+              :error-messages="nicknameErrors"
+              @input="$v.nickname.$touch()"
+              @blur="$v.nickname.$touch()"
+            ></v-text-field>
             <span class="caption grey--text text--darken-1">
-              你所填写的邮箱将作为您登录 Envision 所需要的账户名称。
+              你所填写的邮箱将作为您登录 Envision 所需要的账户名称，你为自己选取的昵称将作为你在Envision社区中使用的虚拟名字
             </span>
           </v-card-text>
         </v-window-item>
@@ -72,6 +78,13 @@
               :error-messages="majorsErrors"
               @input="$v.majors.$touch()"
               @blur="$v.majors.$touch()"
+            ></v-text-field>
+            <v-text-field
+              label="QQ号码"
+              v-model="qqNumber"
+              :error-messages="qqNumberErrors"
+              @input="$v.qqNumber.$touch()"
+              @blur="$v.qqNumber.$touch()"
             ></v-text-field>
             <v-layout grid-list-md>
               <v-flex xs12 sm12 md6 lg6 xl6 class="mr-1">
@@ -159,23 +172,26 @@
 </template>
 
 <script>
-import { required, sameAs, minLength, email } from 'vuelidate/lib/validators'
+import { required, sameAs, minLength, email, maxLength } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 export default {
   data() {
     return {
       step: 1,
-      randomSrc: 'https://api.adorable.io/avatars/130/abott@adorable.png',
+      randomSrc: '',
       email: '',
       password: '',
       confirmPassword: '',
       majors: '',
       realname: '',
+      nickname: '',
       nextBtnText: '下一步',
       years: ['2015级', '2016级', '2017级', '2018级', '教师'],
       year: '',
       uClass: '',
       dept: '',
+      qqNumber: '',
       classes: ['教研组', '1班', '2班', '3班', '4班', '5班', '6班', '7班', '8班', '卓越班'],
       depts: ['会员', '游客', '理事会', '软件开发技术部', '机器人技术部', '嵌入式技术部', '办公室', '宣传策划部', '机器人技术部', '学习实践部', '退休办'],
     }
@@ -199,10 +215,17 @@ export default {
     realname: {
       required
     },
+    nickname: {
+      required,
+      maxLength: maxLength(10)
+    },
     year: {
       required
     },
     uClass: {
+      required
+    },
+    qqNumber:{
       required
     },
     dept: {
@@ -249,10 +272,23 @@ export default {
       !this.$v.realname.required && errors.push('这是一个必填项目');
       return errors;
     },
+    qqNumberErrors () {
+      const errors = [];
+      if (!this.$v.qqNumber.$dirty) return errors;
+      !this.$v.qqNumber.required && errors.push('这是一个必填项目');
+      return errors;
+    },
+    nicknameErrors () {
+      const errors = [];
+      if (!this.$v.nickname.$dirty) return errors;
+      !this.$v.nickname.maxLength && errors.push('昵称不能超过 10 汉字或字符');
+      !this.$v.nickname.required && errors.push('这是一个必填项目');
+      return errors;
+    },
     majorsErrors () {
       const errors = [];
-      if (!this.$v.realname.$dirty) return errors;
-      !this.$v.realname.required && errors.push('这是一个必填项目');
+      if (!this.$v.majors.$dirty) return errors;
+      !this.$v.majors.required && errors.push('这是一个必填项目');
       return errors;
     },
     yearsErrors () {
@@ -280,7 +316,7 @@ export default {
       switch(this.step) {
         case 1: 
           this.$v.email.$touch()
-          if(!this.$v.email.$invalid) {
+          if(!this.$v.email.$invalid && !this.$v.nickname.$invalid) {
             this.step++;
           }
         break;
@@ -297,7 +333,7 @@ export default {
           this.$v.year.$touch()
           this.$v.uClass.$touch()
           this.$v.dept.$touch()
-          if(!this.$v.realname.$invalid && !this.$v.majors.$invalid &&
+          if(!this.$v.realname.$invalid && !this.$v.majors.$invalid && !this.$v.qqNumber.$invalid &&
              !this.$v.year.$invalid && !this.$v.uClass.$invalid && !this.$v.dept.$invalid) {
             this.step++
           }
@@ -315,8 +351,30 @@ export default {
       this.randomSrc = 'https://api.adorable.io/avatars/130/' + randomHash;
     },
     SubmitRegisterForm: function() {
-
+      let self = this;
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/register/`, {
+        'e_mail': this.email,
+        'password': this.password,
+        'confirm_password': this.confirmPassword,
+        'major': this.majors,
+        '_class': this.uClass,
+        'really_name': this.realname,
+        'nickname': this.nickname,
+        'QQ_number': this.qqNumber,
+        'age': this.year,
+        'department': this.dept,
+      }).
+      then(function(response) {
+        self.$emit('changeLoginStatus');
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
     }
+  },
+  mounted() {
+    // Generate random avater for new users
+    this.GetAvatar();
   }
 }
 </script>

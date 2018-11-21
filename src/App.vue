@@ -13,10 +13,12 @@
         <login-panle style="z-index: 99" 
           v-if="currentPanel === 'login'" 
           :switchPanel="SwitchPanel"
+          v-on:changeLoginStatus="ChangeLoginStatus()"
         ></login-panle>
         <reg-panle style="z-index: 99" 
           v-if="currentPanel === 'reg'" 
           :switchPanel="SwitchPanel"
+          v-on:changeLoginStatus="ChangeLoginStatus()"
         ></reg-panle>
       </v-layout>
     </v-content>
@@ -102,11 +104,16 @@
         let storge = window.localStorage;
         if(storge.getItem('envision_username')) {
           this.isUserLogged = true;
+          // router.push('/home');
           return true;
         } else {
-          this.isUserLogged =false;
+          this.isUserLogged = false;
           return false;
         }
+      },
+      ChangeLoginStatus: function() {
+        this.isUserLogged = true;
+        router.push('/home');
       }
     },
     mounted() {

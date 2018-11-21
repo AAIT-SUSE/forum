@@ -12,11 +12,14 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
 import Vuelidate from 'vuelidate'
+import axios from 'axios'
 
 
 Vue.use(Vuelidate)
 // 富文本编辑器
 Vue.use(VueQuillEditor)
+
+Vue.use(axios)
 
 
 new Vue({

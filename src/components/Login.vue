@@ -1,8 +1,7 @@
 <template>
   <div id="loginWindow">
     <v-card
-      class="mx-auto"
-      width="550px"
+      max-width="400px"
       raised
       dark
     >
@@ -93,8 +92,8 @@ export default {
   },
   methods: {
     SubmitLoginForm: function() {
-      this.$v.username.$touch()
-      this.$v.password.$touch()
+      this.$v.username.$touch();
+      this.$v.password.$touch();
     }
   }
 }
