@@ -84,6 +84,15 @@ your.dev.machine.ip:8080    #e.g. 192.168.1.100:8080
 AF stands on gaints' shoulders. In order to run this project in development enviroment, you will also need to install some packages. The following is a list on what dependencis you should install and the official website of them.
 
  - Vue Router. **路由不用我介绍了吧。如果你不知道路由是什么，那...**
+ - axios. **异步请求库**
+ - vue-quill-editor. **基于Quill的富文本编辑器**
+ - vuelidate. **表单验证库**
+
+You can install those dependencis simply by using CLI.
+
+```shell
+npm install vue-quill-editor
+```
 
 
 ### 1.5 Merge project
@@ -94,7 +103,6 @@ You can get familiar with the application you have just created, do some modific
 
 ## 2 Server Side Environment
 
-<<<<<<< HEAD
 > 这一部分文档将会指引你搭建服务端的本地开发环境，并初步了解如何使用 Django 框架进行后端开发.
 
 AAIT Forum 项目，*以下简称AF*，在服务端使用基于python，且遵循MVC 标准的 **django** 框架,但在本项目中后端开发人员只需要考虑视图层中api设计，不需要考虑界面设计。 
@@ -224,4 +232,3 @@ urlpatterns=[
 
 =======
 In order to setup **server side environment** of Envision, please refer to this [link](https://github.com/q513021617/forum/blob/master/README.md#2-server-side-enviroment).
->>>>>>> 4c1c065cd988a86aca4562d099862563ed4f690b
