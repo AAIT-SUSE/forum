@@ -4,7 +4,7 @@
     <v-toolbar-title v-text="title"></v-toolbar-title>
     <v-spacer></v-spacer>
     <v-tooltip bottom>
-      <v-btn icon to="" slot="activator">
+      <v-btn icon to="/notifications" slot="activator">
         <v-icon>textsms</v-icon>
       </v-btn>
       <span>消息与通知</span>

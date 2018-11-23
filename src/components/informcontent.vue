@@ -1,7 +1,7 @@
 <template>
 <div float="left">
   <v-layout>
-    <v-flex xs12 sm6  offset-sm3>
+    <v-flex>
       <v-card>
         <v-img
           src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"

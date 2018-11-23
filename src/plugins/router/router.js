@@ -15,10 +15,12 @@ const newCreation = () => import('@/views/NewCreation')
 const management = () => import('@/views/Management')
 const placeHolder = () => import('@/views/ComingSoon')
 const mainAppView = () => import('@/App')
+const feedback = () => import('@/components/suggestions')
+const notifications = () => import('@/views/Notifications')
 
 //user router
 // const userdata = () => import('@/components/userdata')
-// const mynews = () => import('@/components/mynews')
+
 // const mycreations = () => import('@/components/mycreations')
 // const myfavorites = () => import('@/components/myfavorites')
 // const myfocus = () => import('@/components/myfocus')
@@ -44,6 +46,16 @@ const routes = [
 		path: '/',
 		name: 'main',
 		component: mainAppView
+	},
+	{
+		path: '/notifications',
+		name: 'notifications',
+		component: notifications
+	},
+	{
+		path: '/feedback',
+		name: 'feedback',
+		cpmponent: feedback
 	},
 	{
 		path: '/user',

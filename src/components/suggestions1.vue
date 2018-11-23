@@ -30,7 +30,6 @@
 
 
 <script>
-import suggestions from './suggestions.vue'
   export default {
     data: () => ({
       valid: false,

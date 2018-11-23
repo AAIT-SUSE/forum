@@ -19,7 +19,7 @@ Vue.use(Vuelidate)
 // 富文本编辑器
 Vue.use(VueQuillEditor)
 
-Vue.use(axios)
+// Vue.use(axios)
 
 
 new Vue({
