@@ -14,6 +14,7 @@ const admin = () => import('@/views/Admin')
 const newCreation = () => import('@/views/NewCreation')
 const management = () => import('@/views/Management')
 const placeHolder = () => import('@/views/ComingSoon')
+const mainAppView = () => import('@/App')
 
 //user router
 // const userdata = () => import('@/components/userdata')
@@ -38,7 +39,13 @@ const settings = () => import('@/components/settings')
 //home router
 
 
-const routes = [{
+const routes = [
+	{
+		path: '/',
+		name: 'main',
+		component: mainAppView
+	},
+	{
 		path: '/user',
 		name: 'user',
 		component: user,
