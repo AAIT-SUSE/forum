@@ -12,12 +12,14 @@ const study = () => import('@/views/Study')
 const forum = () => import('@/views/Forum')
 const admin = () => import('@/views/Admin')
 const newCreation = () => import('@/views/NewCreation')
-const userMgr = () => import('@/components/UserManagement')
 const placeHolder = () => import('@/views/ComingSoon')
 const mainAppView = () => import('@/App')
 const feedback = () => import('@/components/suggestions')
 const notifications = () => import('@/views/Notifications')
 
+const userMgr = () => import('@/components/UserManagement')
+const articleMgr = () => import('@/components/ArticleManagement')
+const feedMgr = () => import('@/components/FeedManagement')
 //user router
 // const userdata = () => import('@/components/userdata')
 
@@ -101,6 +103,16 @@ const routes = [
 		path: '/admin/user',
 		name: 'userMgr',
 		component: userMgr
+	},
+	{
+		path: '/admin/article',
+		name: 'articleMgr',
+		component:articleMgr
+	},
+	{
+		path: '/admin/feed',
+		name: 'feedMgr',
+		component:feedMgr
 	},
 	//user children router
 	// {
