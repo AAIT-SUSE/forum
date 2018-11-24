@@ -37,7 +37,7 @@ router.register(r'GoodsViewSet',views.GoodsViewSet)
 router.register(r'PoromodoClockViewSet',views.PoromodoClockViewSet)
 
 router.register(r'FeedViewSet',views.FeedViewSet)
-
+router.register(r'UserProfileViewSet',views.UserProfileViewSet)
 
 
 urlpatterns = [
@@ -46,9 +46,10 @@ urlpatterns = [
     path('index/',views.index),
     path('test/',views.test),
     path('register/',views.UserRegisterAPIView.as_view()),
+    path('GetArticleInfoUser/',views.GetArticleInfoUser.as_view()),
+    path('GetFeedInfoUser/',views.GetFeedInfoUser.as_view()),
     path('login/',views.UserLoginAPIView.as_view()),
     path('forgetpassword',views.ForgetPasswordAPIView.as_view()),
     path('resetpassword',views.ResetPasswordAPIView.as_view()),
-    url(r'^user_profile/(?P<pk>[0-9]+)/$',views.UserProfileAPIView.as_view()),
     url(r'changepassword/',views.ChangePasswordAPIView.as_view()),
 ]

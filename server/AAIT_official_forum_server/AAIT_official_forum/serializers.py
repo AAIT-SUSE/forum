@@ -111,18 +111,18 @@ class UserSerializer(serializers.ModelSerializer):
     account = serializers.StringRelatedField(many=True) #该字段只读
     class Meta:
         model = User
-        fields = ('user_id','username','e_mail','user_logo','user_description','last_post_id','last_article_id','account')
+        fields = ('user_id','nickname','e_mail','user_logo','user_description','last_post_id','major','age','_class','really_name','QQ_number','last_article_id','account')
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password','confirm_password','e_mail','major','_class','really_name','QQ_number')
+        fields = ('e_mail','nickname','password','confirm_password','really_name','major','age','_class','QQ_number','department','user_logo')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password')
+        fields = ('e_mail','password')
 
 class ChangePasswordSerializer(serializers.Serializer): 
     """ 
@@ -139,9 +139,9 @@ class ForgetPasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','e_mail')
+        fields = ('e_mail')
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','password','confirm_password')
+        fields = ('e_mail','password','confirm_password')
