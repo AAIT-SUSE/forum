@@ -15,14 +15,12 @@ import Vuelidate from 'vuelidate'
 import axios from 'axios'
 
 
-Vue.use(Vuelidate)
-// 富文本编辑器
-Vue.use(VueQuillEditor)
-
-// Vue.use(axios)
-
-
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app');
+
+Vue.use(Vuelidate)
+// 富文本编辑器
+Vue.use(VueQuillEditor)
+// Vue.use(axios)

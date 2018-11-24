@@ -36,7 +36,6 @@ const feedMgr = () => import('@/components/FeedManagement')
 
 //centre router
 const shop = () => import('@/components/shop')
-const about = () => import('@/components/About')
 const group = () => import('@/components/group')
 // const suggestions = () => import('@/components/suggestions')
 const settings = () => import('@/components/settings')
@@ -175,11 +174,6 @@ const routes = [
 		path: '/centre/shop',
 		name: 'shop',
 		component: shop
-	},
-	{
-		path: '/centre/about',
-		name: 'about',
-		component: about
 	},
 	{
 		path: '/centre/group',
