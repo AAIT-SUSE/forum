@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card class="ma-2" raised v-for="post in posts" :key="post.id">
+      <v-card class="ma-2" raised v-for="post in posts" :key="post.feed_id">
         <v-img v-if="post.img"
           :src="post.img"
           aspect-ratio="2.75"
@@ -25,9 +25,9 @@
           <v-btn 
             flat
             :color="post.isLiked ? 'red' : 'info'"
-            @click="AddPostToFav(post.id)"
+            @click="AddPostToFav(post.feed_id)"
           >
-            <v-icon left>favorite</v-icon> {{ post.likes }}
+            <v-icon left>favorite</v-icon> {{ post.applaud }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -36,51 +36,41 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name:'PostList',
   data() {
     return {
-      posts:[
-        {
-          id: 0,
-          author: 'Owen Tsai',
-          content: '这是澳大利亚袋鼠谷(Kangaroo Valley)的美丽景色。正要日落的时候，太阳从地平线照射过来。\n远处可能有动物，我没看清。',
-          img:'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-          isLiked: false,
-          likes: 46,
-          isInFav: false,
-        },
-        {
-          id: 1,
-          author: 'Jack Ma',
-          content: '双十一给我送了钱的，请点个赞让我知道一下！',
-          isLiked: false,
-          likes: 123,
-          isInFav: false,
-        },
-        {
-          id: 2,
-          author: 'Tony Owens',
-          content: '多行文本测试\n这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字这是一段很长的文字',
-          isLiked: false,
-          likes: 0,
-          isInFav: false,
-        },
-      ]
+      posts:[]
     }
   },
   methods: {
-    AddPostToFav: function(id) {
-      this.posts[id].isLiked = !this.posts[id].isLiked;
-      if(this.posts[id].isLiked === false) {
-        this.posts[id].likes -= 1;
+    AddPostToFav: function(feed_id) {
+      this.posts[feed_id].isLiked = !this.posts[feed_id].isLiked;
+      if(this.posts[feed_id].isLiked === false) {
+        this.posts[feed_id].likes -= 1;
       } else {
-        this.posts[id].likes += 1;
+        this.posts[feed_id].likes += 1;
       }
     }
   },
+  PostListGet: function() {
+      let self = this;
+      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`
+      ).
+      then(function(response) {
+        self.posts=response.data;
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    }
   props: {
     showCtrlBtns: Boolean
+  },
+  mounted() {
+    this.PostListGet();
   }
 }
 </script>
