@@ -54,6 +54,7 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 export default {
   data() {
@@ -94,6 +95,17 @@ export default {
     SubmitLoginForm: function() {
       this.$v.username.$touch();
       this.$v.password.$touch();
+      let self = this;
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/login/`, {
+        'e_mail': this.username,
+        'password': this.password,
+      }).
+      then(function(response) {
+        self.$emit('changeLoginStatus', this.username);//[response.data]
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
     }
   }
 }
