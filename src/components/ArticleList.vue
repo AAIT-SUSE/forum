@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card class="ma-2" raised v-for="article in articles" :key="article.article_id">
+      <v-card raised v-for="article in articles" :key="article.article_id">
         <v-img v-if="article.img"
           :src="article.img"
           aspect-ratio="2.75"

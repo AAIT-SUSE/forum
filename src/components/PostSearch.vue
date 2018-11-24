@@ -1,11 +1,13 @@
 <template>
   <div>
-    <v-toolbar color="warning" prominent tabs>
-      <v-text-field class="mx-3" flat 
-        :label="searchPlaceholder" 
-        prepend-inner-icon="search" solo
-      >
-      </v-text-field>
+    <v-toolbar color="warning" tabs>
+      <v-text-field
+        class="mx-3"
+        flat
+        label="搜索功能暂不可用"
+        prepend-inner-icon="search"
+        solo-inverted
+      ></v-text-field>
       <v-tabs slot="extension" v-model="tab" left color="transparent" slider-color="red">
         <v-tab v-for="item in items" :key="item.message">
           {{ item.message }}
@@ -14,11 +16,9 @@
     </v-toolbar>
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.message">
-        <v-card flat>
-          <PostList v-if="item.value === 'Feed'" :showCtrlBtns="true"></PostList>
+          <FeedList v-if="item.value === 'Feed'" :showCtrlBtns="true"></FeedList>
           <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="true"></ArticleList>
           <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
-        </v-card>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -26,21 +26,21 @@
 
 <script>
 import ArticleList from '@/components/ArticleList'
-import PostList from '@/components/PostList'
+import FeedList from '@/components/FeedList'
 import DirectAnswerList from "@/components/DirectAnswerList";
 
 export default {
   name:'PostSearch',
   components:{
     ArticleList,
-    PostList,
+    FeedList,
     DirectAnswerList
   },
   data() {
     return {
       tab:null,
       tabView: true,
-      searchPlaceholder: '搜索文章或帖子',
+      searchPlaceholder: '搜索功能暂不可用',
       items: [
         {
           message: "动态",

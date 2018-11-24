@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card class="ma-2" raised v-for="question in questions" :key="question.id">
+      <v-card raised v-for="question in questions" :key="question.id">
         <v-img v-if="question.img"
           :src="question.img"
           aspect-ratio="2.75"
@@ -30,7 +30,7 @@
           </v-tooltip>
           <v-tooltip bottom>
             <v-btn color="error" flat slot="activator" @click="dialog = true">阅读</v-btn>
-            <span>阅读答案需要消耗 10 积分</span>
+            <span>阅读答案需要消耗 0 积分</span>
           </v-tooltip>
           <v-tooltip bottom>
             <v-btn color="success" flat>回答该问题</v-btn>

@@ -1,15 +1,15 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card class="ma-2" raised v-for="post in posts" :key="post.feed_id">
-        <v-img v-if="post.img"
-          :src="post.img"
+      <v-card class="" raised v-for="feed in feeds" :key="feed.feed_id">
+        <v-img v-if="feed.img"
+          :src="feed.img"
           aspect-ratio="2.75"
         ></v-img>
 
         <v-card-title primary-title>
           <div>
-            {{ post.content }}
+            {{ feed.content }}
           </div>
         </v-card-title>
 
@@ -17,17 +17,17 @@
           <v-spacer></v-spacer>
           <v-btn 
             flat
-            :color="post.isInFav ? 'success' : 'grey'"
-            @click="post.isInFav = !post.isInFav"
+            :color="feed.isInFav ? 'success' : 'grey'"
+            @click="feed.isInFav = !feed.isInFav"
           >
             <v-icon>star</v-icon>
           </v-btn>
           <v-btn 
             flat
-            :color="post.isLiked ? 'red' : 'info'"
-            @click="AddPostToFav(post.feed_id)"
+            :color="feed.isLiked ? 'red' : 'info'"
+            @click="AddFeedToFav(feed.feed_id)"
           >
-            <v-icon left>favorite</v-icon> {{ post.applaud }}
+            <v-icon left>favorite</v-icon> {{ feed.applaud }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -39,38 +39,38 @@
 import axios from 'axios'
 
 export default {
-  name:'PostList',
+  name:'FeedList',
   data() {
     return {
-      posts:[]
+      feeds:[]
     }
   },
   methods: {
-    AddPostToFav: function(feed_id) {
-      this.posts[feed_id].isLiked = !this.posts[feed_id].isLiked;
-      if(this.posts[feed_id].isLiked === false) {
-        this.posts[feed_id].likes -= 1;
+    AddFeedToFav: function(feed_id) {
+      this.feeds[feed_id].isLiked = !this.feeds[feed_id].isLiked;
+      if(this.feeds[feed_id].isLiked === false) {
+        this.feeds[feed_id].likes -= 1;
       } else {
-        this.posts[feed_id].likes += 1;
+        this.feeds[feed_id].likes += 1;
       }
-    }
-  },
-  PostListGet: function() {
+    },
+    FeedListGet: function() {
       let self = this;
       axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`
       ).
       then(function(response) {
-        self.posts=response.data;
+        self.feeds=response.data;
       }).
       catch(function(error) {
         console.log(error);
       });
-    }
+    },
+  },
   props: {
     showCtrlBtns: Boolean
   },
   mounted() {
-    this.PostListGet();
+    this.FeedListGet();
   }
 }
 </script>

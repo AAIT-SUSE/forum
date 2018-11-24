@@ -10,7 +10,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.value">
         <v-card flat>
-          <PostList v-if="item.value === 'Post'" :showCtrlBtns="false"></PostList>
+          <FeedList v-if="item.value === 'Post'" :showCtrlBtns="false"></FeedList>
           <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="false"></ArticleList>
           <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
         </v-card>
@@ -22,13 +22,13 @@
 
 <script>
 import ArticleList from './ArticleList.vue'
-import PostList from './PostList.vue'
+import FeedList from './FeedList.vue'
 import DirectAnswerList from './DirectAnswerList.vue'
 
 export default {
   components: {
     ArticleList,
-    PostList,
+    FeedList,
     DirectAnswerList
   },
   data () {
