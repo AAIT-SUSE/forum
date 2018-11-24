@@ -12,7 +12,7 @@ const study = () => import('@/views/Study')
 const forum = () => import('@/views/Forum')
 const admin = () => import('@/views/Admin')
 const newCreation = () => import('@/views/NewCreation')
-const management = () => import('@/views/Management')
+const userMgr = () => import('@/components/UserManagement')
 const placeHolder = () => import('@/views/ComingSoon')
 const mainAppView = () => import('@/App')
 const feedback = () => import('@/components/suggestions')
@@ -98,9 +98,9 @@ const routes = [
 		component: admin
 	},
 	{
-		path: '/admin/:type',
-		name: 'management',
-		component: management
+		path: '/admin/user',
+		name: 'userMgr',
+		component: userMgr
 	},
 	//user children router
 	// {

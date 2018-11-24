@@ -1,5 +1,5 @@
 <template>
-   <v-container grid-list-md align-content-center>
+  <v-container grid-list-md align-content-center>
     <v-layout row wrap> 
       <v-flex xl7 lg12 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
         <userinfo></userinfo> 
@@ -25,7 +25,7 @@
         <tbc-alert></tbc-alert>
       </v-flex>
     </v-layout>
-   </v-container>
+  </v-container>
 
 </template>
 
@@ -52,7 +52,7 @@ export default {
         {
           title: '小组建设',
           icon: 'group_work',
-          link: '/groupDetail'
+          link: '/comingSoon'
         },
         {
           title: '积分商城',
@@ -62,7 +62,7 @@ export default {
         {
           title: '意见与反馈',
           icon: 'mail',
-          link: '/feedback'
+          link: '/comingSoon'
         },
         {
           title: '管理中心',
@@ -87,4 +87,3 @@ export default {
 
 
 </style>
-

@@ -131,7 +131,8 @@
             </v-flex>
             <br>
             <span class="caption grey--text text--darken-1">
-              对头像不满意？点击下面的按钮随机更换一个。你可能需要等待几秒，图片才能完成载入。
+              对头像不满意？点击下面的按钮随机更换一个。你可能需要等待几秒，图片才能载入。<br>
+              若要保存头像到本地，在头像上单击鼠标右键，选择“图片另存为”。
             </span>
           </v-card-text>
         </v-window-item>
@@ -348,7 +349,7 @@ export default {
     },
     GetAvatar: function(){
       let randomHash = Math.random().toString(36).substr(2);
-      this.randomSrc = 'https://api.adorable.io/avatars/130/' + randomHash;
+      this.randomSrc = 'https://api.adorable.io/avatars/150/' + randomHash;
     },
     SubmitRegisterForm: function() {
       let self = this;
