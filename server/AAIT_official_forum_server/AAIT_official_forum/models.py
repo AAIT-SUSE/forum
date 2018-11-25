@@ -273,7 +273,7 @@ class ScheduleTag(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=45)
+    nickname = models.CharField(max_length=45,blank=True,null=True)
     password = models.CharField(max_length=200)
     confirm_password = models.CharField(max_length=200)
     salt = models.CharField(max_length=45, blank=True, null=True)
@@ -284,8 +284,10 @@ class User(models.Model):
     last_article_id = models.IntegerField(blank=True, null=True)
     QQ_number = models.CharField(max_length=45)
     major = models.CharField(max_length=45)
+    age = models.CharField(max_length=45)
     _class = models.CharField(max_length=45)
     really_name = models.CharField(max_length=45)
+    department = models.CharField(max_length=45)
 
     #递归~保存随机盐值并加密用户密码
 

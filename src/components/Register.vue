@@ -175,6 +175,7 @@
 <script>
 import { required, sameAs, minLength, email, maxLength } from 'vuelidate/lib/validators'
 import axios from 'axios'
+import globalData from '../plugins/GlobalData';
 
 export default {
   data() {
@@ -354,19 +355,21 @@ export default {
     SubmitRegisterForm: function() {
       let self = this;
       axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/register/`, {
-        'e_mail': this.email,
-        'password': this.password,
-        'confirm_password': this.confirmPassword,
-        'major': this.majors,
-        '_class': this.uClass,
-        'really_name': this.realname,
-        'nickname': this.nickname,
-        'QQ_number': this.qqNumber,
-        'age': this.year,
-        'department': this.dept,
+        'e_mail': self.email,
+        'password': self.password,
+        'confirm_password': self.confirmPassword,
+        'major': self.majors,
+        '_class': self.uClass,
+        'really_name': self.realname,
+        'nickname': self.nickname,
+        'QQ_number': self.qqNumber,
+        'age': self.year,
+        'department': self.dept,
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', [response.data]);
+        self.$emit('changeLoginStatus', self.email);
+        globalData.commit('SetUserId', response.data.id);
+        console.log(globalData.state.userId);
       }).
       catch(function(error) {
         console.log(error);

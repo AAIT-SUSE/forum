@@ -23,6 +23,48 @@
         </v-card>
         <infoPanel></infoPanel>
       </v-flex>
+      
+      <v-dialog v-model="dialogInfo" max-width="450">
+        <v-card>
+          <v-toolbar card color="blue-grey" dark>
+            <v-toolbar-title>新动态</v-toolbar-title>
+          </v-toolbar>
+        
+            <v-card-text>
+              
+              <v-textarea
+                box
+                label="内容"
+                value=""
+              ></v-textarea>
+        
+              <v-divider class="my-2"></v-divider>
+        
+              <v-item-group multiple>
+                <v-subheader>标签</v-subheader>
+                <v-item
+                  v-for="n in 8"
+                  :key="n"
+                >
+                  <v-chip
+                    slot-scope="{ active, toggle }"
+                    :selected="active"
+                    @click="toggle"
+                  >
+                    Tag {{ n }}
+                  </v-chip>
+                </v-item>
+              </v-item-group>
+            </v-card-text>
+        
+            <v-divider></v-divider>
+        
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="success" depressed>发表</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-layout>
   </v-container>
 

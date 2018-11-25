@@ -100,23 +100,28 @@ class UserRegisterAPIView(APIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
     permission_classes = (permissions.AllowAny,)
+    def get(self,request,format=None):
+        serializer = UserRegisterSerializer()
+        return Response(serializer.data)
 
     def post(self,request,format=None):
+        ret = {'data':None,'result':None,'id':None}
         data = request.data
-        username = data.get('username')
         password = data.get('password')
         confirm_password = data.get('confirm_password')
-        email = data.get('e_mail')
-        if User.objects.filter(username__exact=username):
-            return Response('用户名已存在',status=status.HTTP_400_BAD_REQUEST)
-        elif User.objects.filter(e_mail=email):
+        e_mail = data.get('e_mail')
+        if User.objects.filter(e_mail=e_mail):
             return Response('该邮箱已被注册',status=status.HTTP_400_BAD_REQUEST)
         elif password != confirm_password:
             return Response('两次输入密码不一致',status=status.HTTP_400_BAD_REQUEST)  
         serializer = UserRegisterSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data.get('username'),status=status.HTTP_200_OK)
+            user = User.objects.get(e_mail=e_mail)
+            ret['id'] = user.user_id
+            ret['data'] = e_mail
+            ret['result'] = 'Successed'
+            return JsonResponse(ret)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class UserLoginAPIView(APIView):
@@ -127,26 +132,31 @@ class UserLoginAPIView(APIView):
     serializer_class = UserLoginSerializer
     permission_classes = (permissions.AllowAny,)
 
+    def get(self,request,format=None):
+        serializer = UserLoginSerializer()
+        return Response(serializer.data)
+
     def post(self,request,format=None):
-        ret = {'msg':None,'token':None}
+        ret = {'msg':None,'token':None,'id':None}
         data = request.data
-        username = data.get('username')
+        e_mail = data.get('e_mail')
         password = data.get('password')
         try:
-            user = User.objects.get(username__exact=username)
-        except:
+            user = User.objects.get(e_mail=e_mail)
+            password_1 = hashlib.md5(password.encode('utf-8')).hexdigest()
+            password = hashlib.md5(password_1.encode('utf-8')+user.salt.encode('utf-8')).hexdigest()
+            if e_mail == user.e_mail and password == user.password:
+                token = hashlib.md5(e_mail.encode('utf-8')).hexdigest()
+                ret['msg'] = 'Successed'
+                ret['token'] = token
+                ret['id'] = user.user_id
+                return JsonResponse(ret)
+                UserToken.objects.update_or_create(user=user,defaults={'token':token})
+                #serializer = UserSerializer(user)
+                #return Response(serializer.data,status=status.HTTP_200_OK)
             return Response('用户名或密码错误',status=status.HTTP_400_BAD_REQUEST)
-        password_1 = hashlib.md5(password.encode('utf-8')).hexdigest()
-        password = hashlib.md5(password_1.encode('utf-8')+user.salt.encode('utf-8')).hexdigest()
-        if username == user.username and password == user.password:
-            token = hashlib.md5(username.encode('utf-8')).hexdigest()
-            ret['msg'] = 'Successed'
-            ret['token'] = token
-            return JsonResponse(ret)
-            UserToken.objects.update_or_create(user=user,defaults={'token':token})
-            #serializer = UserSerializer(user)
-            #return Response(serializer.data,status=status.HTTP_200_OK)
-        return Response('用户名或密码错误',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('用户不存在',status=status.HTTP_400_BAD_REQUEST)
 
 class ChangePasswordAPIView(APIView): 
     """ 
@@ -154,12 +164,16 @@ class ChangePasswordAPIView(APIView):
     """ 
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
-    permission_classes = (permissions.IsAuthenticated,) 
+   # permission_classes = (permissions.IsAuthenticated,) 
 
     def get_object(self, queryset=None): 
         return self.request.user 
 
-    def put(self, request, *args, **kwargs): 
+    def get(self,request,format=None):
+        serializer = ChangePasswordSerializer()
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs): 
         self.object = self.get_object() 
         serializer = ChangePasswordSerializer(data=request.data) 
 
@@ -179,32 +193,39 @@ class ForgetPasswordAPIView(APIView):
     queryset = User.objects.all()
     serializer_class = ForgetPasswordSerializer
 
+    def get(self,request,format=None):
+        serializer = ForgetPasswordSerializer()
+        return Response(serializer.data)
+
     def post(self,request,format=None):
         data = request.data
-        username = data.get('username')
         e_mail = data.get('e_mail')
         try:
-            user = User.objects.get(username__exact=username)
+            user = User.objects.get(e_mail=e_mail)
             if e_mail == user.e_mail:
                 sendemail = SendEmail()
                 sendemail.send(str(e_mail))
                 return Response('resetpassword',status=status.HTTP_200_OK)
             else:
-                return Response('用户名与邮箱不匹配',status=status.HTTP_400_BAD_REQUEST)
+                return Response('用户不存在',status=status.HTTP_400_BAD_REQUEST)
         except:
-            return Response('用户名或邮箱错误',status=status.HTTP_400_BAD_REQUEST)
+            return Response('用户不存在',status=status.HTTP_400_BAD_REQUEST)
 
 class ResetPasswordAPIView(APIView):
     queryset = User.objects.all()
     serializer_class = ResetPasswordSerializer
 
-    def put(self,request,*args, **kwarge):
+    def get(self,request,format=None):
+        serializer = ResetPasswordSerializer()
+        return Response(serializer.data)
+
+    def post(self,request,*args, **kwarge):
         data = request.data
-        username = data.get('username')
+        e_mail = data.get('e_mail')
         password = data.get('password')
         confirm_password = data.get('confirm_password')
         try:
-            self.object = User.objects.get(username__exact=username)
+            self.object = User.objects.get(e_mail=e_mail)
             if password != confirm_password:
                 return Response('两次输入密码不一致')
             else:
@@ -216,7 +237,7 @@ class ResetPasswordAPIView(APIView):
                     return Response('重置密码成功',status=status.HTTP_200_OK)
                 return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         except:
-            return Response('用户名不存在',status=status.HTTP_400_BAD_REQUEST)
+            return Response('用户不存在',status=status.HTTP_400_BAD_REQUEST)
 
 class Authentication(APIView):
     '''
@@ -232,8 +253,36 @@ class Authentication(APIView):
     def authenticate_header(self,request):
         pass
 
-    
-class UserProfileAPIView(generics.RetrieveUpdateDestroyAPIView):
+class GetArticleInfoUser(APIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    def get(self,request,format=None):
+        ret={'id':None,'result':None}
+        user_id = request.data.get('user_id')
+        try:
+            article = Article.objects.get(user_id=user_id)
+            serializer = ArticleSerializer(article,many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        except:
+            ret['id'] = user_id
+            ret['msg'] = 'The user has no articles!'
+            return JsonResponse(ret)     
+
+class GetFeedInfoUser(APIView):
+    queryset = Feed.objects.all()
+    serializer_class = FeedSerializer
+    def get(self,request,format=None):
+        ret = {'id':None,'msg':None}
+        user_id = request.data.get('user_id')
+        try:
+            feed = Feed.objects.get(user_id=user_id)
+            serializer = FeedSerializer(feed,many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        except:
+            ret['id'] = user_id
+            ret['msg'] = 'The user has no feed'
+            return JsonResponse(ret)
+class UserProfileViewSet(viewsets.ModelViewSet):
     '''
     用户登录认证通过后可查看
     '''
