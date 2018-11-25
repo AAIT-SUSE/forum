@@ -43,6 +43,21 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="errorDialog" max-width="290">
+      <v-card>
+        <v-card-title class="headline">用户名或密码错误</v-card-title>
+
+        <v-card-text>
+          <p>请检查并重新输入你的用户名和密码。用户名即为您注册时使用的邮箱。</p>
+          <p>忘记了密码？你可以点击这里进行<a href="#">重新设置</a>。</p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary darken-2" @click="errorDialog = false">好</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -55,6 +70,7 @@ export default {
     return {
       username: '',
       password: '',
+      errorDialog: false,
       nextBtnText: '登录',
     }
   },
@@ -75,7 +91,7 @@ export default {
         console.log(globalData.state.userId)
       }).
       catch(function(error) {
-        console.log(error);
+        self.errorDialog = true;
       });
     }
   },
