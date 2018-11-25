@@ -80,20 +80,17 @@ export default {
   methods: {
     SubmitLoginForm: function() {
       let self = this;
-      let username = this.username;
       axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/login/`, {
-        'e_mail': username,
+        'e_mail': self.username,
         'password': self.password,
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', username);
-        globalData.commit('SetUserId', response.data.id);
-        console.log(globalData.state.userId)
+        self.$emit('changeLoginStatus', self.username, response.data.id, response.data.nickname);
       }).
       catch(function(error) {
         self.errorDialog = true;
       });
-    }
+    },
   },
 }
 </script>
