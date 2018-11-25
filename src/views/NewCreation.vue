@@ -41,6 +41,9 @@ import UserActions from '@/components/UserActions.vue'
 import RightInfoPanel from '@/components/RightInfoPanel.vue'
 import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios'
+import globalData from '../plugins/GlobalData'
+
+
 
 export default {
   name: 'newCreation',
@@ -114,6 +117,7 @@ export default {
       catch(function(error) {
         console.log(error);
       });
+      
     },
     ExcuteUserAction: function(action) {
       switch(action) {
