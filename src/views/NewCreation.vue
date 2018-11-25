@@ -26,6 +26,7 @@
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"
+            :onClickHandler="ExcuteUserAction"
             ></UserActions>
           </v-card-text>
         </v-card>
@@ -40,6 +41,9 @@ import UserActions from '@/components/UserActions.vue'
 import RightInfoPanel from '@/components/RightInfoPanel.vue'
 import { quillEditor } from 'vue-quill-editor'
 import axios from 'axios'
+import globalData from '../plugins/GlobalData'
+
+
 
 export default {
   name: 'newCreation',
@@ -83,29 +87,47 @@ export default {
     ArticleListPost: function() {
       let self = this;
       let myDate = new Date();
-      axios.post(`${'https://cors-anywhere.herokuapp.com/'} http://www.aait-suse.cn/api/ArticleViewSet/`, {
-        'article_id': this.articleid,
-        'user_id': this.userid,
-        'user_name': this.username,
-        'article_time': myDate.toLocaleString(),
-        'title': this.articleTitle,
-        'is_valid': 'true',
-        'content': this.editorContent,
-        'article_board_id': 'default',
-      }).
-      then(function(response) {
-        self.articles=response.data;
+      console.log(globalData.state.userId);
+
+         //获取指定用户信息
+         //axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProfileViewSet/`, {
+         //'user_id':globalData.state.userId,
+         //'nickname':,
+         //'e_mail':,
+         //'user_logo':,
+         //'user_description':,
+         //'last_post_id':,
+         //'major':,
+         //'age':,
+         //'_class':,
+         //'really_name':,
+         //'QQ_number':,
+         //    });
+
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
+        // 'user_id': globalData.state.userId,
+        'user_id': 12,
+        // 'user_name': this.username,
+        // 'article_time': myDate.toLocaleString(),
+        'title': self.articleTitle,
+        // 'is_valid': 'true',
+        'content': self.editorContent,
+        // 'article_board_id': 'default',
       }).
       catch(function(error) {
         console.log(error);
       });
+      
     },
-     mounted() {
-       this.ArticleListPost();
-
-       }
-     },
+    ExcuteUserAction: function(action) {
+      switch(action) {
+        case '发布': 
+          this.ArticleListPost();
+          break;
+      }
+    }
   }
+}
 </script>
 
 
