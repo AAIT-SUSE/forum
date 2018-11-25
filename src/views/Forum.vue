@@ -3,8 +3,6 @@
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
         <GroupedPanel
-          :topTitle='topTitle'
-          :groups='groups'
         ></GroupedPanel>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>

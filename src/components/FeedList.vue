@@ -27,7 +27,7 @@
             :color="feed.isLiked ? 'red' : 'info'"
             @click="AddFeedToFav(feed.feed_id)"
           >
-            <v-icon left>favorite</v-icon> {{ feed.applaud }}
+            <v-icon>favorite</v-icon>{{ feed.applaud }}
           </v-btn>
         </v-card-actions>
       </v-card>

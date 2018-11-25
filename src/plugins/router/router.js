@@ -16,6 +16,7 @@ const placeHolder = () => import('@/views/ComingSoon')
 const mainAppView = () => import('@/App')
 const feedback = () => import('@/components/suggestions')
 const notifications = () => import('@/views/Notifications')
+const artileDetail =() => import('@/views/ArticleDetail')
 
 const userMgr = () => import('@/components/UserManagement')
 const articleMgr = () => import('@/components/ArticleManagement')
@@ -47,6 +48,11 @@ const routes = [
 		path: '/',
 		name: 'main',
 		component: mainAppView
+	},
+	{
+		path: '/article/:id',
+		name: 'articleDetail',
+		component: artileDetail
 	},
 	{
 		path: '/notifications',

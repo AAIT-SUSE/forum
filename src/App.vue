@@ -88,7 +88,7 @@
         cancelAnimationFrame(timer)
         timer = requestAnimationFrame(function fn() {
           if(_that.scrollTop > 0){
-            _that.scrollTop -= 30
+            _that.scrollTop -= 60
             //修改这里实现动画滚动效果
             document.body.scrollTop = document.documentElement.scrollTop = _that.scrollTop
             timer = requestAnimationFrame(fn)
@@ -125,7 +125,7 @@
       },
       InitUserProfile: function() {
         // 保存数据到全局变量
-        let userId = window.localStorage.getItem('envision_userID');
+        let userId = window.localStorage.getItem('envision_userId');
         let nickname = window.localStorage.getItem('envision_nickname');
         let email = window.localStorage.getItem('envision_username');
         globalData.commit('SetUserId', userId);

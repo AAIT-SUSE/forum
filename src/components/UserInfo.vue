@@ -12,6 +12,7 @@
           :src='userAvatar'
           height="125px"
           contain
+          style="border-radius: 100%;"
         ></v-img>
       </v-flex>
       <v-flex xs9>
@@ -66,12 +67,12 @@ export default {
   methods: {
     GetUserInfo: function(){
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProﬁleViewSet/${globalData.state.userId}/`)
+      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProfileViewSet/${globalData.state.userId}/`)
       .then(function (response){
         self.username = response.data.nickname;
         self.userCredits = 0,
         self.userAvatar = 'https://api.adorable.io/avatars/150/' + response.data.user_logo;
-        self.userSignature = response.data.majors + response.data.age + response.data._class;
+        self.userSignature = response.data.major + response.data.age + response.data._class;
       })
       .catch(function (error){
         console.log(error);

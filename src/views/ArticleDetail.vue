@@ -6,11 +6,11 @@
           <v-card-title primary-title>
             <div>
               <h3 class="headline mb-0">{{ title }}</h3>
-              <div>{{ ahtuor }} , 发表于 {{ time }}</div>
+              <div>作者 {{ author }} , 发表于 {{ time }}</div>
             </div>
           </v-card-title>
-          <v-card-text>{{ content }}</v-card-text>
-        </v-card>>
+          <v-card-text v-html="content"></v-card-text>
+        </v-card>
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
@@ -35,14 +35,13 @@
 
 <script>
 import UserActions from '../components/UserActions.vue';
-import UserFeed from '../components/FeedPost.vue';
 import InfoPanel from '../components/RightInfoPanel.vue';
 import router from '@/plugins/router/router.js'
+import axios from 'axios'
 
 export default {
   components: {
     UserActions,
-    UserFeed,
     InfoPanel,
   },
   data() {
@@ -53,14 +52,19 @@ export default {
       time: '',
       userActions: [
         {
-          name: '赞同文章',
+          name: '赞同',
           icon: 'thumb_up',
-          color: 'info',
+          color: 'warning',
         },
         {
-          name: '收藏文章',
-          icon: 'frade',
-          color: 'info',
+          name: '收藏',
+          icon: 'turned_in',
+          color: 'warning',
+        },
+        {
+          name: '返回',
+          icon: 'undo',
+          color: 'warning',
         },
       ],
     }
@@ -68,16 +72,35 @@ export default {
   methods: {
     ExcuteUserAction: function(action) {
       switch(action) {
-        case '新文章': 
-          router.push('/newPost');
+        case '赞同': 
+          // do nothing
           break;
-        case '新动态': 
-          this.dialogInfo = true;
+        case '收藏': 
+          // do nothing
           break;
-         default: 
-          router.push('/user');
+        default: 
+          router.go(-1);
+          break;
       }
+    },
+    GetArticleContent: function() {
+      // console.log(this.$route.params.id)
+      let aid = this.$route.params.id;
+      let self = this;
+      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/${aid}/`)
+      .then(function(response) {
+        self.content = response.data.content;
+        self.author = response.data.user_name;
+        self.title = response.data.title;
+        self.time = response.data.article_time;
+      })
+      .catch(function(error) {
+        alert('获取文章出现错误。请将以下内容发送给 @蔡仲晨 进行分析：\n' + error);
+      });
     }
+  },
+  mounted() {
+    this.GetArticleContent();
   }
 }
 </script>
