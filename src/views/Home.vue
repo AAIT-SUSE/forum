@@ -118,8 +118,6 @@ export default {
     },
     OnClickExplore: function() {
       let self = this;
-      console.log(globalData.state.userId+'1111'+globalData.state.nickname);
-      console.log(parseInt(globalData.state.userId));
       if(self.contents != '') {
         axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`,{
         "user_id": parseInt(globalData.state.userId),
@@ -127,11 +125,11 @@ export default {
         "content": self.contents
         }).
         then(function(response) {
+          self.dialogSuccess = true;
         }).
         catch(function(error) {
           console.log(error);
         });
-        self.dialogSuccess = true;
       }else {
         self.dialogFalse = true;
       }
