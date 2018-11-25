@@ -83,29 +83,30 @@ export default {
     ArticleListPost: function() {
       let self = this;
       let myDate = new Date();
-      axios.post(`${'https://cors-anywhere.herokuapp.com/'} http://www.aait-suse.cn/api/ArticleViewSet/`, {
-        'article_id': this.articleid,
-        'user_id': this.userid,
-        'user_name': this.username,
-        'article_time': myDate.toLocaleString(),
-        'title': this.articleTitle,
-        'is_valid': 'true',
-        'content': this.editorContent,
-        'article_board_id': 'default',
-      }).
-      then(function(response) {
-        self.articles=response.data;
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
+        'user_id': globalData.state.userId,
+        // 'user_id': 12,
+        'user_name': globalData.state.nickname,
+        'article_time': myDate.toLocaleString('chinese', {hour12: false}),
+        'title': self.articleTitle,
+        // 'is_valid': 'true',
+        'content': self.editorContent,
+        // 'article_board_id': 'default',
       }).
       catch(function(error) {
         console.log(error);
       });
     },
-     mounted() {
-       this.ArticleListPost();
-
-       }
-     },
-  }
+    ExcuteUserAction: function(action) {
+      switch(action) {
+        case '发布': 
+          this.ArticleListPost();
+        break;
+        default: alert('抱歉，此功能暂不可用');
+      }
+    }
+  },
+}
 </script>
 
 
