@@ -108,7 +108,6 @@ export default {
       let myDate = new Date();
       axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
         'user_id': globalData.state.userId,
-        'user_id': 12,
         'user_name': globalData.state.nickname,
         'article_time': myDate.toLocaleString('chinese', {hour12: false}).replace(/\//g,"-"),
         'title': self.articleTitle,
