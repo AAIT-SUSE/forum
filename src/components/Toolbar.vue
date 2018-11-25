@@ -54,7 +54,7 @@
       return {
         userThemeColor: 'warning',
         title: 'Envision - 因问',
-        dialogInfo: false,
+        dialog: false,
       }
     },
     methods: {
