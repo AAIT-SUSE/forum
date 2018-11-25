@@ -3,6 +3,11 @@
     <v-layout row wrap>
       <v-flex xl7 lg7 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
         <v-card style="min-height: 400px;">
+          <v-text-field
+            label="文章标题"
+            outline
+            v-model="articleTitle"
+          ></v-text-field>
           <quill-editor 
             v-model="editorContent" 
             :options="editorOption"
@@ -34,6 +39,7 @@
 import UserActions from '@/components/UserActions.vue'
 import RightInfoPanel from '@/components/RightInfoPanel.vue'
 import { quillEditor } from 'vue-quill-editor'
+import axios from 'axios'
 
 export default {
   name: 'newCreation',
@@ -44,6 +50,7 @@ export default {
   },
   data() {
     return {
+      articleTitle: '',
       editorContent: '<h1 class="ql-align-center">欢迎使用 Envision 记录你的灵感</h1><p class="ql-align-center"><br></p><blockquote>欢迎使用Envision-QuillEditor富文本编辑器，以下是一个简单的示例。</blockquote><p><br></p><p>这是一段默认文本，你可以对这段默认文本进行编辑。</p><p><br></p><p>文本编辑器支持各种<span style="color: rgb(230, 0, 0);">颜色</span>和基本的<strong>文字处理</strong>与<u>排版功能</u>，可以满足<em>发表文章  </em><s>和发表文章</s>的基本需求。</p><p><br></p><p>本富文本编辑器基于<span class="ql-font-monospace">Quill Editor开发，能够和vue框架完美结合。甚至可以插入代码：</span></p><p><br></p><pre class="ql-syntax" spellcheck="false">using System;\nusing UnityEditor;\n\npublic class Player : Character {\n    private int HP;\n    \n    public DamageHealth(int amount) {\n        HP -= amount;\n        if(HP &lt;= 0) {\n            Die();\n        }\n    }\n}\n</pre><p><br></p><ul><li>代码高亮正在逐步完善，并在下一版本更新。Envision-QuillEditor首个版本代码高亮支持C, Cpp, C sharp, JavaScript(ES6), Typescript, PHP, Unity-C#语法的高亮。</li></ul><p><br></p><p>欢迎来我们的Github页https://github.com/AAIT-SUSE/forum，查看源代码，并对Star、Fork我们的项目！</p>',
       editorOption: {
         modules: {
@@ -71,9 +78,36 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    ArticleListPost: function() {
+      let self = this;
+      let myDate = new Date();
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'} http://www.aait-suse.cn/api/ArticleViewSet/`, {
+        'article_id': this.articleid,
+        'user_id': this.userid,
+        'user_name': this.username,
+        'article_time': myDate.toLocaleString(),
+        'title': this.articleTitle,
+        'is_valid': 'true',
+        'content': this.editorContent,
+        'article_board_id': 'default',
+      }).
+      then(function(response) {
+        self.articles=response.data;
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    },
+     mounted() {
+       this.ArticleListPost();
+
+       }
+     },
   }
-}
 </script>
+
 
 <style scoped>
   .quill-editor{
