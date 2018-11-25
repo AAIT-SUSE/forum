@@ -169,6 +169,22 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="errorDialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">未知错误</v-card-title>
+
+        <v-card-text>
+          <p>发生了未知错误。很抱歉，我们并不知道发生了什么。</p>
+          <p>请你将这个页面截图，或者将下面的代码发送给@蔡仲晨 和 @邓文义进行分析。</p>
+          <p>{{errorInfomation}}</p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary darken-2" @click="errorDialog = false">好</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -181,6 +197,7 @@ export default {
   data() {
     return {
       step: 1,
+      randomHash: '',
       randomSrc: '',
       email: '',
       password: '',
@@ -196,6 +213,8 @@ export default {
       qqNumber: '',
       classes: ['教研组', '1班', '2班', '3班', '4班', '5班', '6班', '7班', '8班', '卓越班'],
       depts: ['会员', '游客', '理事会', '软件开发技术部', '机器人技术部', '嵌入式技术部', '办公室', '宣传策划部', '机器人技术部', '学习实践部', '退休办'],
+      errorInfomation: '',
+      errorDialog: false,
     }
   },
   validations: {
@@ -349,8 +368,8 @@ export default {
       }
     },
     GetAvatar: function(){
-      let randomHash = Math.random().toString(36).substr(2);
-      this.randomSrc = 'https://api.adorable.io/avatars/150/' + randomHash;
+      this.randomHash = Math.random().toString(36).substr(2);
+      this.randomSrc = 'https://api.adorable.io/avatars/150/' + this.randomHash;
     },
     SubmitRegisterForm: function() {
       let self = this;
@@ -365,14 +384,14 @@ export default {
         'QQ_number': self.qqNumber,
         'age': self.year,
         'department': self.dept,
+        'user_logo': self.randomHash
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', self.email);
-        globalData.commit('SetUserId', response.data.id);
-        console.log(globalData.state.userId);
+        self.$emit('changeLoginStatus', self.email, response.data.id, self.nickname);
       }).
       catch(function(error) {
-        console.log(error);
+        self.errorDialog = true;
+        self.errorInfomation = error;
       });
     }
   },

@@ -2,7 +2,7 @@
   <v-app style="background-color: white">
     <SideMenu v-if="isUserLogged"></SideMenu>
 
-    <Toolbar></Toolbar>
+    <Toolbar v-if="isUserLogged"></Toolbar>
     
     <v-content>
       <v-layout v-if="isUserLogged">
@@ -112,14 +112,31 @@
           return false;
         }
       },
-      ChangeLoginStatus: function(userEmail) {
+      ChangeLoginStatus: function(userEmail, userId, userNickname) {
         this.isUserLogged = true;
         window.localStorage.setItem('envision_username', userEmail);
+        window.localStorage.setItem('envision_userId', userId);
+        window.localStorage.setItem('envision_nickname', userNickname);
+        globalData.commit('SetUserId', userId);
+        globalData.commit('SetNickname', userNickname);
+        globalData.commit('SetEmail', userEmail);
+        console.log("Login status is now changed. \nYour infos are: " + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname);
         router.push('/home');
+      },
+      InitUserProfile: function() {
+        // 保存数据到全局变量
+        let userId = window.localStorage.getItem('envision_userID');
+        let nickname = window.localStorage.getItem('envision_nickname');
+        let email = window.localStorage.getItem('envision_username');
+        globalData.commit('SetUserId', userId);
+        globalData.commit('SetNickname', nickname);
+        globalData.commit('SetEmail', email);
       }
     },
     mounted() {
+      // Check if there's valid data in client side
       if(this.CheckLoginState() === true) {
+        this.InitUserProfile();
         router.push('/home');
       }
       this.$nextTick(function () {

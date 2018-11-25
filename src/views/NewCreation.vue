@@ -87,30 +87,30 @@ export default {
     ArticleListPost: function() {
       let self = this;
       let myDate = new Date();
-      console.log(globalData.state.userId);
-
-         //获取指定用户信息
-         //axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProfileViewSet/`, {
-         //'user_id':globalData.state.userId,
-         //'nickname':,
-         //'e_mail':,
-         //'user_logo':,
-         //'user_description':,
-         //'last_post_id':,
-         //'major':,
-         //'age':,
-         //'_class':,
-         //'really_name':,
-         //'QQ_number':,
-         //    });
-
       axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
-        // 'user_id': globalData.state.userId,
-        'user_id': 12,
-        // 'user_name': this.username,
-        // 'article_time': myDate.toLocaleString(),
+        'user_id': globalData.state.userId,
+        // 'user_id': 12,
+        'user_name': globalData.state.nickname,
+        'article_time': myDate.toLocaleString('chinese', {hour12: false}),
         'title': self.articleTitle,
-        // 'is_valid': 'true',
+        'is_valid': 1,
+        'content': self.editorContent,
+        // 'article_board_id': 'default',
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    },
+    SaveAsDraft: function() {
+      let self = this;
+      let myDate = new Date();
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
+        'user_id': globalData.state.userId,
+        // 'user_id': 12,
+        'user_name': globalData.state.nickname,
+        'article_time': myDate.toLocaleString('chinese', {hour12: false}),
+        'title': self.articleTitle,
+        'is_valid': 0,
         'content': self.editorContent,
         // 'article_board_id': 'default',
       }).
@@ -123,10 +123,13 @@ export default {
       switch(action) {
         case '发布': 
           this.ArticleListPost();
-          break;
+        break;
+        case '保存为草稿': 
+          this.SaveAsDraft();
+        break;
       }
     }
-  }
+  },
 }
 </script>
 

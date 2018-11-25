@@ -1,5 +1,5 @@
 <template>
-  <div id="lgbg" style="height: 500px;">
+  <div id="lgbg" style="height: 500px; width: 0px;">
     <div id="Clouds">
       <div class="Cloud Foreground"></div>
       <div class="Cloud Background"></div>
@@ -194,7 +194,7 @@
   .Cloud.Background:nth-child(7) {
     -webkit-animation-duration: 122s;
             animation-duration: 122s;
-    height: 0.34090909%;
+    height: 2.34090909%;
   }
   .Cloud:nth-child(6) {
     -webkit-animation-delay: -110.76923077s;
@@ -209,7 +209,7 @@
   .Cloud.Background:nth-child(6) {
     -webkit-animation-duration: 126s;
             animation-duration: 126s;
-    height: 1.59090909%;
+    height: 6.59090909%;
   }
   .Cloud:nth-child(5) {
     -webkit-animation-delay: -92.30769231s;
@@ -224,7 +224,7 @@
   .Cloud.Background:nth-child(5) {
     -webkit-animation-duration: 130s;
             animation-duration: 130s;
-    height: 2.84090909%;
+    height: 7.84090909%;
   }
   .Cloud:nth-child(4) {
     -webkit-animation-delay: -73.84615385s;
@@ -239,7 +239,7 @@
   .Cloud.Background:nth-child(4) {
     -webkit-animation-duration: 134s;
             animation-duration: 134s;
-    height: 4.09090909%;
+    height: 14.09090909%;
   }
   .Cloud:nth-child(3) {
     -webkit-animation-delay: -55.38461538s;
@@ -254,7 +254,7 @@
   .Cloud.Background:nth-child(3) {
     -webkit-animation-duration: 138s;
             animation-duration: 138s;
-    height: 5.34090909%;
+    height: 15.34090909%;
   }
   .Cloud:nth-child(2) {
     -webkit-animation-delay: -36.92307692s;
