@@ -13,12 +13,12 @@
         <login-panle style="z-index: 99" 
           v-if="currentPanel === 'login'" 
           :switchPanel="SwitchPanel"
-          v-on:changeLoginStatus="ChangeLoginStatus()"
+          v-on:changeLoginStatus="ChangeLoginStatus"
         ></login-panle>
         <reg-panle style="z-index: 99" 
           v-if="currentPanel === 'reg'" 
           :switchPanel="SwitchPanel"
-          v-on:changeLoginStatus="ChangeLoginStatus()"
+          v-on:changeLoginStatus="ChangeLoginStatus"
         ></reg-panle>
       </v-layout>
     </v-content>
@@ -51,6 +51,7 @@
   import LoginPanle from './components/Login.vue'
   import router from './plugins/router/router.js'
   import AnimatedBg from './components/AnimatedBackground.vue'
+  import globalData from './plugins/GlobalData'
 
   export default {
     name: "App",
@@ -126,6 +127,7 @@
         window.addEventListener('scroll',this.handleScroll)
       });
       
+      console.log(globalData.state.userId)
     },
     destroyed() {
       window.removeEventListener('scroll',this.handleScroll)

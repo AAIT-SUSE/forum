@@ -12,7 +12,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
 import Vuelidate from 'vuelidate'
-import axios from 'axios'
+//import axios from 'axios'
 
 
 new Vue({

@@ -16,17 +16,11 @@
               label="邮箱"
               v-model="username"
               type="text"
-              :error-messages="emailErrors"
-              @input="$v.username.$touch()"
-              @blur="$v.username.$touch()"
             ></v-text-field>
             <v-text-field
               label="密码"
               v-model="password"
               type="password"
-              :error-messages="passwordErrors"
-              @input="$v.password.$touch()"
-              @blur="$v.password.$touch()"
             ></v-text-field>
             <span class="caption grey--text text--darken-1">
               输入正确的账号密码以登录 Envision. <a href="#" style="color: white">忘记密码？</a>
@@ -53,8 +47,8 @@
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
 import axios from 'axios'
+import globalData from '../plugins/GlobalData';
 
 export default {
   data() {
@@ -64,49 +58,26 @@ export default {
       nextBtnText: '登录',
     }
   },
-  validations: {
-    username: {
-      required,
-      email
-    },
-    password: {
-      required,
-    },
-  },
   props: {
     switchPanel: Function,
   },
-  computed: {
-    emailErrors () {
-      const errors = [];
-      if (!this.$v.username.$dirty) return errors;
-      !this.$v.username.email && errors.push('邮箱格式不正确');
-      !this.$v.username.required && errors.push('这是一个必填项目');
-      return errors;
-    },
-    passwordErrors () {
-      const errors = [];
-      if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.required && errors.push('这是一个必填项目');
-      return errors;
-    }
-  },
   methods: {
     SubmitLoginForm: function() {
-      this.$v.username.$touch();
-      this.$v.password.$touch();
       let self = this;
+      let username = this.username;
       axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/login/`, {
-        'e_mail': this.username,
-        'password': this.password,
+        'e_mail': username,
+        'password': self.password,
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', this.username);//[response.data]
+        self.$emit('changeLoginStatus', username);
+        globalData.commit('SetUserId', response.data.id);
+        console.log(globalData.state.userId)
       }).
       catch(function(error) {
         console.log(error);
       });
     }
-  }
+  },
 }
 </script>

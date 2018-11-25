@@ -1,10 +1,17 @@
-let globalData = {
-  nickname: '',
-  userId: '',
-  userEmail: '',
-  SetUserName: function(val){
-    this.nickname = val;
-  }
-}
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-export default 'globalData'
+Vue.use(Vuex)
+
+const globalData = new Vuex.Store({
+  state: {
+    userId: '',
+  },
+  mutations: {
+    SetUserId: function(state, val) {
+      state.userId = val;
+    }
+  }
+})
+
+export default globalData
