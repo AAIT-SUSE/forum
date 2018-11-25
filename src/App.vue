@@ -2,7 +2,7 @@
   <v-app style="background-color: white">
     <SideMenu v-if="isUserLogged"></SideMenu>
 
-    <Toolbar></Toolbar>
+    <Toolbar v-if="isUserLogged"></Toolbar>
     
     <v-content>
       <v-layout v-if="isUserLogged">

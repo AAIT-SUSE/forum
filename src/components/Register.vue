@@ -169,7 +169,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="errorDialog" max-width="290">
+    <v-dialog v-model="errorDialog" max-width="400">
       <v-card>
         <v-card-title class="headline">未知错误</v-card-title>
 

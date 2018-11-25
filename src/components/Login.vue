@@ -43,7 +43,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="errorDialog" max-width="290">
+    <v-dialog v-model="errorDialog" max-width="390">
       <v-card>
         <v-card-title class="headline">用户名或密码错误</v-card-title>
 
