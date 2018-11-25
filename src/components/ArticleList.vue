@@ -1,36 +1,38 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card raised v-for="article in articles" :key="article.article_id">
-        <v-img v-if="article.img"
-          :src="article.img"
-          aspect-ratio="2.75"
-        ></v-img>
+      <div v-for="article in articles" :key="article.article_id">
+        <v-card raised v-if="article.is_valid === 1">
+          <v-img v-if="article.img"
+            :src="article.img"
+            aspect-ratio="2.75"
+          ></v-img>
 
-        <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">{{ article.title }}</h3>
-            <div>作者 | 
-              {{ article.user_name }}
-            </div>
+          <v-card-title primary-title>
             <div>
-            {{article.article_time}}
+              <h3 class="headline mb-0">{{ article.title }}</h3>
+              <div>作者 | 
+                {{ article.user_name }}
+              </div>
+              <div>
+              {{article.article_time}}
+              </div>
             </div>
-          </div>
-        </v-card-title>
+          </v-card-title>
 
-        <v-card-actions v-if="showCtrlBtns === true">
-          <v-spacer></v-spacer>
-          <v-btn 
-            flat
-            :color="article.isLiked ? 'red' : 'info'"
-            @click="AddArticleToFav(article.article_id)"
-          >
-            <v-icon left>favorite</v-icon> {{ article.applaud }}
-          </v-btn>
-          <v-btn color="info" flat>阅读</v-btn>
-        </v-card-actions>
-      </v-card>
+          <v-card-actions v-if="showCtrlBtns === true">
+            <v-spacer></v-spacer>
+            <v-btn 
+              flat
+              :color="article.isLiked ? 'red' : 'info'"
+              @click="AddArticleToFav(article.article_id)"
+            >
+              <v-icon left>favorite</v-icon> {{ article.applaud }}
+            </v-btn>
+            <v-btn color="info" flat>阅读</v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
     </v-flex>
   </v-layout>
 </template>
@@ -58,7 +60,7 @@ export default {
       axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`
       ).
       then(function(response) {
-        self.articles=response.data;
+        self.articles = response.data;
       }).
       catch(function(error) {
         console.log(error);

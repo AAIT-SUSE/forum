@@ -50,6 +50,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import globalData from '../plugins/GlobalData';
+
 export default {
   name:"UserInfo",
   data() {
@@ -59,6 +62,24 @@ export default {
       userSignature: 'Envision 项目发起人',
       userAvatar: 'https://randomuser.me/api/portraits/men/85.jpg'
     }
+  },
+  methods: {
+    GetUserInfo: function(){
+      let self = this;
+      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProﬁleViewSet/${globalData.state.userId}/`)
+      .then(function (response){
+        self.username = response.data.nickname;
+        self.userCredits = 0,
+        self.userAvatar = 'https://api.adorable.io/avatars/150/' + response.data.user_logo;
+        self.userSignature = response.data.majors + response.data.age + response.data._class;
+      })
+      .catch(function (error){
+        console.log(error);
+      });
+    }
+  },
+  mounted() {
+    this.GetUserInfo();
   }
 }
 </script>

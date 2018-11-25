@@ -26,6 +26,7 @@
             v-bind:btnColor="act.color"
             v-bind:actName="act.name"
             v-bind:actIcon="act.icon"
+            :onClickHandler="ExcuteUserAction"
             ></UserActions>
           </v-card-text>
         </v-card>
@@ -89,7 +90,24 @@ export default {
         'user_name': globalData.state.nickname,
         'article_time': myDate.toLocaleString('chinese', {hour12: false}),
         'title': self.articleTitle,
-        // 'is_valid': 'true',
+        'is_valid': 1,
+        'content': self.editorContent,
+        // 'article_board_id': 'default',
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    },
+    SaveAsDraft: function() {
+      let self = this;
+      let myDate = new Date();
+      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`, {
+        'user_id': globalData.state.userId,
+        // 'user_id': 12,
+        'user_name': globalData.state.nickname,
+        'article_time': myDate.toLocaleString('chinese', {hour12: false}),
+        'title': self.articleTitle,
+        'is_valid': 0,
         'content': self.editorContent,
         // 'article_board_id': 'default',
       }).
@@ -102,7 +120,9 @@ export default {
         case '发布': 
           this.ArticleListPost();
         break;
-        default: alert('抱歉，此功能暂不可用');
+        case '保存为草稿': 
+          this.SaveAsDraft();
+        break;
       }
     }
   },
