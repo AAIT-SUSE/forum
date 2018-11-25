@@ -19,80 +19,47 @@
             ></UserActions>
           </v-card-text>
         </v-card>
-        <infoPanel></infoPanel>
-      </v-flex>
-      
-      <v-dialog v-model="dialogInfo" max-width="450">
-        <v-card>
-          <v-toolbar card color="blue-grey" dark>
-            <v-toolbar-title>新动态</v-toolbar-title>
-          </v-toolbar>
-        
-            <v-card-text>
-              
-              <v-textarea
-                box
-                label="内容"
-                value=""
-              ></v-textarea>
-        
-              <v-divider class="my-2"></v-divider>
-        
-              <v-item-group multiple>
-                <v-subheader>标签</v-subheader>
-                <v-item
-                  v-for="n in 8"
-                  :key="n"
-                >
-                  <v-chip
-                    slot-scope="{ active, toggle }"
-                    :selected="active"
-                    @click="toggle"
-                  >
-                    Tag {{ n }}
-                  </v-chip>
-                </v-item>
-              </v-item-group>
+        <v-dialog v-model="dialogExplore" max-width="450">
+          <v-card>
+            <v-toolbar card color="blue-grey" dark>
+              <v-toolbar-title>添加新动态</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>        
+              <v-textarea solo no-resize v-model="contents"></v-textarea> 
+            </v-card-text>  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              <v-btn color="success" depressed @click="OnClickExplore()"> 发表</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogSuccess" max-width="250">
+          <v-card color="success" dark>
+            <v-card-text style="font-size:20px text-align:center">
+              发布成功
             </v-card-text>
-        
-            <v-divider></v-divider>
-        
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="success" depressed>发表</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+              <v-btn depressed outline @click="OnClickSuccess()">确定</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogFalse" max-width="250">
+          <v-card color="error" dark>
+            <v-card-text style="font-size:20px">
+              你发布的内容不能为空
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn depressed outline @click="dialogFalse = false">确定</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <infoPanel></infoPanel>
+      </v-flex>
     </v-layout>
-    <v-dialog v-model="dialogInfo" max-width="450">
-      <v-card>
-        <v-toolbar card color="blue-grey" dark>
-          <v-toolbar-title>新动态</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-textarea box label="内容" value=""></v-textarea>
-            <v-divider class="my-2"></v-divider>
-            <v-item-group multiple>
-              <v-subheader>标签</v-subheader>
-              <v-item v-for="n in 8" :key="n">
-                <v-chip slot-scope="{ active, toggle }" :selected="active" @click="toggle">
-                  Tag {{ n }}
-                </v-chip>
-              </v-item>
-            </v-item-group>
-          </v-card-text>
-      
-          <v-divider></v-divider>
-      
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="success"
-              depressed
-            >发表</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
@@ -100,7 +67,9 @@
 import UserActions from '../components/UserActions.vue';
 import UserFeed from '../components/FeedPost.vue';
 import InfoPanel from '../components/RightInfoPanel.vue';
-import router from '@/plugins/router/router.js'
+import router from '@/plugins/router/router.js';
+import axios from 'axios';
+import globalData from '../plugins/GlobalData';
 
 export default {
   components: {
@@ -111,6 +80,10 @@ export default {
   data() {
     return {
       dialogInfo: false,
+      dialogExplore: false,
+      dialogSuccess: false,
+      dialogFalse: false,
+      contents: '',
       userActions: [
         {
           name: '新文章',
@@ -137,11 +110,35 @@ export default {
           router.push('/newPost');
           break;
         case '新动态': 
-          this.dialogInfo = true;
+          this.dialogExplore = true;
           break;
          default: 
           router.push('/user');
       }
+    },
+    OnClickExplore: function() {
+      let self = this;
+      console.log(globalData.state.userId+'1111'+globalData.state.nickname);
+      console.log(parseInt(globalData.state.userId));
+      if(self.contents != '') {
+        axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`,{
+        "user_id": parseInt(globalData.state.userId),
+        "user_name": globalData.state.nickname,
+        "content": self.contents
+        }).
+        then(function(response) {
+        }).
+        catch(function(error) {
+          console.log(error);
+        });
+        self.dialogSuccess = true;
+      }else {
+        self.dialogFalse = true;
+      }
+    },
+    OnClickSuccess: function() {
+      this.dialogSuccess = false;
+      this.dialogExplore = false;
     }
   }
 }

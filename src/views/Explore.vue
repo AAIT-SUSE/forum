@@ -6,85 +6,68 @@
       </v-flex>
       <v-flex xl5 lg5 md5 sm12 xs12 order-sm1 order-xs1 order-lg2 order-md2 order-xl2>
         <v-card flat>
-          <v-card-text 
-            class="px-0 text-md-center text-sm-center text-xs-center text-lg-center text-xl-center"
-          >
-          <UserActions 
-            v-for="act in userActions"
-            :key="act.name"
-            v-bind:btnColor="act.color"
-            v-bind:actName="act.name"
-            v-bind:actIcon="act.icon"
-            :onClickHandler="ExcuteUserAction"
-            ></UserActions>
+          <v-card-text  class="px-0 text-md-center text-sm-center text-xs-center text-lg-center text-xl-center">
+            <UserActions 
+              v-for="act in userActions"
+              :key="act.name"
+              v-bind:btnColor="act.color"
+              v-bind:actName="act.name"
+              v-bind:actIcon="act.icon"
+              :onClickHandler="ExcuteUserAction">
+            </UserActions>
           </v-card-text>
         </v-card>
-
-
-
-    <v-dialog v-model="dialogInfo" max-width="450">
-    <v-card>
-    <v-toolbar
-      card
-      color="blue-grey"
-      dark
-    >
-     <v-toolbar-title>新动态</v-toolbar-title>
-      </v-toolbar>
-  
-      <v-card-text>
-        
-        <v-textarea
-          box
-          label="内容"
-          value=""
-        ></v-textarea>
-  
-        <v-divider class="my-2"></v-divider>
-  
-        <v-item-group multiple>
-          <v-subheader>标签</v-subheader>
-          <v-item
-            v-for="n in 8"
-            :key="n"
-          >
-            <v-chip
-              slot-scope="{ active, toggle }"
-              :selected="active"
-              @click="toggle"
-            >
-              Tag {{ n }}
-            </v-chip>
-          </v-item>
-        </v-item-group>
-      </v-card-text>
-  
-      <v-divider></v-divider>
-  
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
-          color="success"
-          depressed
-        >
-          发表
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-  </v-dialog>
-<infoPanel></infoPanel>
+        <v-dialog v-model="dialogInfo" max-width="450">
+          <v-card>
+            <v-toolbar card color="blue-grey" dark>
+              <v-toolbar-title>添加新动态</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>        
+              <v-textarea solo no-resize v-model="contents"></v-textarea> 
+            </v-card-text>  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              <v-btn color="success" depressed @click="OnClickExplore()"> 发表</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogSuccess" max-width="250">
+          <v-card color="success" dark>
+            <v-card-text style="font-size:20px text-align:center">
+              发布成功
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn depressed outline @click="OnClickSuccess()">确定</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogFalse" max-width="250">
+          <v-card color="error" dark>
+            <v-card-text style="font-size:20px">
+              你发布的内容不能为空
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn depressed outline @click="dialogFalse = false">确定</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <infoPanel></infoPanel>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
-
-
 
 <script>
 import PostSearch from '@/components/PostSearch.vue'
 import UserActions from '@/components/UserActions.vue'
 import InfoPanel from '@/components/RightInfoPanel.vue'
 import router from '@/plugins/router/router.js'
+import axios from 'axios'
+import globalData from '../plugins/GlobalData'
 
 export default {
   name:'Explore',
@@ -96,6 +79,9 @@ export default {
   data() {
     return {
       dialogInfo: false,
+      dialogSuccess: false,
+      dialogFalse: false,
+      contents: '',
       userActions: [
         {
           name: '新文章',
@@ -127,8 +113,32 @@ export default {
         default: 
           router.push('/user');
       }
+    },
+    OnClickExplore: function() {
+      let self = this;
+      console.log(globalData.state.userId+'1111'+globalData.state.nickname);
+      console.log(parseInt(globalData.state.userId));
+      if(self.contents != '') {
+        axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`,{
+        "user_id": parseInt(globalData.state.userId),
+        "user_name": globalData.state.nickname,
+        "content": self.contents
+        }).
+        then(function(response) {
+        }).
+        catch(function(error) {
+          console.log(error);
+        });
+        self.dialogSuccess = true;
+      }else {
+        self.dialogFalse = true;
+      }
+    },
+    OnClickSuccess: function() {
+      this.dialogSuccess = false;
+      this.dialogInfo = false;
     }
-    }
+  }
 }
 
 </script>
