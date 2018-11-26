@@ -373,7 +373,7 @@ export default {
     },
     SubmitRegisterForm: function() {
       let self = this;
-      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/register/`, {
+      axios.post(`/register/`, {
         'e_mail': self.email,
         'password': self.password,
         'confirm_password': self.confirmPassword,

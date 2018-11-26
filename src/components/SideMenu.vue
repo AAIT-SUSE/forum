@@ -45,14 +45,15 @@
 
 
 <script>
+import axios from 'axios'
+import globalData from '@/plugins/GlobalData'
+
 export default {
   data() {
     return {
       drawer: true,
       miniVariant: true,
       name: 'SideMenu',
-      username: 'Owen Tsai',
-      userAvatar: 'https://randomuser.me/api/portraits/men/85.jpg',
       items: [
         {
           icon: "home",
@@ -81,6 +82,10 @@ export default {
         }
       ],
     }
+  },
+  props: {
+    username: String,
+    userAvatar: String
   }
 }
 </script>

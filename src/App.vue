@@ -1,8 +1,8 @@
 <template>
   <v-app style="background-color: white">
-    <SideMenu v-if="isUserLogged"></SideMenu>
+    <SideMenu v-if="isUserLogged" :username='sNickname' :userAvatar='sAvatar'></SideMenu>
 
-    <Toolbar v-if="isUserLogged"></Toolbar>
+    <Toolbar :show-toolbar-actions="isUserLogged"></Toolbar>
     
     <v-content>
       <v-layout v-if="isUserLogged">
@@ -52,6 +52,7 @@
   import router from './plugins/router/router.js'
   import AnimatedBg from './components/AnimatedBackground.vue'
   import globalData from './plugins/GlobalData'
+  import axios from 'axios'
 
   export default {
     name: "App",
@@ -68,7 +69,9 @@
         title: "ENVISION - 因问",
         isUserLogged: false,
         currentPanel: 'login',
-        currentBtnText: '没有账号？立即注册'
+        currentBtnText: '没有账号？立即注册',
+        sNickname: '',
+        sAvatar: '',
       };
     },
     methods: {
@@ -120,17 +123,29 @@
         globalData.commit('SetUserId', userId);
         globalData.commit('SetNickname', userNickname);
         globalData.commit('SetEmail', userEmail);
-        console.log("Login status is now changed. \nYour infos are: " + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname);
-        router.push('/home');
+
+        //get avatar
+        let self = this;
+        axios.get(`/api/UserProfileViewSet/${globalData.state.userId}/`).
+        then(function(response){
+          self.sAvatar = 'https://api.adorable.io/avatars/150/' + response.data.user_logo;
+          self.sNickname =  response.data.nickname;
+          window.localStorage.setItem('envision_avatar', self.sAvatar);
+          globalData.commit('SetAvatar', self.sAvatar);
+          console.log("Login status is now changed. \nYour infos are: " + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname + "," + globalData.userAvatar);
+          router.push('/home');
+        });
       },
       InitUserProfile: function() {
         // 保存数据到全局变量
         let userId = window.localStorage.getItem('envision_userId');
         let nickname = window.localStorage.getItem('envision_nickname');
         let email = window.localStorage.getItem('envision_username');
+        let email = window.localStorage.getItem('envision_avatar');
         globalData.commit('SetUserId', userId);
         globalData.commit('SetNickname', nickname);
         globalData.commit('SetEmail', email);
+        globalData.commit('SetAvatar', self.sAvatar);
       }
     },
     mounted() {

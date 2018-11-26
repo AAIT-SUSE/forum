@@ -119,7 +119,7 @@ export default {
       console.log(globalData.state.userId+'1111'+globalData.state.nickname);
       console.log(parseInt(globalData.state.userId));
       if(self.contents != '') {
-        axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`,{
+        axios.post(`/api/FeedViewSet/`,{
         "user_id": parseInt(globalData.state.userId),
         "user_name": globalData.state.nickname,
         "content": self.contents

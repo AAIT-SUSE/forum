@@ -8,6 +8,7 @@ const globalData = new Vuex.Store({
     userId: '',
     nickname: '',
     email: '',
+    userAvatar: '',
   },
   mutations: {
     SetUserId: function(state, val) {
@@ -18,6 +19,9 @@ const globalData = new Vuex.Store({
     },
     SetEmail: function(state, val) {
       state.email = val;
+    },
+    SetAvatar: function(state, val) {
+      state.userAvatar = val;
     }
   }
 })

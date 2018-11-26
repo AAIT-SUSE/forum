@@ -67,7 +67,7 @@ export default {
   methods: {
     GetUserInfo: function(){
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProfileViewSet/${globalData.state.userId}/`)
+      axios.get(`/api/UserProfileViewSet/${globalData.state.userId}/`)
       .then(function (response){
         self.username = response.data.nickname;
         self.userCredits = 0,

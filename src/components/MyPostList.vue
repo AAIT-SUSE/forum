@@ -21,7 +21,7 @@ export default {
   methods: {
     GetMyPosts: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/GetFeedInfoUser/`,{
+      axios.get(`/GetFeedInfoUser/`,{
         'user_id': globalData.state.userId
       })
       .then(function(response){

@@ -80,7 +80,7 @@ export default {
   methods: {
     SubmitLoginForm: function() {
       let self = this;
-      axios.post(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/login/`, {
+      axios.post(`/login/`, {
         'e_mail': self.username,
         'password': self.password,
       }).

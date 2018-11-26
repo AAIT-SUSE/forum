@@ -120,7 +120,7 @@ export default {
   methods: {
     GetAllFeeds: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`)
+      axios.get(`/api/FeedViewSet/`)
       .then(function(response) {
         self.feedList = response.data;
       })
@@ -136,7 +136,7 @@ export default {
     DeleteFeed: function(feed_id) {
       if(feed_id === -1) return;
       let self = this;
-      axios.delete(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/${this.deleteId}/`,)
+      axios.delete(`/api/FeedViewSet/${this.deleteId}/`,)
       .then(function(response) {
         console.log(response);
         self.deleteId = -1;

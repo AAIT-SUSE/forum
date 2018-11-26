@@ -127,7 +127,7 @@ export default {
   methods: {
     GetAllUsers: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/UserProfileViewSet/`)
+      axios.get(`/api/UserProfileViewSet/`)
       .then(function(response) {
         let data = response.data;
         let len = data.length;

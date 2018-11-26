@@ -42,7 +42,7 @@ export default {
     },
     GetMyArticles: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/GetArticleInfoUser/`,{
+      axios.get(`/GetArticleInfoUser/`,{
         'user_id': globalData.state.userId
       })
       .then(function(response){

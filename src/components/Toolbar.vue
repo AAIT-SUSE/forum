@@ -3,24 +3,26 @@
     <v-toolbar app dark clipped-left>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-tooltip bottom>
-        <v-btn icon to="/notifications" slot="activator">
-          <v-icon>textsms</v-icon>
-        </v-btn>
-        <span>消息与通知</span>
-      </v-tooltip>
-      <v-tooltip bottom>
-        <v-btn icon to="" slot="activator">
-          <v-icon>settings</v-icon>
-        </v-btn>
-        <span>个人设置</span>
-      </v-tooltip>
-      <v-tooltip bottom>
-        <v-btn icon to="" slot="activator" @click="dialog = true">
-          <v-icon>exit_to_app</v-icon>
-        </v-btn>
-        <span>注销</span>
-      </v-tooltip>
+      <div v-if="showToolbarActions === true">
+        <v-tooltip bottom>
+          <v-btn icon to="/notifications" slot="activator">
+            <v-icon>textsms</v-icon>
+          </v-btn>
+          <span>消息与通知</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn icon to="" slot="activator">
+            <v-icon>settings</v-icon>
+          </v-btn>
+          <span>个人设置</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn icon to="" slot="activator" @click="dialog = true">
+            <v-icon>exit_to_app</v-icon>
+          </v-btn>
+          <span>注销</span>
+        </v-tooltip>
+      </div>
     </v-toolbar>
 
     <v-dialog v-model="dialog" max-width="300">
@@ -63,6 +65,9 @@
         this.$emit('CheckLoginStatus');
         router.go(0);
       }
+    },
+    props: {
+      showToolbarActions: Boolean
     }
   }
 </script>

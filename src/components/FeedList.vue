@@ -9,7 +9,7 @@
 
         <v-card-title primary-title>
           <div>
-            {{ feed.content }}
+            {{feed.user_name}} 说：{{ feed.content }}
           </div>
         </v-card-title>
 
@@ -47,16 +47,16 @@ export default {
   },
   methods: {
     AddFeedToFav: function(feed_id) {
-      this.feeds[feed_id].isLiked = !this.feeds[feed_id].isLiked;
-      if(this.feeds[feed_id].isLiked === false) {
-        this.feeds[feed_id].likes -= 1;
-      } else {
-        this.feeds[feed_id].likes += 1;
-      }
+      // this.feeds[feed_id].isLiked = !this.feeds[feed_id].isLiked;
+      // if(this.feeds[feed_id].isLiked === false) {
+      //   this.feeds[feed_id].likes -= 1;
+      // } else {
+      //   this.feeds[feed_id].likes += 1;
+      // }
     },
     FeedListGet: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/FeedViewSet/`
+      axios.get(`/api/FeedViewSet/`
       ).
       then(function(response) {
         self.feeds=response.data;

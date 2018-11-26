@@ -59,7 +59,7 @@ export default {
   // methods: {
   //   GroupListGet: function() {
   //     let self = this;
-  //     axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/GroupViewSet/`
+  //     axios.get(`http://www.aait-suse.cn/api/GroupViewSet/`
   //     ).
   //     then(function(response) {
   //       //console.log(response.data)

@@ -64,11 +64,11 @@ export default {
           icon: 'mail',
           link: '/comingSoon'
         },
-        {
-          title: '管理中心',
-          icon: 'assignment',
-          link: '/admin'
-        }
+        // {
+        //   title: '管理中心',
+        //   icon: 'assignment',
+        //   link: '/admin'
+        // }
       ]
     }
   },

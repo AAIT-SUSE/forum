@@ -123,7 +123,7 @@ export default {
   methods: {
     GetAllUsers: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/PostBoardViewSet/`)
+      axios.get(`/api/PostBoardViewSet/`)
       .then(function(response) {
         let data = response.data;
         let len = data.length;

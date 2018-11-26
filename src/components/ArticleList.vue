@@ -54,7 +54,7 @@ export default {
     },
     ArticleListGet: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`
+      axios.get(`/api/ArticleViewSet/`
       ).
       then(function(response) {
         console.log(response.data)

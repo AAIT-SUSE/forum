@@ -125,7 +125,7 @@ export default {
   methods: {
     GetAllArticles: function() {
       let self = this;
-      axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/`)
+      axios.get(`/api/ArticleViewSet/`)
       .then(function(response) {
         let data = response.data;
         let len = data.length;
@@ -153,7 +153,7 @@ export default {
     DeleteArticle: function(aid) {
       if(aid === -1) return;
       let self = this;
-      axios.delete(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/${this.deleteId}/`,)
+      axios.delete(`http://www.aait-suse.cn/api/ArticleViewSet/${this.deleteId}/`,)
       .then(function(response) {
         console.log(response);
         self.deleteId = -1;
