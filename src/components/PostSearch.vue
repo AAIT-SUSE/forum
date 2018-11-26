@@ -16,9 +16,9 @@
     </v-toolbar>
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in items" :key="item.message">
-          <FeedList v-if="item.value === 'Feed'" :showCtrlBtns="true"></FeedList>
-          <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="true"></ArticleList>
-          <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
+        <FeedList v-if="item.value === 'Feed'" :showCtrlBtns="true"></FeedList>
+        <ArticleList v-if="item.value === 'Article'" :showCtrlBtns="true"></ArticleList>
+        <direct-answer-list v-if="item.value === 'Answer'"></direct-answer-list>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -39,7 +39,6 @@ export default {
   data() {
     return {
       tab:null,
-      tabView: true,
       searchPlaceholder: '搜索功能暂不可用',
       items: [
         {

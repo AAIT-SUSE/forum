@@ -57,8 +57,14 @@ export default {
       axios.get(`/api/ArticleViewSet/`
       ).
       then(function(response) {
-        console.log(response.data)
-        self.articles=response.data;
+        let data = '' + response.data + '';
+        console.log(data.substring(0,1))
+        if(data.substring(0,1) === '<') {
+          // re-send the request
+          self.ArticleListGet();
+        } else {
+          self.articles=response.data;
+        }
       }).
       catch(function(error) {
         console.log(error);

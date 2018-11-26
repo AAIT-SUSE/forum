@@ -1,12 +1,11 @@
 <template>
   <v-layout>
     <v-flex>
-      <v-card class="" raised v-for="feed in feeds" :key="feed.feed_id">
-        <v-img v-if="feed.img"
+      <v-card raised v-for="feed in feeds" :key="feed.feed_id">
+        <!-- <v-img v-if="feed.img"
           :src="feed.img"
           aspect-ratio="2.75"
-        ></v-img>
-
+        ></v-img> -->
         <v-card-title primary-title>
           <div>
             {{feed.user_name}} 说：{{ feed.content }}
@@ -17,15 +16,15 @@
           <v-spacer></v-spacer>
           <v-btn 
             flat
-            :color="feed.isInFav ? 'success' : 'grey'"
-            @click="feed.isInFav = !feed.isInFav"
+            color="info"
+            @click=";"
           >
             <v-icon>star</v-icon>
           </v-btn>
           <v-btn 
             flat
-            :color="feed.isLiked ? 'red' : 'info'"
-            @click="AddFeedToFav(feed.feed_id)"
+            color="red"
+            @click=";"
           >
             <v-icon>favorite</v-icon>{{ feed.applaud }}
           </v-btn>
@@ -46,7 +45,7 @@ export default {
     }
   },
   methods: {
-    AddFeedToFav: function(feed_id) {
+    AddFeedToFav: function() {
       // this.feeds[feed_id].isLiked = !this.feeds[feed_id].isLiked;
       // if(this.feeds[feed_id].isLiked === false) {
       //   this.feeds[feed_id].likes -= 1;
@@ -59,7 +58,14 @@ export default {
       axios.get(`/api/FeedViewSet/`
       ).
       then(function(response) {
-        self.feeds=response.data;
+        let data = '' + response.data + '';
+        console.log(data.substring(0,1))
+        if(data.substring(0,1) === '<') {
+          // re-send the request
+          self.FeedListGet();
+        } else {
+          self.feeds = response.data;
+        }
       }).
       catch(function(error) {
         console.log(error);
@@ -69,7 +75,7 @@ export default {
   props: {
     showCtrlBtns: Boolean
   },
-  mounted() {
+  created() {
     this.FeedListGet();
   }
 }

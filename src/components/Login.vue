@@ -1,7 +1,7 @@
 <template>
   <div id="loginWindow">
     <v-card
-      max-width="400px"
+      max-width="500px"
       raised
       dark
     >
@@ -32,6 +32,8 @@
       <v-divider></v-divider>
 
       <v-card-actions>
+        <v-btn outline color="white" @click="FuckYou()">评委登录入口</v-btn>
+        <v-spacer></v-spacer>
         <v-btn outline color="white" @click="switchPanel('reg')">没有账号，切换注册</v-btn>
         <v-spacer></v-spacer>
         <v-btn
@@ -92,6 +94,20 @@ export default {
         self.errorDialog = true;
       });
     },
+    FuckYou: function() {
+      let self = this;
+      axios.post(`/login/`, {
+        'e_mail': 'test@suse.cn',
+        'password': 'test123456',
+      }).
+      then(function(response) {
+        console.log(response.data);
+        self.$emit('changeLoginStatus', 'test@suse.cn', response.data.id, response.data.nickname, response.data.avatar);
+      }).
+      catch(function(error) {
+        self.errorDialog = true;
+      });
+    }
   },
 }
 </script>
