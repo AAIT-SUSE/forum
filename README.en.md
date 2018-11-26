@@ -3,7 +3,7 @@
 <img src="https://img.shields.io/badge/version-1.0.0-red.svg"> <img src="https://img.shields.io/badge/founder-%E8%94%A1%E4%BB%B2%E6%99%A8-orange.svg"> <img src="https://img.shields.io/badge/%E5%9B%9B%E5%B7%9D%E8%BD%BB%E5%8C%96%E5%B7%A5-AAIT-brightgreen.svg"> <img src="https://img.shields.io/badge/status-PreRelease-blue.svg">
 </p>
    
-<p align=center><b>An English vsersion of this documentation can be found [here](https://github.com/AAIT-SUSE/forum/blob/master/README.en.md).</b></p>
+<p align=center><b>An English vsersion of this documentation can be found [here](https://github.com/AAIT-SUSE/forum/blob/master/README.md).</b></p>
 
 > Envision，中文名称「因问」，是人工智能技术协会官方应用。Envision 基于 UGC 内容，为用户提供交流知识与分享灵感的平台。
 
