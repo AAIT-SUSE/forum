@@ -141,10 +141,10 @@
         let userId = window.localStorage.getItem('envision_userId');
         let nickname = window.localStorage.getItem('envision_nickname');
         let email = window.localStorage.getItem('envision_username');
-        let email = window.localStorage.getItem('envision_avatar');
+        let avatar = window.localStorage.getItem('envision_avatar');
         globalData.commit('SetUserId', userId);
         globalData.commit('SetNickname', nickname);
-        globalData.commit('SetEmail', email);
+        globalData.commit('SetEmail', avatar);
         globalData.commit('SetAvatar', self.sAvatar);
       }
     },
