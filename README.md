@@ -1,11 +1,15 @@
-<h1 align=center>AAIT Official Forum </h1>
+<h1 align=center>Envision 英文文档</h1>
 <p align=center>
-<img src="https://img.shields.io/badge/version-0.1.0-red.svg"> <img src="https://img.shields.io/badge/founder-%E8%94%A1%E4%BB%B2%E6%99%A8-orange.svg"> <img src="https://img.shields.io/badge/%E5%9B%9B%E5%B7%9D%E8%BD%BB%E5%8C%96%E5%B7%A5-AAIT-brightgreen.svg"> <img src="https://img.shields.io/badge/status-Unfinished-lightgrey.svg">
+<img src="https://img.shields.io/badge/version-1.0.0-red.svg"> <img src="https://img.shields.io/badge/founder-%E8%94%A1%E4%BB%B2%E6%99%A8-orange.svg"> <img src="https://img.shields.io/badge/%E5%9B%9B%E5%B7%9D%E8%BD%BB%E5%8C%96%E5%B7%A5-AAIT-brightgreen.svg"> <img src="https://img.shields.io/badge/status-PreRelease-blue.svg">
 </p>
    
-<p align=center><b>注意, 这仍是一个未完成版本。</b></p>
+<p align=center><b>一份中文的文档可以在 [这里](https://github.com/AAIT-SUSE/forum/blob/master/README.en.md) 找到.</b></p>
 
-> AAIT Official Forum is a UGC based website and mobile hybrid APP for members of AAIT to exchange ideas and share inspirations.
+<p align=center>Want to help with the translation? Read the [Contribution Guide here](https://github.com/AAIT-SUSE/forum/blob/master/CONTRIBUTION.en.md).</p>
+
+<br>
+
+> Envision is an official APP of AAIT(Association for Artificial Intelligence Technology) of SUSE. Envision provides a platform where users are encouraged to share inspirations and exchange ideas.
 
 **By reading through this documentation you will:**
 - Get a copy of this project;
@@ -15,220 +19,222 @@
 
 ## 1 Client Side Enviroment
 
-> 这一部分文档将会指引你搭建客户端的本地开发环境，并初步了解如何使用 Vuetify 框架进行前端开发.
+> This sction covers everything you need to setup the client side developement. If you are a server-side programmer, please skip this section.
 
-AAIT Forum 项目，*以下简称AF*，在客户端使用基于Vue.js，且遵循谷歌material design 标准的 **vuetify** 框架. 
+Envision is built with **Vue.js**, a responsive, lightweight and progressive javascript framework. Vue.js is created by Chinese developer [Evan You](https://github.com/yyx990803) and is now even popular than react.js (by Facebook) and Angular (by Google). If you need more information on Vue.js, please follow [this link](https://vuejs.org/index.html).
 
-In order to run this project in development environment, you'll need **a virtual server, vue.js framework, and vuetify framework** installed on your machine. But in this part, I will only guide you through client side enviroment building.
+Also, a lot of other kits or frameworks are involved during the development of Envision. We use **Vuetify** as its UI component library, and many other open source third party addons/plugins. You can see a full list of dependencies in *section 1.4*.
 
-一个最快捷的部署前端开发环境的方式就是通过`npm`安装所需的包。
+In order to run the project in your local enviroment, you must have all the frameworks and dependencies installed on your machine. A easiest way of doing so is to install them via `npm`.
 
-### 1.1 Install NPM
+### 1.1 Install `npm`
 
-One way to quickly get all things prepared is to install them via `npm`. If you have `npm` installed on your machine, skip this section.
+`npm` is a popular package management tool. If you already have `npm` installed on your machine, skip this section.
 
-If you haven't installed `npm` yet, following the link below to download and install `node.js` with `npm` : [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm).
+If you haven't installed `npm` yet, click the link below to download and install `node.js` with `npm` : [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm).
 
 Follow the instruction you will easily get things done. But be advised, `npm` is **not** your only option. You can use other pakage management tools such as `yarn`. Vue.js and vuetify ***DO*** provide other ways of installation, you can easily find solutons online or at [vuetify official website](https://vuetifyjs.com/zh-Hans/getting-started/quick-start).
 ### 1.2 Install vue.js and vuetify
 
-When you have `npm` installed on your machine, you need to install `vue.js` and `vuetify`. Launch your CLI (Command Line Interface, 命令行交互界面), and type:
+When you have `npm` installed on your machine, you need to install `vue.js` and `vuetify`, two primary frameworks of Envision. To do this, launch your CLI (Command Line Interface), and excute the following command:
 
-```
+```bash
 > npm install @vue/cli -g
 ```
 
-This command will download and install vue.js CLI. After that, install vuetify with another similar command
+This command will download and install vue.js CLI. After that, install vuetify with another similar command:
 
-```
+```bash
 > npm install vuetify --save
 ```
 
-当上述步骤完成后，你就可以准备创建一个新的应用了. 但要注意的是，这只是前端开发环境. 由于项目的服务器端采用了python语言，你必须在本地搭建一个用于python开发的环境和虚拟服务器，才能正常运行项目工程. 请参见`section 1.3`.
+Once the installation finished, you are ready to create project directory. If you encounter any problmes, **refer to this link for help: [https://vuetifyjs.com/zh-Hans/getting-started/quick-start](https://vuetifyjs.com/zh-Hans/getting-started/quick-start)**
 
-**If you have any problmes, refer to this link for help: [https://vuetifyjs.com/zh-Hans/getting-started/quick-start](https://vuetifyjs.com/zh-Hans/getting-started/quick-start)**
+### 1.3 Create vue applications
 
-### 1.3 Creating new application
+Once you have done all the preperations, you should create a new vue application.  Excute the following commands in you CLI:
 
-Once you have done all the prepare work, you should create a new application. In you CLI, type: 
+```bash
+# cd to a folder where project is going to be setup and init
+> cd xxx
 
-```
-> cd xxx					#切换到你的项目路径
-> vue create xxx			#xxx为项目名称
+# create a vue application
+> vue create your-app-name
 
-# 选择几个选项，并等待创建结束
+# you need to make multiple choices during this process,
+# but it's okay to leave them as default
 
-> vue add vuetify		   #添加vuetify到项目目录
+# add vuetify to your vue application
+> vue add vuetify
 ```
 
 Then, `cd` to your project folder, and excute
 
-```
-npm run serve
-```
-
-to run the developement server. Open your browser, visit:
-
-```
-localhost:8080
+```bash
+> npm run serve
 ```
 
-to preview your application. You can also preview mobile version on your mobile phone browser. Make sure that your mobile device is connected to the same LAN, and launch browser, type the following address:
+to run the developement server. If everything is done correctly, your CLI will display a prompt of IP addresses your app is now running at. For the local machine, visit
 
+```bash
+http://localhost:8080
 ```
+
+to preview your application. You can also preview mobile version on your mobile browser. Make sure that your mobile device is connected to the same LAN, and launch browser, type the following address:
+
+```bash
 your.dev.machine.ip:8080    #e.g. 192.168.1.100:8080
 ```
 
-### 1.4 Install Dependencis
+### 1.4 Install dependencis
 
-AF stands on gaints' shoulders. In order to run this project in development enviroment, you will also need to install some packages. The following is a list on what dependencis you should install and the official website of them.
+**Be advised, the content of this part is possible to change**
 
- - Vue Router. **路由不用我介绍了吧。如果你不知道路由是什么，那...**
- - axios. **异步请求库**
- - vue-quill-editor. **基于Quill的富文本编辑器**
- - vuelidate. **表单验证库**
+Envision stands on gaints' shoulders. In order to run this project in development enviroment, you will also need to install some third party packages based on **vue.js** and **vuetify**. The following is a list about what dependencis you should install and the installation commands of them. 
 
-You can install those dependencis simply by using CLI.
+ - vue router. `npm install vue-router`
+ - axios. `npm install axios`
+ - quill editor for vue. `npm install vue-quill-editor`
+ - vuelidate. `npm install vuelidate`
+ - vuex. `npm install vuex`
 
-```shell
-npm install vue-quill-editor
+You can install those dependencis simply by using CLI with commands listed above. **BUT It is highly recommended that you search and visit their website and documentations before install them. **
+
+ 
+### 1.5 Clone the current version of Envision
+
+Now it's the final step. Here is a checklist, make sure you have done all the work listed below:
+
+1. install npm and node.js
+1. install vue
+2. install vuetify
+3. install all the dependencies
+
+Next, you need to pull the source code of Envision from our github repository. Manually download or use `git clone` command to get a copy of the project, and place all the files into your project root directory.
+
+After that, your project directory structure may look like this:
+
+```bash
+	myProjectFolder/
+    	- server/ # contains server side source code
+    	- public/ # contains static resources and entry files
+    	- src/ # contains all client side source code
+    		- assets/ #contains all the assets (mostly images)
+    		- components/ # contains all vue components
+    		- plugins/ # contains config files of installed dependencies
+    			- router/router.js # configs of router paths and components
+    		- views/ # views that need to be mounted via router link
+    	- App.vue # main vue component
+    	- main.js # main javascript file and all js entry
 ```
 
+For the most of your part, you will work under directory `src/`.
 
-### 1.5 Merge project
-
-You can get familiar with the application you have just created, do some modification for testing purpose, and try to make something new with the help of [vuetify official guide](https://vuetifyjs.com/zh-Hans/getting-started/quick-start).
-
-当你熟悉了基本的操作流程和**vuetify**之后，你就可以参与开发了。在本地创建一个新项目后，在本Github仓库中下载`.zip`压缩包，解压后得到的文件复制到项目目录中即可。
+Now you can have a try with your ready-to-go project. If you want to contribute to the project, please read the [Contribution Guide](https://github.com/AAIT-SUSE/forum/blob/master/CONTRIBUTION.en.md).
 
 ## 2 Server Side Environment
 
-> 这一部分文档将会指引你搭建服务端的本地开发环境，并初步了解如何使用 Django 框架进行后端开发.
+> This section will lead you through server side environment setup. If you are a client side programmer, please read the 1st section.
 
-AAIT Forum 项目，*以下简称AF*，在服务端使用基于python，且遵循MVC 标准的 **django** 框架,但在本项目中后端开发人员只需要考虑视图层中api设计，不需要考虑界面设计。 
+Envision uses **Python** as server side language, with the powerful partener **Django framework**. To begin with, you need to install them on your developement machine.
 
-后端使用的数据库是mysql，此数据库拥有简单，易用，高性能特点等特点。
+We use **MySQL** database, so you also need to install MySQL, and a visual database management tool if interested.
 
-In order to run this project in development environment, you'll need **mysql,python 3.x, and django framework** installed on your machine. But in this part, I will only guide you through server side enviroment building.
+A easiest way to get things prepared is to install them via `pip`.
 
-一个最快捷的部署后端开发环境的方式就是通过`pip`安装所需的包。
+### 2.1 Install python 3.x and `pip`
 
-### 2.1 Install python Setuptools and pip
+**Get Python** from [python official site](https://www.python.org/).
 
-**获取Python** [https://www.python.org/]
+Normally, python for Windows contains the package manager `pip`. So if you have `pip` installed with python, skip to next section.
 
-选择Windows版本下载，直接运行文件开始自动安装。
+If you haven't installed `pip` yet, following the link below to download and install [ez_setup.py](https://bootstrap.pypa.io/ez_setup.py).
 
-一般Windows版本的Python安装包里面自带有pip，所以安装好Python之后直接可以在cmd或者pycharm的终端中使用pip。
+```bash
+> python ez_setup.py
 
-If you haven't installed `pip` yet, following the link below to download and install `ez_setup.py` : [https://bootstrap.pypa.io/ez_setup.py),
-
-```
->python ez_setup.py #安装ez_setup.py
-
->easy_install pip #安装 pip
+> easy_install pip
 ```
 
-在Python项目中使用pip可以极高效率的获取需要的包。关于pip的快速入门教程[ https://www.jianshu.com/p/134daa4b254a]
+It is super easy to use `pip` to install and manage the packages involved in your python project. A quick start of using `pip` can be found [here](https://pip.pypa.io/en/stable/quickstart/).
 
-### 2.2 Install django
+### 2.2 Install Django
 
-```
->pip install Django #安装django
-```
-你也可以直接使用源码安装，就是稍微麻烦一点,获取源码[https://www.djangoproject.com/download/].
+Once you have `pip` setup, use it to install Django.
 
-直接用解压软件解压，然后到命令行（win10点击开始旁边的那个输入框中输入 cmd, Win8在开始那里点右键，选择命令行).
-
-比如在 D:\django-1.11.8\  这个文件夹下.
-
-```
->cd D:
-
->cd django
-
->python setup.py install #安装django
+```bash
+> pip install Django
 ```
 
-### 2.3 Creating new application
+Lanuch your CLI, create a project with Django:
 
-```
-> cd xxx					#切换到你的项目路径
+```bash
+# the project path can be anywhere, 
+# the following path is just an example.
 
-> django-admin startproject xxxx	 #xxxx为项目名称
-```
+> cd D:
 
-Then, `cd` to your project folder, and excute
+> cd django
 
-```
->cd xxxx #进入项目目录
-
->django-admin startapp sus #创建项目中的应用
+# setup and init Django in the currrent folder
+> python setup.py install
 ```
 
-创建成功后会看到项目目录结构,然后我们可以找到应用目录中的 views.py，写我们的第一次代码.
+### 2.3 Create Django application
 
+```bash
+# cd to your project folder
+> cd xxx
+
+# start a project
+> django-admin startproject xxxx
 ```
+
+Then excute the following command to create an app of the current project:
+
+```bash
+> django-admin startapp sus
+```
+
+If this process exit with success, you will be able to see the project structure. Find a python file named `view.py`, then write your first line of code in django:
+
+```python
 def index(request):
 	return HttpResponse("hello world!")
 
 ```
 
-写完之后将我们的应用添加到setting文件中.
+Then add your app into settings by editing the `settings.py` file:
 
-```
-
+```python
 INSTALLED_APPS=[
 .....,
 .....,
 .....,
-'sus'
+'sus' # add your app here
 ]
 
 ```
 
-再配置url(urls.py).
+And also, due to the `MVC` design of Django, you need to set the route of your app view in `urls.py`
 
-```
+```python
 urlpatterns=[
 	..........,
-	url(r'^index/',sus.views.urls)
+	url(r'^index/',sus.views.urls) # add your pattern here
 ]
 
 ```
 
-配置完url之后你的第一个应用就完成了！运行下列命令试试吧！
+Finally everything is done, you can run the following command to see if the project is running well:
 
+```bash
+> python manage.py runserver
 ```
->python manage.py runserver
-```
-可以用浏览器打开控制台提示中的地址看到效果.
+
 
 ### 2.4 Install mysql
 
-获取mysql,[https://dev.mysql.com/downloads/installer/]
+Download MySQL [here](https://dev.mysql.com/downloads/installer/).
 
-下载之后，直接点击安装文件，即可开始自动安装。
-
-
-安装成功之后,将mysql添加到系统环境变量中,（此电脑->属性->高级系统设置->环境变量->系统环境变量->path->新建->你的mysql的安装路径\MySQL Server 8.0\bin)
-
-
-输入下列命令测试数据库是否安装成功
-
-```
->mysql –h localhost –u root -p #登录数据库
->enter password:你设置的mysql的root账户的密码
->show databases
->合并此处
-```
-
-如果以上命令正常输入，并且返回正常结果没有报错就说明你已经安装成功了！
-
-### 2.5 About database
-
-此项目开发中需要你对数据库有较为熟练的认识，如果没有学习过数据库的话，你可以通过学习快速入门教程学习 [http://www.runoob.com/mysql/mysql-tutorial.html].
-
-
-=======
-In order to setup **server side environment** of Envision, please refer to this [link](https://github.com/q513021617/forum/blob/master/README.md#2-server-side-enviroment).
+Install MySQL and config you own database password.
