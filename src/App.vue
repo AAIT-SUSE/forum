@@ -1,6 +1,6 @@
 <template>
   <v-app style="background-color: white">
-    <SideMenu v-if="isUserLogged" :username='sNickname' :userAvatar='sAvatar'></SideMenu>
+    <SideMenu v-show="isUserLogged" :username='sNickname' :userAvatar='sAvatar'></SideMenu>
 
     <Toolbar :show-toolbar-actions="isUserLogged"></Toolbar>
     
@@ -72,7 +72,7 @@
         currentBtnText: '没有账号？立即注册',
         sNickname: '',
         sAvatar: '',
-      };
+      }
     },
     methods: {
       handleScroll() {
@@ -115,26 +115,22 @@
           return false;
         }
       },
-      ChangeLoginStatus: function(userEmail, userId, userNickname) {
+      ChangeLoginStatus: function(userEmail, userId, userNickname, userAvatar) {
+        console.log("接收到的数据：" + userEmail + ',' + userId + ',' + userNickname + ',' + userAvatar);
         this.isUserLogged = true;
         window.localStorage.setItem('envision_username', userEmail);
         window.localStorage.setItem('envision_userId', userId);
         window.localStorage.setItem('envision_nickname', userNickname);
+        window.localStorage.setItem('envision_avatar', userAvatar)
         globalData.commit('SetUserId', userId);
         globalData.commit('SetNickname', userNickname);
         globalData.commit('SetEmail', userEmail);
-
-        //get avatar
-        let self = this;
-        axios.get(`/api/UserProfileViewSet/${globalData.state.userId}/`).
-        then(function(response){
-          self.sAvatar = 'https://api.adorable.io/avatars/150/' + response.data.user_logo;
-          self.sNickname =  response.data.nickname;
-          window.localStorage.setItem('envision_avatar', self.sAvatar);
-          globalData.commit('SetAvatar', self.sAvatar);
-          console.log("Login status is now changed. \nYour infos are: " + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname + "," + globalData.userAvatar);
-          router.push('/home');
-        });
+        globalData.commit('SetAvatar', userAvatar);
+        this.sNickname = userNickname;
+        this.sAvatar = 'https://api.adorable.io/avatars/150/' + userAvatar;
+        console.log('Your login status is now changed: \n' + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname + "," + globalData.state.userAvatar)
+        // router.push('/home');
+        router.go(0);
       },
       InitUserProfile: function() {
         // 保存数据到全局变量
@@ -144,8 +140,11 @@
         let avatar = window.localStorage.getItem('envision_avatar');
         globalData.commit('SetUserId', userId);
         globalData.commit('SetNickname', nickname);
-        globalData.commit('SetEmail', avatar);
-        globalData.commit('SetAvatar', self.sAvatar);
+        globalData.commit('SetEmail', email);
+        globalData.commit('SetAvatar', avatar);
+        this.sNickname = nickname;
+        this.sAvatar = 'https://api.adorable.io/avatars/150/' + avatar;
+        console.log('Your data is now changed: \n' + globalData.state.userId + "," + globalData.state.email + "," + globalData.state.nickname + "," + globalData.userAvatar)
       }
     },
     mounted() {
@@ -160,6 +159,14 @@
       });
       
       console.log(globalData.state.userId)
+    },
+    computed: {
+      // sNickname() {
+      //   return globalData.state.nickname;
+      // },
+      // sAvatar() {
+      //   return globalData.state.userAvatar;
+      // }
     },
     destroyed() {
       window.removeEventListener('scroll',this.handleScroll)

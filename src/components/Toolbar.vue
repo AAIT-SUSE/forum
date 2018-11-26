@@ -3,7 +3,7 @@
     <v-toolbar app dark clipped-left>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="showToolbarActions === true">
+      <div v-show="showToolbarActions === true">
         <v-tooltip bottom>
           <v-btn icon to="/notifications" slot="activator">
             <v-icon>textsms</v-icon>

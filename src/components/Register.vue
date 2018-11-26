@@ -387,7 +387,8 @@ export default {
         'user_logo': self.randomHash
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', self.email, response.data.id, self.nickname);
+        console.log(response.data)
+        self.$emit('changeLoginStatus', self.email, response.data.id, self.nickname, response.data.avatar);
       }).
       catch(function(error) {
         self.errorDialog = true;

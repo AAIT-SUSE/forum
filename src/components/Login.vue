@@ -85,7 +85,8 @@ export default {
         'password': self.password,
       }).
       then(function(response) {
-        self.$emit('changeLoginStatus', self.username, response.data.id, response.data.nickname);
+        console.log(response.data);
+        self.$emit('changeLoginStatus', self.username, response.data.id, response.data.nickname, response.data.avatar);
       }).
       catch(function(error) {
         self.errorDialog = true;
